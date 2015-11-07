@@ -1,3 +1,4 @@
+CC = gcc
 # set CC to what makes most sense for you
 # CC = /opt/local/bin/gcc-mp-4.8
 #
@@ -8,12 +9,15 @@ FERMIFASTO = FermiFAST.o loadpsffile.o calcefft.o loadeffarea.o loadltcube.o gam
 # FERMIFASTO += j_qsort_r.o
 # CFLAGS += -DNEED_QSORT_R
 ASTROMETRYNET = ../../astrometry.net-0.46
-CFLAGS = -fopenmp -O3 -I $(ASTROMETRYNET)/qfits-an -I $(ASTROMETRYNET)/util
-CFLAGS += -I $(ASTROMETRYNET)
+CFLAGS =  -O3 -I $(ASTROMETRYNET)/qfits-an -I $(ASTROMETRYNET)/util -I $(ASTROMETRYNET)/libkd
+# FOPENMP = -fopenmp
+FOPENMP = 
+CFLAGS += $(FOPENMP)
 FermiFAST : $(FERMIFASTO)
-	$(CC) -fopenmp -o FermiFAST $(FERMIFASTO) -lpthread -lm  \
-	$(ASTROMETRYNET)/util/libanutils.a $(ASTROMETRYNET)/util/libanbase.a $(ASTROMETRYNET)/util/libanutils.a \
-	$(ASTROMETRYNET)/qfits-an/libqfits.a $(ASTROMETRYNET)/libkd/libkd.a  $(ASTROMETRYNET)/util/libanutils.a 
+	$(CC) $(FOPENMP) -o FermiFAST $(FERMIFASTO) -lpthread -lm  \
+	$(ASTROMETRYNET)/util/libanutils.a $(ASTROMETRYNET)/util/libanbase.a \
+	$(ASTROMETRYNET)/util/libanutils.a $(ASTROMETRYNET)/qfits-an/libqfits.a \
+	$(ASTROMETRYNET)/libkd/libkd.a  $(ASTROMETRYNET)/util/libanutils.a 
 FermiFAST_clean :
 	rm FermiFAST $(FERMIFASTO)
 	make FermiFAST

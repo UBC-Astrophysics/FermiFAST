@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../astrometry.net-0.46/util/fitstable.h"
+#include "fitstable.h"
 #include "loadltcube.h"
 
 extern int debug;

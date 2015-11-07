@@ -1,8 +1,8 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "../astrometry.net-0.46/util/healpix.h"
-#include "../astrometry.net-0.46/libkd/kdtree_fits_io.h"
+#include "healpix.h"
+#include "kdtree_fits_io.h"
 #include "loadpsffile.h"
 #include "loadphotondata.h"
 #include "j_minimizer.h"

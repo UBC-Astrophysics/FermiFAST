@@ -1,7 +1,7 @@
 #include <math.h>
 #include <stdio.h>
 #include "loadpsffile.h"
-#include "../astrometry.net-0.46/util/fitstable.h"
+#include "fitstable.h"
 
 #define PRECISION 1e-4    /* solution of integrated PSF */
 

@@ -1,7 +1,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "../astrometry.net-0.46/util/healpix.h"
+#include "healpix.h"
 #include "loadeffarea.h"
 #include "loadltcube.h"
 #include "calcefft.h"

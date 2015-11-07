@@ -1,7 +1,7 @@
 #include <math.h>
 #include <stdio.h>
 #include "loadeffarea.h"
-#include "../astrometry.net-0.46/util/fitstable.h"
+#include "fitstable.h"
 
 char aeff_colname[NAEFF_DATA][12]={"ENERG_LO","ENERG_HI",
 				   "CTHETA_LO","CTHETA_HI","EFFAREA"};
