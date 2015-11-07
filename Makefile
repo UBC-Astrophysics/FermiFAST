@@ -4,14 +4,27 @@ CC = gcc
 #
 # FermiFAST
 #
-FERMIFASTO = FermiFAST.o loadpsffile.o calcefft.o loadeffarea.o loadltcube.o gammq.o loadphotondata.o calcpixeldata.o j_dbrent.o j_mnbrak.o j_powell.o j_linmin.o j_brent.o j_utils.o
+#
+FERMIFASTO = FermiFAST.o loadpsffile.o calcefft.o loadeffarea.o \
+	loadltcube.o gammq.o loadphotondata.o calcpixeldata.o \
+	j_dbrent.o j_mnbrak.o j_powell.o j_linmin.o j_brent.o j_utils.o
+#
+#
+# Set this to the directory where the astrometry net program is
+#
+ASTROMETRYNET = ../../astrometry.net-0.46
+#
+#
+CFLAGS =  -O3 -I $(ASTROMETRYNET)/qfits-an -I $(ASTROMETRYNET)/util -I $(ASTROMETRYNET)/libkd
+#
 # If you don't have qsort_r on your machine, uncomment the following
 # FERMIFASTO += j_qsort_r.o
 # CFLAGS += -DNEED_QSORT_R
-ASTROMETRYNET = ../../astrometry.net-0.46
-CFLAGS =  -O3 -I $(ASTROMETRYNET)/qfits-an -I $(ASTROMETRYNET)/util -I $(ASTROMETRYNET)/libkd
+#
+# If you have OpenMP support in the compile, uncomment the following line
 # FOPENMP = -fopenmp
-FOPENMP = 
+#
+#
 CFLAGS += $(FOPENMP)
 FermiFAST : $(FERMIFASTO)
 	$(CC) $(FOPENMP) -o FermiFAST $(FERMIFASTO) -lpthread -lm  \
