@@ -1,18 +1,19 @@
 # set CC to what makes most sense for you
 # CC = /opt/local/bin/gcc-mp-4.8
-CFLAGS = -fopenmp -O3 -I../astrometry.net-0.46/qfits-an -I../astrometry.net-0.46/util
 #
 # FermiFAST
 #
 FERMIFASTO = FermiFAST.o loadpsffile.o calcefft.o loadeffarea.o loadltcube.o gammq.o loadphotondata.o calcpixeldata.o j_dbrent.o j_mnbrak.o j_powell.o j_linmin.o j_brent.o j_utils.o
 # If you don't have qsort_r on your machine, uncomment the following
-
 # FERMIFASTO += j_qsort_r.o
 # CFLAGS += -DNEED_QSORT_R
+ASTROMETRYNET = ../../astrometry.net-0.46
+CFLAGS = -fopenmp -O3 -I $(ASTROMETRYNET)/qfits-an -I $(ASTROMETRYNET)/util
+CFLAGS += -I $(ASTROMETRYNET)
 FermiFAST : $(FERMIFASTO)
-	$(CC) -fopenmp -o FermiFAST $(FERMIFASTO) -lpthread -lm  ../astrometry.net-0.46/util/libanutils.a ../astrometry.net-0.46/util/libanbase.a ../astrometry.net-0.46/util/libanutils.a ../astrometry.net-0.46/qfits-an/libqfits.a ../astrometry.net-0.46/libkd/libkd.a   ../astrometry.net-0.46/util/libanutils.a 
-fermifast : FermiFAST
-	cp FermiFAST fermifast
+	$(CC) -fopenmp -o FermiFAST $(FERMIFASTO) -lpthread -lm  \
+	$(ASTROMETRYNET)/util/libanutils.a $(ASTROMETRYNET)/util/libanbase.a $(ASTROMETRYNET)/util/libanutils.a \
+	$(ASTROMETRYNET)/qfits-an/libqfits.a $(ASTROMETRYNET)/libkd/libkd.a  $(ASTROMETRYNET)/util/libanutils.a 
 FermiFAST_clean :
 	rm FermiFAST $(FERMIFASTO)
 	make FermiFAST
@@ -43,19 +44,6 @@ loadfile.o : loadfile.h
 peakfind.o : loadfile.h
 peakfind.o : kdtree.h
 kdtree.o   : kdtree.h
-##################
-## These are older versions ##
-##################
-FITSKDO = fitskd.o 
-fitskd : $(FITSKDO)
-	gcc -o fitskd $(FITSKDO) -lpthread -lm  ../astrometry.net-0.46/util/libanutils.a ../astrometry.net-0.46/util/libanbase.a ../astrometry.net-0.46/util/libanutils.a ../astrometry.net-0.46/qfits-an/libqfits.a ../astrometry.net-0.46/libkd/libkd.a   ../astrometry.net-0.46/util/libanutils.a 
-FITSKD_V2O = fitskd_v2.o 
-fitskd_v2 : $(FITSKD_V2O)
-	gcc -o fitskd_v2 $(FITSKD_V2O) -lpthread -lm  ../astrometry.net-0.46/util/libanutils.a ../astrometry.net-0.46/util/libanbase.a ../astrometry.net-0.46/util/libanutils.a ../astrometry.net-0.46/qfits-an/libqfits.a ../astrometry.net-0.46/libkd/libkd.a   ../astrometry.net-0.46/util/libanutils.a 
-#
-#
-#
-all = fitskd fitskd_v2
 USEKDO = usekd.o
 usekd : $(USEKDO)
 	gcc -o usekd $(USEKDO) ../astrometry.net-0.46/libkd/libkd.a ../astrometry.net-0.46/qfits-an/libqfits.a ../astrometry.net-0.46/util/libanutils.a ../astrometry.net-0.46//util/libanbase.a -lm -L/opt/local/lib -lgsl

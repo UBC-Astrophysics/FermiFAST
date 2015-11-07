@@ -28,11 +28,11 @@ OF SUCH DAMAGE.
 
 #include <sys/times.h>
 #include <unistd.h>
-#include "../astrometry.net-0.46/libkd/kdtree.h"
-#include "../astrometry.net-0.46/libkd/kdtree_fits_io.h"
-#include "../astrometry.net-0.46/util/healpix.h"
-#include "../astrometry.net-0.46/util/fitstable.h"
-#include "../astrometry.net-0.46/util/fitsioutils.h"
+#include "libkd/kdtree.h"
+#include "libkd/kdtree_fits_io.h"
+#include "util/healpix.h"
+#include "util/fitstable.h"
+#include "util/fitsioutils.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
