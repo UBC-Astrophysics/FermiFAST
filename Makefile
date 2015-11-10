@@ -27,7 +27,7 @@ CLIBS = $(ASTROMETRYNET)/util/libanutils.a $(ASTROMETRYNET)/util/libanbase.a \
 # CFLAGS += -DNEED_QSORT_R
 #
 # If you have OpenMP support in the compiler, uncomment the following line
-# FOPENMP = -fopenmp
+FOPENMP = -fopenmp
 #
 #
 CFLAGS += $(FOPENMP)
@@ -46,7 +46,7 @@ CLIBS += $(HEALPIXDIR)/lib/libchealpix.a
 FermiFAST : $(FERMIFASTO)
 	$(CC) $(FOPENMP) -o FermiFAST $(FERMIFASTO) -lpthread -lm  \
 	$(CLIBS)
-FermiFAST_clean :
+bFermiFAST_clean :
 	rm FermiFAST $(FERMIFASTO)
 	make FermiFAST
 FermiFAST.o : loadeffarea.h loadltcube.h loadpsffile.h calcefft.h calcpixeldata.h \
