@@ -29,8 +29,8 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
 # IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
 # OF SUCH DAMAGE.
-
-
+#
+#
 
 
 from argparse import ArgumentParser
@@ -56,6 +56,12 @@ def _parse_command_line_arguments():
             'A file containing the TS sky map'
         ),
     )
+    parser.add_argument('--skiprows',
+                        type=int,
+                        help='number of rows to skip at the top (default 32)',
+                        required=False)
+    parser.set_defaults(skiprows=32)
+
     arguments = vars(parser.parse_args())
     return arguments
 
@@ -67,22 +73,27 @@ def IndexToDeclRa(NSIDE,index):
 def DeclRaToIndex(decl,RA,NSIDE):
     return hp.pixelfunc.ang2pix(NSIDE,np.radians(90.-decl),np.radians(RA))
 
-def plot_tsfile(file):
-    data = np.loadtxt(file,skiprows=25,unpack=True)
+def plot_tsfile(file,skiprows=32):
+    data = np.loadtxt(file,skiprows=skiprows,unpack=True)
 
     print len(data[0])
     nside=int(round(mt.sqrt(len(data[9])/12)))
     tsarray=data[0]*0
     RA=data[8]
     decl=data[9]
-#    index=DeclRaToIndex(decl,RA,nside)
-#    index=hp.nest2ring(nside,np.array(data[0]).astype(int))
     index=np.array(data[0]).astype(int)
+
+    '''
+    data2=np.transpose(0*data)
+    data2[index]=np.transpose(data)
+    data2=np.transpose(data2)
+    print(data2[0])
+    print(data2[10])
+    return
+    '''
+
     tsarray[index]=data[22]
     tsarray_s = hp.sphtfunc.smoothing(tsarray,sigma = 1.023/nside)
-
-#   tsmap=0*tsarray
-
 
     hp.mollview(np.arcsinh(tsarray)/mt.log(10.0),coord=['C','G'], title='TS Map', unit='prob',xsize = 2048)
     hp.graticule()
@@ -102,7 +113,7 @@ def _main():
     """
 
     args=_parse_command_line_arguments()
-    plot_tsfile(args['ts-file'])
+    plot_tsfile(args['ts-file'],skiprows=args['skiprows'])
 
 
 #------------------------------------------------------------------------------
