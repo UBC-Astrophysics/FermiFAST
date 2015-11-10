@@ -7,7 +7,9 @@
 #include "loadphotondata.h"
 #include "j_minimizer.h"
 #include "calcpixeldata.h"
-
+#ifdef USE_CHEALPIX
+#include "chealpix.h"
+#endif
 
 typedef
 struct calcpixel_struct {
@@ -397,7 +399,13 @@ calcpixeldata(u32 *indexarray, double *data, float *photondata[],
 
   if (i>=0) {
     /* find the ra and dec of the pixel */
+#ifdef USE_CHEALPIX
+    pix2ang_ring(healpixlevel,i,&dec,&ra);
+    dec=90-dec*180.0/M_PI;
+    ra=ra*180.0/M_PI;
+#else
     healpix_to_radecdeg(i,healpixlevel,0.0,0.0,&ra,&dec);
+#endif
   }
 
   if (calcmode & CALC_SPECTRUM) {
