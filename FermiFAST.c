@@ -30,7 +30,13 @@ OF SUCH DAMAGE.
 #include <unistd.h>
 #include "kdtree.h"
 #include "kdtree_fits_io.h"
+#if USE_CHEALPIX
+#include "chealpix.h"
+#define healpix_to_xyzarr(I,HEALPIXLEVEL,DX,DY,PT) (pix2vec_ring(HEALPIXLEVEL,I, PT))
+#else
 #include "healpix.h"
+#endif
+
 #include "fitstable.h"
 #include "fitsioutils.h"
 #include <stdio.h>

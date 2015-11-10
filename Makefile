@@ -15,22 +15,37 @@ FERMIFASTO = FermiFAST.o loadpsffile.o calcefft.o loadeffarea.o \
 ASTROMETRYNET = ../../astrometry.net-0.46
 #
 #
+#
 CFLAGS =  -O3 -I $(ASTROMETRYNET)/qfits-an -I $(ASTROMETRYNET)/util -I $(ASTROMETRYNET)/libkd
+CLIBS = $(ASTROMETRYNET)/util/libanutils.a $(ASTROMETRYNET)/util/libanbase.a \
+	$(ASTROMETRYNET)/util/libanutils.a $(ASTROMETRYNET)/qfits-an/libqfits.a \
+	$(ASTROMETRYNET)/libkd/libkd.a  $(ASTROMETRYNET)/util/libanutils.a 
+
 #
 # If you don't have qsort_r on your machine, uncomment the following
 # FERMIFASTO += j_qsort_r.o
 # CFLAGS += -DNEED_QSORT_R
 #
-# If you have OpenMP support in the compile, uncomment the following line
+# If you have OpenMP support in the compiler, uncomment the following line
 # FOPENMP = -fopenmp
 #
 #
 CFLAGS += $(FOPENMP)
+#
+#
+# Define the following to use the healpix library routines
+# instead of those in astrometry.net
+#
+#
+HEALPIXDIR = ../../Healpix_3.30
+CFLAGS += -DUSE_CHEALPIX -I $(HEALPIXDIR)/include
+CLIBS += $(HEALPIXDIR)/lib/libchealpix.a
+#
+#
+#
 FermiFAST : $(FERMIFASTO)
 	$(CC) $(FOPENMP) -o FermiFAST $(FERMIFASTO) -lpthread -lm  \
-	$(ASTROMETRYNET)/util/libanutils.a $(ASTROMETRYNET)/util/libanbase.a \
-	$(ASTROMETRYNET)/util/libanutils.a $(ASTROMETRYNET)/qfits-an/libqfits.a \
-	$(ASTROMETRYNET)/libkd/libkd.a  $(ASTROMETRYNET)/util/libanutils.a 
+	$(CLIBS)
 FermiFAST_clean :
 	rm FermiFAST $(FERMIFASTO)
 	make FermiFAST
