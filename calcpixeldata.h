@@ -3,6 +3,8 @@
 #define CALC_POWFIT 4
 #define OUTPUT_RADIAL 8
 
+#define WEIGHTMIN 1e-3
+
 double
 calcpixeldata(u32 *indexarray, double *data, float *photondata[], 
 	      double *photontime,

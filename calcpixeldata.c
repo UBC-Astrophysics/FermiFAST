@@ -343,7 +343,7 @@ calcpixeldata(u32 *indexarray, double *data, float *photondata[],
 	weight=(photonenergy_g[indexarray[j+1]]-photonenergy_g[indexarray[j-1]])*0.5;
       }
 
-      if (weight==0) weight=1e-3;
+      if (weight<WEIGHTMIN) weight=WEIGHTMIN;
       
       /* calculate basic flux spectral density --- for zero background */
       /* units per area per time per MeV */
