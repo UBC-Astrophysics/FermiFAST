@@ -39,6 +39,7 @@ import math as mt
 import numpy as np
 import healpy as hp
 import matplotlib.pyplot as plt
+import gzip
 
 def _parse_command_line_arguments():
     """
@@ -61,6 +62,11 @@ def _parse_command_line_arguments():
                         help='number of rows to skip at the top (default 32)',
                         required=False)
     parser.set_defaults(skiprows=32)
+    parser.add_argument('--column',
+                        type=int,
+                        help='number of the column to use starting from zero (default 22)',
+                        required=False)
+    parser.set_defaults(column=22)
 
     arguments = vars(parser.parse_args())
     return arguments
@@ -73,14 +79,14 @@ def IndexToDeclRa(NSIDE,index):
 def DeclRaToIndex(decl,RA,NSIDE):
     return hp.pixelfunc.ang2pix(NSIDE,np.radians(90.-decl),np.radians(RA))
 
-def plot_tsfile(file,skiprows=32):
+def plot_tsfile(file,skiprows=32,column=22):
+
+    
     data = np.loadtxt(file,skiprows=skiprows,unpack=True)
 
     print len(data[0])
     nside=int(round(mt.sqrt(len(data[9])/12)))
-    tsarray=data[0]*0
-    RA=data[8]
-    decl=data[9]
+    tsarray=np.zeros(nside*nside*12)
     index=np.array(data[0]).astype(int)
 
     '''
@@ -92,17 +98,17 @@ def plot_tsfile(file,skiprows=32):
     return
     '''
 
-    tsarray[index]=data[22]
+    tsarray[index]=data[column]
     tsarray_s = hp.sphtfunc.smoothing(tsarray,sigma = 1.023/nside)
 
     hp.mollview(np.arcsinh(tsarray)/mt.log(10.0),coord=['C','G'], title='TS Map', unit='prob',xsize = 2048)
     hp.graticule()
-    plt.savefig("%s.png" % file)
+    plt.savefig("%s_c%d.png" % (file,column))
     plt.show()
 
     hp.mollview(np.arcsinh(tsarray_s)/mt.log(10.0),coord=['C','G'], title='TS Map Smoothed', unit='prob',xsize = 2048)
     hp.graticule()
-    plt.savefig("%s_s.png" % file)
+    plt.savefig("%s_c%d__s.png" % (file,column))
     plt.show()
 
 
@@ -113,7 +119,7 @@ def _main():
     """
 
     args=_parse_command_line_arguments()
-    plot_tsfile(args['ts-file'],skiprows=args['skiprows'])
+    plot_tsfile(args['ts-file'],skiprows=args['skiprows'],column=args['column'])
 
 
 #------------------------------------------------------------------------------

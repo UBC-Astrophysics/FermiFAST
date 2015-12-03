@@ -256,8 +256,11 @@ minpixeldata(u32 *indexarray, double *data, float *photondata[],
 /*                                                                                       */
 /* at a minimum calcpixeldata will calculate the mean value of r2 and the best fitting   */
 /* combination of PSF and a flat background to the data returning the null probability   */
-/* changing the value of calcmode from CALC_SPECTRUM | CALC_PERCENTILE | CALC_POWFIT to zero */
-/* yields this minimal functionality for a 15% speed up                                  */ 
+/* changing the value of calcmode from                                                   */
+/*                                                                                       */
+/* CALC_SPECTRUM | CALC_PERCENTILE | CALC_POWFIT                                         */
+/*                                                                                       */
+/* to zero yields this minimal functionality for a 15% speed up                          */ 
 /*                                                                                       */
 /*****************************************************************************************/
 
@@ -339,6 +342,8 @@ calcpixeldata(u32 *indexarray, double *data, float *photondata[],
       } else {
 	weight=(photonenergy_g[indexarray[j+1]]-photonenergy_g[indexarray[j-1]])*0.5;
       }
+
+      if (weight==0) weight=1e-3;
       
       /* calculate basic flux spectral density --- for zero background */
       /* units per area per time per MeV */
