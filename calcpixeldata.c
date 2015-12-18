@@ -79,7 +79,7 @@ void
 printpixelheader() {
   printf("\
 #    1     2      3       4        5         6         7         8        9         10         11       12       13       14       15        16       17        18        19        20        21        22       23       24      25\n\
-# Healpix  N     TS     MEANR2   MEANFRAC  SIGR2    SIGFRAC    AFRAC     RA         DEC      BVALUE   NBACK  BACK_OFF ln(PTSNew) DeltaSig csource  cesource   cback    ceback     sumL0     sumL1  2(DeltaSum)  TSPSF    APSF  ln(ProbPSF)F\n");
+# Healpix  N     TS     MEANR2   MEANFRAC  SIGR2    SIGFRAC    AFRAC     RA         DEC      BVALUE   NBACK  BACK_OFF ln(PTSNew) DeltaSig csource  cesource   cback    ceback     sumL0     sumL1  2(DeltaSum)  TSPSF    APSF  ln(ProbPSF)\n");
 }
 
 void printinfocolumns() {
@@ -98,7 +98,8 @@ void printinfocolumns() {
 ###   Column 11 - cei        total cumulative spectra energy density MeV/m^2/s\n\
 ###   Column 12 - cbi        background cumulative spectra energy density MeV/m^2/s\n\
 ###   Column 13 - cbei       background cumulative spectra energy density MeV/m^2/s\n\
-###   Column 14 - time       mission elapsed time\n");
+###   Column 14 - diffrspi   diffrspi for photon\n\
+###   Column 15 - time       mission elapsed time\n");
 }
 
 
@@ -308,8 +309,7 @@ calcpixeldata(u32 *indexarray, double *data, float *photondata[],
   if ((debug>0) && (calcmode & CALC_SPECTRUM)) {
     outputbuffer=(char *) calloc((nres+1)*LINELENGTH,sizeof(char));
     if (outputbuffer) 
-      sprintf(outputbuffer,"###     j photon_num   energy    psf effarea    back        weight     r2         fi         ci         cei     cbi     cebi    time\n");
-
+      sprintf(outputbuffer,"###        j photon_num   energy      psf   effarea      back     weight     r2         fi         ci         cei           cbi     cebi    diffrspi    time\n");
   }
 
   for (j=nres-1;j>=0;j--) {
@@ -354,7 +354,7 @@ calcpixeldata(u32 *indexarray, double *data, float *photondata[],
       /* units of psfi are 1/(solid angle) */
       psfieaifi=psfi_val*photondata[EFFAREA][photpos]*fi;
       sumL0+=log(psfieaifi);
-      
+
       psfieaifiodi=psfieaifi/(diffrspi=bfactor*photondata[DIFRSP_GAL][photpos]);
       sumTS+=log(psfieaifiodi);
       
@@ -369,10 +369,10 @@ calcpixeldata(u32 *indexarray, double *data, float *photondata[],
 
       if (outputbuffer) {
 	sprintf(outputbuffer,
-		 "%s## %9d %10d %9.2f %9.2f %6.2f %10.2e %10.2e %10.2e %10.2e %10.2e %10.2e %10.2e %10.2e %.17e\n",outputbuffer,
+		 "%s## %9d %10d %9.2f %9.2f %6.2f %10.2e %10.2e %10.2e %10.2e %10.2e %10.2e %10.2e %10.2e %10.2e %.17e\n",outputbuffer,
 		 j,indexarray[j],
 		 ehold,psfi_val,photondata[EFFAREAT][photpos],dum/weight,weight,r2,
-		 fi,sumspec,sumespec,sumbspec,sumbespec,photontime[photpos]);
+		fi,sumspec,sumespec,sumbspec,sumbespec,diffrspi,photontime[photpos]);
       }
     }
   }

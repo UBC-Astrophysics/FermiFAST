@@ -96,7 +96,7 @@ double lnprob(double dof, double chi2) {
 	void lgcf(),gser();
 	
 	a=dof*0.5;  x=chi2*0.5;
-	if (x < 0.0 || a <= 0.0) return -1;
+	if (x < 0.0 || a <= 0.0) return 0;
 	if (x < (a+1.0)) {
 		gser(&gamser,a,x,&gln);
 		return log1p(-gamser);
