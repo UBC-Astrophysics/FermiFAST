@@ -242,8 +242,11 @@ loadphotondata(char *filename, char *passfile) {
       photondata[ENERGY][j+ntot]=ehold;
       photondata[DIFRSP_GAL][j+ntot]=galdisrsp[i];
       photondata[DIFRSP_ISO][j+ntot]=isodisrsp[i];
-      photondata[EFFAREA][j+ntot]=aeffds.aeffdata[conv_type][AEFF_EFF_AREA]
+      r2hold=aeffds.aeffdata[conv_type][AEFF_EFF_AREA]
 	[(int) ((photondata[COSTHETA][j+ntot]-aeffds.mumin)/aeffds.mustep)*aeffds.nE + (int) ((log10(ehold)-aeffds.lemin)/aeffds.lestep)];
+      if (r2hold<EFFAREAMIN) r2hold=EFFAREAMIN;
+      photondata[EFFAREA][j+ntot]=r2hold;
+
       /* calculate the effective area integral */
       photondata[EFFAREAT][j+ntot]=calcefft(ra,dec,ehold,&aeffds,&ltcubeds);
       photontime[j+ntot]=localphotontime[i];
