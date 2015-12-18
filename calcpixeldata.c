@@ -285,7 +285,7 @@ calcpixeldata(u32 *indexarray, double *data, float *photondata[],
   float *ratioarray, *photonenergy_g;
   char *outputbuffer=NULL;
   int totallength;
-#define LINELENGTH 170
+#define LINELENGTH 180
 
   photonenergy_g=photondata[ENERGY];
   if (calcmode & CALC_SPECTRUM)  {
@@ -353,6 +353,7 @@ calcpixeldata(u32 *indexarray, double *data, float *photondata[],
       /* same units as the diffuse response */ 
       /* units of psfi are 1/(solid angle) */
       psfieaifi=psfi_val*photondata[EFFAREA][photpos]*fi;
+      printf("##* %g %g %g\n",psfi_val,photondata[EFFAREA][photpos],fi);
       sumL0+=log(psfieaifi);
 
       psfieaifiodi=psfieaifi/(diffrspi=bfactor*photondata[DIFRSP_GAL][photpos]);
@@ -371,7 +372,7 @@ calcpixeldata(u32 *indexarray, double *data, float *photondata[],
 	sprintf(outputbuffer,
 		 "%s## %9d %10d %9.2f %9.2f %6.2f %10.2e %10.2e %10.2e %10.2e %10.2e %10.2e %10.2e %10.2e %10.2e %.17e\n",outputbuffer,
 		 j,indexarray[j],
-		 ehold,psfi_val,photondata[EFFAREAT][photpos],dum/weight,weight,r2,
+		 ehold,psfi_val,photondata[EFFAREA][photpos],dum/weight,weight,r2,
 		fi,sumspec,sumespec,sumbspec,sumbespec,diffrspi,photontime[photpos]);
       }
     }

@@ -8,6 +8,8 @@
 #define AEFF_EFF_AREA 4
 #define NAEFF_DATA 5
 
+#define EFFAREAMIN 1e-5
+
 typedef 
 struct aeff_data_struct {
   float ***aeffdata, mustep, lestep, mumin, lemin;
