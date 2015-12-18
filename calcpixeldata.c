@@ -416,7 +416,7 @@ calcpixeldata(u32 *indexarray, double *data, float *photondata[],
   if (calcmode & CALC_SPECTRUM) {
     /* calculate the coefficient of the diff response B */
     dum=nres/sumnback*(1-afrac);
-    resTS=lnprob(2*nres,sumTS);
+    resTS=lnprob(2.0*nres,sumTS);
   } else { 
     dum=0; 
   }
