@@ -16,11 +16,14 @@ ASTROMETRYNET = ../../astrometry.net-0.46
 #
 #
 #
-CFLAGS =  -O3 -I $(ASTROMETRYNET)/qfits-an -I $(ASTROMETRYNET)/util -I $(ASTROMETRYNET)/libkd
+CFLAGS = -O3 -I $(ASTROMETRYNET)/qfits-an -I $(ASTROMETRYNET)/util -I $(ASTROMETRYNET)/libkd
 CLIBS = $(ASTROMETRYNET)/util/libanutils.a $(ASTROMETRYNET)/util/libanbase.a \
 	$(ASTROMETRYNET)/util/libanutils.a $(ASTROMETRYNET)/qfits-an/libqfits.a \
 	$(ASTROMETRYNET)/libkd/libkd.a  $(ASTROMETRYNET)/util/libanutils.a 
 
+# optimization of gammq.c causes nan occassionally
+gammq.o : gammq.c
+	gcc -c gammq.c
 #
 # If you don't have qsort_r on your machine, uncomment the following
 # FERMIFASTO += j_qsort_r.o
@@ -46,7 +49,7 @@ CLIBS += $(HEALPIXDIR)/lib/libchealpix.a
 FermiFAST : $(FERMIFASTO)
 	$(CC) $(FOPENMP) -o FermiFAST $(FERMIFASTO) -lpthread -lm  \
 	$(CLIBS)
-bFermiFAST_clean :
+FermiFAST_clean :
 	rm FermiFAST $(FERMIFASTO)
 	make FermiFAST
 FermiFAST.o : loadeffarea.h loadltcube.h loadpsffile.h calcefft.h calcpixeldata.h \
