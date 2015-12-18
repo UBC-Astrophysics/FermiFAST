@@ -99,7 +99,7 @@ double lnprob(double dof, double chi2) {
 	if (x < 0.0 || a <= 0.0) return -1;
 	if (x < (a+1.0)) {
 		gser(&gamser,a,x,&gln);
-		return log(1.0-gamser);
+		return log1p(-gamser);
 	} else {
 		lgcf(&lgammcf,a,x,&gln);
 		return lgammcf;
