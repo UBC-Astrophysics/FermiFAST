@@ -248,7 +248,10 @@ loadphotondata(char *filename, char *passfile) {
       photondata[EFFAREA][j+ntot]=r2hold;
 
       /* calculate the effective area integral */
-      photondata[EFFAREAT][j+ntot]=calcefft(ra,dec,ehold,&aeffds,&ltcubeds);
+      r2hold=calcefft(ra,dec,ehold,&aeffds,&ltcubeds);
+      if (r2hold<EFFAREATMIN) r2hold=EFFAREATMIN;
+      photondata[EFFAREAT][j+ntot]=r2hold;
+
       photontime[j+ntot]=localphotontime[i];
       j++;
     }

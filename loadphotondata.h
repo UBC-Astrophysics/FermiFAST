@@ -19,6 +19,9 @@
 #define RA 2
 #define DEC 3
 
+#define EFFAREAMIN 1e-5
+#define EFFAREATMIN 1e-9
+
 #if 0
 typedef 
 struct photon_data_struct {

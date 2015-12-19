@@ -353,7 +353,6 @@ calcpixeldata(u32 *indexarray, double *data, float *photondata[],
       /* same units as the diffuse response */ 
       /* units of psfi are 1/(solid angle) */
       psfieaifi=psfi_val*photondata[EFFAREA][photpos]*fi;
-      printf("##* %g %g %g\n",psfi_val,photondata[EFFAREA][photpos],fi);
       sumL0+=log(psfieaifi);
 
       psfieaifiodi=psfieaifi/(diffrspi=bfactor*photondata[DIFRSP_GAL][photpos]);
@@ -370,7 +369,7 @@ calcpixeldata(u32 *indexarray, double *data, float *photondata[],
 
       if (outputbuffer) {
 	sprintf(outputbuffer,
-		 "%s## %9d %10d %9.2f %9.2f %6.2f %10.2e %10.2e %10.2e %10.2e %10.2e %10.2e %10.2e %10.2e %10.2e %.17e\n",outputbuffer,
+		 "%s## %9d %10d %9.2f %9.2f %10.2e %10.2e %10.2e %10.2e %10.2e %10.2e %10.2e %10.2e %10.2e %10.2e %.17e\n",outputbuffer,
 		 j,indexarray[j],
 		 ehold,psfi_val,photondata[EFFAREA][photpos],dum/weight,weight,r2,
 		fi,sumspec,sumespec,sumbspec,sumbespec,diffrspi,photontime[photpos]);
