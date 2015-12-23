@@ -101,12 +101,12 @@ def plot_tsfile(file,skiprows=32,column=22):
     tsarray[index]=data[column]
     tsarray_s = hp.sphtfunc.smoothing(tsarray,sigma = 1.023/nside)
 
-    hp.mollview(np.arcsinh(tsarray)/mt.log(10.0),coord=['C','G'], title='TS Map', unit='prob',xsize = 2048)
+    hp.mollview(tsarray,coord=['C','G'], title='TS Map', unit='prob',xsize = 2048)
     hp.graticule()
     plt.savefig("%s_c%d.png" % (file,column))
     plt.show()
 
-    hp.mollview(np.arcsinh(tsarray_s)/mt.log(10.0),coord=['C','G'], title='TS Map Smoothed', unit='prob',xsize = 2048)
+    hp.mollview(tsarray_s,coord=['C','G'], title='TS Map Smoothed', unit='prob',xsize = 2048)
     hp.graticule()
     plt.savefig("%s_c%d__s.png" % (file,column))
     plt.show()

@@ -94,7 +94,7 @@ main(int argc,char *argv[]) {
   float f_cutoff=0.05, oneminusfcutoff;
   char *livetimecubefilename=NULL;
   char *filenames[1024];
-  int ntot_array[1024], filecnt=0, calcmode = CALC_SPECTRUM,  treetype=KDTT_DSS;
+  int ntot_array[1024], filecnt=0, calcmode = CALC_SPECTRUM | CALC_PERCENTILE,  treetype=KDTT_DSS;
   
   if (!(passfile=malloc(255*sizeof(char)))) {
     printf("# Could not allocate passfile in main() %s:%d\n",__FILE__,__LINE__);
