@@ -27,6 +27,7 @@ CLIBS = $(ASTROMETRYNET)/util/libanutils.a $(ASTROMETRYNET)/util/libanbase.a \
 # CFLAGS += -DNEED_QSORT_R
 #
 # If you have OpenMP support in the compiler, uncomment the following line
+#
 FOPENMP = -fopenmp
 #
 #
@@ -36,6 +37,7 @@ CFLAGS += $(FOPENMP)
 # Define the following to use the healpix library routines
 # instead of those in astrometry.net
 #
+# The astrometry.net libraries by default use a different tesselation.
 #
 HEALPIXDIR = ../../Healpix_3.30
 CFLAGS += -DUSE_CHEALPIX -I $(HEALPIXDIR)/include
@@ -46,7 +48,9 @@ CLIBS += $(HEALPIXDIR)/lib/libchealpix.a
 FermiFAST : $(FERMIFASTO)
 	$(CC) $(FOPENMP) -o FermiFAST $(FERMIFASTO) -lpthread -lm  \
 	$(CLIBS)
+#
 # optimization of gammq.c causes nan occassionally
+#
 gammq.o : gammq.c
 	gcc -c gammq.c
 FermiFAST_clean :

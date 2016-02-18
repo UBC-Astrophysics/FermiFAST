@@ -132,7 +132,9 @@ main(int argc,char *argv[]) {
        4 (g) - read l and b from STDIN (degrees)\n\
        5 (p) - read x, y, z from STDIN\n\n\
    If readmode is non-zero, you can override the setting for a line\n\
-   by adding the appropriate letter at the beginning of the line\n\n\
+   by adding the appropriate letter at the beginning of the line.\n\
+   If readmode is negative, use the positive value but allow the position\n\
+   to vary to maximize TS\n\n\
    -tt tree_type        set tree type default %d\n\n",
 	   argv[0],
 	   passfile,f_cutoff,
