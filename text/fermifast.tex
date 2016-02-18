@@ -305,11 +305,35 @@ these potential source positions is used more precisely to determine
 the local maxima of $\log L$ and get a more precise position for each
 source.
 
+Before discussing the results ({\em i.e.} the catalogue of sources and
+how they compare with the third Fermi catalogue, we will examine the
+performance of the technique and focus on the sources detected from
+photons with energies exceeding 1~GeV.
+\begin{figure}
+  \includegraphics[width=\columnwidth]{acorr}
+  \includegraphics[width=\columnwidth]{asigcorr}
+  \caption{Upper: the correlation of the value $A_f$, determined from the means
+    of the photon distributions, to the value of $A_\mathrm{PSF}$, determined from
+    the maximum likelihood techinque.  Lower: The values of $A_\mathrm{PSF}$ against
+    the significance.}
+  \label{fig:acorr}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\columnwidth]{changelogL}
+  \includegraphics[width=\columnwidth]{change_position}
+  \caption{Upper: the relative change in $\log L$ during the position refinement.  Green is for sources
+    whose positions moved less than one degree.  Red is for greater movement.
+    Lower: the relative change in position during the position refinement.  Green is for sources
+    whose positions likelihood increased.  Red is for those whose likelihood decreased.}
+  \label{fig:position}
+\end{figure}
 
 \section{Results}
 
 \begin{table*}
-  \caption{The results for the ten most significant peaks in the 1 GeV map}
+  \caption{The results for the ten most significant peaks in the 1 GeV
+    map}
 \label{tab:topten}
   \begin{tabular}{l|rrrrrrrrrrr}
     \hline
@@ -338,11 +362,11 @@ PSR J2021+3651	 & $305.26$ & $ 36.85$ &  22744 & $0.352$ & $0.699$ & $ -77.5$ & 
     is fuzzier.}
 \end{figure*}
 \begin{figure*}
-\includegraphics[width=\columnwidth]{../cumfermi.pdf}
-\includegraphics[width=\columnwidth]{../cumff.pdf}
+\includegraphics[width=\columnwidth]{cumfermi.pdf}
+\includegraphics[width=\columnwidth]{cumff.pdf}
 
-\includegraphics[width=\columnwidth]{../cumfermi_hib.pdf}
-\includegraphics[width=\columnwidth]{../cumff_hib.pdf}
+\includegraphics[width=\columnwidth]{cumfermi_hib.pdf}
+\includegraphics[width=\columnwidth]{cumff_hib.pdf}
 \caption{The upper panels give the results for all sources and the lower panels have
   $|b|>10^\circ$.   Left: The distance from a Fermi 2PSC source to the nearest
   Fermi FAST source.  This demonstrates that Fermi FAST finds about
