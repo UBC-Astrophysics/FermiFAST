@@ -57,6 +57,14 @@ def _parse_command_line_arguments():
             'A file containing the TS sky map'
         ),
     )
+    parser.add_argument(
+        'peak-file',
+        type=str,
+        help=(
+            'A file containing the peaks'
+        ),
+    )
+    
     parser.add_argument('--skiprows',
                         type=int,
                         help='number of rows to skip at the top (default 26)',
@@ -79,7 +87,7 @@ def IndexToDeclRa(NSIDE,index):
 def DeclRaToIndex(decl,RA,NSIDE):
     return hp.pixelfunc.ang2pix(NSIDE,np.radians(90.-decl),np.radians(RA))
 
-def get_peaks(file,skiprows=26,column=24,siglevel=-12.5):
+def get_peaks(file,peakfile,skiprows=26,column=24,siglevel=-12.5):
     data = np.loadtxt(file,skiprows=skiprows)
     print(np.shape(data))
     nside=int(round(mt.sqrt(len(data)/12)))
@@ -102,7 +110,9 @@ def get_peaks(file,skiprows=26,column=24,siglevel=-12.5):
             hpeaklist.append(hpeaklist)
 
     print("# number of unique peaks= %d" % len(peaklist))
-    np.savetxt("unique_peaks.txt",data[peaklist])        
+    np.savetxt(peakfile,data[peaklist],header='#           1                  2                              3                     4                        5                        6                            7                    8                          9                        10                        11                       12                       13                      14                       15                         16                       17                       18                      19                       20                       21                        22                      23                     24                           25\n\
+#      Healpix                 N                             TS                  MEANR2                  MEANFRAC                   SIGR2                      SIGFRAC                AFRAC                       RA                       DEC                      BVALUE                   NBACK                   BACK_OFF               ln(PTSNew)                DeltaSig                   csource                  cesource                   cback                  ceback                   sumL0                     sumL1                  2(DeltaSum)                TSPSF                  APSF                      ln(ProbPSF)\n')
+
     
 
 def _main():
@@ -112,7 +122,7 @@ def _main():
     """
 
     args=_parse_command_line_arguments()
-    get_peaks(args['ts-file'],skiprows=args['skiprows'],column=args['column'])
+    get_peaks(args['ts-file'],args['peak-file'],skiprows=args['skiprows'],column=args['column'])
 
 
 #------------------------------------------------------------------------------

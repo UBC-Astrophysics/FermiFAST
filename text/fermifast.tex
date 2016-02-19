@@ -304,13 +304,15 @@ potential sources.  However, 426 have $A_\mathrm{PSF}<0$, indicating
 not a source but a point-like deficit, leaving 800 sources.  Each of
 these potential source positions is used more precisely to determine
 the local maxima of $\log L$ and get a more precise position for each
-source.
+source.  For the lower-energy cutoff, we start with
+$\mathtt{NSIDE}=128$ or 196,608 grid points.  Of these 196,608 points,
+96,066 have $P(\log L >x) < e^{-12.5} \approx 4 \times 10^{-6}$
+and 967 unique peaks of which 310 have $A_\mathrm{PSF}>0$.
 
 Before discussing the results ({\em i.e.} the catalogue of sources and
 how they compare with the third Fermi catalogue, we will examine the
 performance of the technique and focus on the sources detected from
 photons with energies exceeding 1~GeV.
-
 \begin{figure*}
   \includegraphics[width=\columnwidth]{acorr}
   \includegraphics[width=\columnwidth]{asigcorr}
@@ -414,11 +416,9 @@ PSR J2021+3651	 & $305.26$ & $ 36.85$ &  22744 & $0.352$ & $0.699$ & $ -77.5$ & 
 \end{table*}
 
 \begin{figure*}
-  \includegraphics[width=\textwidth]{fermi.png}
-  \caption{Likelihood map with regions where $TS>25$, i.e. a
-    significant detection of a source.  Because the point spead
-    function is broader at 100~MeV than that at 1~GeV, the TS map at 100~MeV
-    is fuzzier.}
+  \includegraphics[width=\textwidth]{source_plot}
+  \caption{Sources with $\ln P(TS)<-12.5$ (i.e. five sigma) in the 1~GeV catalogue (small blue circles), in the 100~GeV catalogue (big red circles) and the 3FGL (black dots).}
+  \label{fig:sources}
 \end{figure*}
 
 \begin{figure*}
@@ -444,8 +444,15 @@ PSR J2021+3651	 & $305.26$ & $ 36.85$ &  22744 & $0.352$ & $0.699$ & $ -77.5$ & 
   distributions that are fit to the observed distributions.  The
   typical positional error between associated 2PSC and FAST sources is
   four arcminutes.  }
+\label{fig:corresponances}
 \end{figure*}
 
+\begin{figure*}
+\includegraphics[width=\columnwidth]{sign-comp}
+\includegraphics[width=\columnwidth]{sign-dist}
+\caption{Left: 3FGL Significances vs Fermi FAST.  Right: Cumulative distribution of 3FGL significances for the entire 3FGL (green)
+  and Fermi FAST (red).}
+\end{figure*}
 \section*{Acknowledgments}
 
 The software used in this paper is available at
