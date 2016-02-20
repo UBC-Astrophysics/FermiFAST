@@ -188,10 +188,10 @@ King function that are used to characterize the Fermi PSF.
 Altough the construction of the tree is not done in parallel, the
 queries are performed in parallel using the tree held in shared
 memory.  For example if one uses all the photons above 100~MeV from
-weeks 9 through 316 with a standard zenith angle cut (89,684,009
-photons) requires one gigabyte to store the tree and about ten minutes
-to construct.  The 200,000 location queries and likelihood
-calculations require 140,000 seconds (700~ms each), so the
+weeks 9 through 216 with a standard zenith angle cut of less than 100
+degrees (89,684,009 photons) requires one gigabyte to store the tree
+and about ten minutes to construct. The 200,000 location queries and
+likelihood calculations require 140,000 seconds (700~ms each), so the
 speed-up through parallisation can be dramatic.  On the other hand, if
 one restricts to photons above 1~GeV (13,193,171), it only takes 90
 seconds to construct the tree.  At higher energies, it makes sense to
@@ -393,65 +393,200 @@ non-characteristic words etc.
 
 \section{Results}
 
+To test the algorithm we used essentially the same data set as used to
+construct the Fermi Large Area Telescope Third Source Catalog
+\cite[3PSC][]{2015ApJS..218...23A}.  We used weeks 9 through 216. That
+is, photons detected between 2008 August 4 (15:45:36 UTC) and 2012
+July 26 (01:07:25 UTC) nearly four years and about five days shorter
+than the span of the 3PSC observations.  We used the good-time
+intervals (GTI) as defined by the Fermi team and the PASS 7 response
+function (\texttt{P7REP\_SOURCE\_V15}) and the PASS 7 reprocessed data.
+From the form of the likelihood function, Eq.~\ref{eq:2}, we do not
+use a model for the background and the key ingredient of the instrument response
+if the estimate of the point-spread function.
+
+We create two catalogues: one using photons above 1~GeV and the second
+with all photons above 100~MeV.  The ten most significant sources in
+the 1~GeV map are given in Tab.~\ref{tab:topten} with the refined
+positions and the original detection significances.  We see a general
+trend that the significances in sigma-units of the 3GFL are about
+three times that of the FermiFAST technique.  The one exception in the
+table is the Crab pulsar which in the Fermi analysis is split among
+three sources the pulsar itself, the synchrotron and inverse Compton
+components of the pulsar wind nebulae.  The FermiFAST source most
+closely coincides with the pulsar, and the 3GFL significance for this
+component alone is quoted in the table.
 \begin{table*}
   \caption{The results for the ten most significant peaks in the 1~GeV map}
-\label{tab:topten}
-  \begin{tabular}{l|rrrrrrrrrrr}
+  \label{tab:topten}
+  \begin{tabular}{lrrrrrrrrrrr}
     \hline
-    Source & \multicolumn{1}{c}{RA} & \multicolumn{1}{c}{Dec}  & \multicolumn{1}{c}{$N_\mathrm{photons}$}  & \multicolumn{1}{c}{$\bar r^2$} & \multicolumn{1}{c}{$\bar f$} & \multicolumn{1}{c}{$S(r^2)$} & \multicolumn{1}{c}{$S(f)$} & \multicolumn{1}{c}{$A_f$} & \multicolumn{1}{c}{$TS_\mathrm{PSF}$} & \multicolumn{1}{c}{$A_\mathrm{PSF}$} &
-    \multicolumn{1}{c}{$\ln P(TS)$} \\
+     Source & \multicolumn{1}{c}{RA} & \multicolumn{1}{c}{Dec}  & \multicolumn{1}{c}{$N_\mathrm{photons}$}  &\multicolumn{1}{c}{$\bar r^2$} & \multicolumn{1}{c}{$\bar f$} & \multicolumn{1}{c}{$S(r^2)$} & \multicolumn{1}{c}{$S(f)$} & \multicolumn{1}{c}{$A_f$}  & \multicolumn{1}{c}{$A_\mathrm{PSF}$} & \multicolumn{1}{c}{$S(\mathrm{FF})$} & \multicolumn{1}{c}{$S(\mathrm{3GFL})$} \\
     \hline
 
-Vela             & $128.84$ & $-45.18$ & 172081 & $0.167$ & $0.507$ & $-478.9$ & $   9.7$ & $0.98$ & $156105.48$ & $0.96$ & $-78058.94$ \\ 
-Geminga          & $ 98.48$ & $ 17.77$ &  90450 & $0.162$ & $0.503$ & $-352.3$ & $   3.4$ & $0.99$ & $ 84019.36$ & $0.98$ & $-42015.58$ \\ 
-Crab             & $ 83.64$ & $ 22.02$ &  26547 & $0.189$ & $0.528$ & $-175.4$ & $  15.9$ & $0.92$ & $ 21557.26$ & $0.90$ & $-10783.85$ \\ 
-PSR J1709-4429   & $257.42$ & $-44.48$ &  33105 & $0.258$ & $0.589$ & $-152.8$ & $  56.0$ & $0.73$ & $ 17373.25$ & $0.70$ & $ -8691.73$ \\ 
-PSR J1836+5925   & $279.06$ & $ 59.43$ &  16605 & $0.163$ & $0.491$ & $-150.3$ & $  -4.0$ & $1.03$ & $ 15372.34$ & $0.97$ & $ -7691.22$ \\ 
-3C 454.3	 & $343.50$ & $ 16.15$ &  14021 & $0.169$ & $0.511$ & $-135.7$ & $   4.6$ & $0.97$ & $ 12422.41$ & $0.96$ & $ -6216.15$ \\ 
-PSR J0007.0+7303 & $  1.76$ & $ 73.05$ &  13610 & $0.212$ & $0.540$ & $-116.2$ & $  16.3$ & $0.88$ & $  9440.20$ & $0.83$ & $ -4724.90$ \\ 
-PSR J2021.5+4026 & $305.39$ & $ 40.45$ &  30942 & $0.324$ & $0.665$ & $-107.0$ & $ 100.4$ & $0.52$ & $  8803.10$ & $0.51$ & $ -4406.32$ \\ 
-PSR J1057-5226   & $164.49$ & $-52.46$ &   8222 & $0.227$ & $0.560$ & $ -85.8$ & $  18.9$ & $0.82$ & $  5301.47$ & $0.79$ & $ -2655.25$ \\ 
-PSR J2021+3651	 & $305.26$ & $ 36.85$ &  22744 & $0.352$ & $0.699$ & $ -77.5$ & $ 103.8$ & $0.43$ & $  4612.93$ & $0.42$ & $ -2310.91$ \\ 
+PSR J0835-4510 (Vela)     & $128.84$ & $-45.18$ & 171821 & $0.174$ & $0.521$ & $-467.5$ & $  29.5$ & $0.94$  & $0.94$ & $   378.92$ & $  1048.96$  \\ 
+PSR J0633+1746 (Geminga)  & $ 98.48$ & $ 17.77$ &  90467 & $0.164$ & $0.501$ & $-349.9$ & $   0.6$ & $1.00$  & $0.97$ & $   286.73$ & $  1012.14$  \\ 
+PSR J0534+2200 (Crab)     & $ 83.64$ & $ 22.02$ &  26443 & $0.204$ & $0.558$ & $-166.7$ & $  32.6$ & $0.84$  & $0.86$ & $   133.34$ & $    30.67$  \\ 
+  LAT PSR J1836+5925      & $279.06$ & $ 59.43$ &  16595 & $0.167$ & $0.494$ & $-148.8$ & $  -2.5$ & $1.02$  & $0.96$ & $   121.85$ & $   438.12$  \\ 
+      PSR J1709-4429      & $257.42$ & $-44.48$ &  32526 & $0.265$ & $0.614$ & $-146.9$ & $  71.3$ & $0.67$  & $0.68$ & $   121.02$ & $   360.82$  \\ 
+            3C 454.3      & $343.50$ & $ 16.15$ &  14021 & $0.170$ & $0.511$ & $-135.4$ & $   4.4$ & $0.97$  & $0.96$ & $   110.98$ & $   480.74$  \\ 
+  LAT PSR J0007+7303      & $  1.76$ & $ 73.05$ &  13558 & $0.224$ & $0.564$ & $-111.5$ & $  25.6$ & $0.81$  & $0.79$ & $    89.89$ & $   288.75$  \\ 
+  LAT PSR J2021+4026      & $305.39$ & $ 40.45$ &  31304 & $0.331$ & $0.669$ & $-103.8$ & $ 103.9$ & $0.50$  & $0.48$ & $    89.31$ & $   237.05$  \\ 
+      PSR J1057-5226      & $164.49$ & $-52.46$ &   8194 & $0.230$ & $0.570$ & $ -84.6$ & $  21.8$ & $0.80$  & $0.78$ & $    70.87$ & $   200.06$  \\ 
+      PSR J2021+3651      & $305.26$ & $ 36.85$ &  22683 & $0.355$ & $0.693$ & $ -75.5$ & $ 100.5$ & $0.43$  & $0.41$ & $    65.78$ & $   145.14$  \\ 
+
+%%   \begin{tabular}{l|rrrrrrrrrrr}
+%%     \hline
+%%     Source & \multicolumn{1}{c}{RA} & \multicolumn{1}{c}{Dec}  & \multicolumn{1}{c}{$N_\mathrm{photons}$}  & \multicolumn{1}{c}{$\bar r^2$} & \multicolumn{1}{c}{$\bar f$} & \multicolumn{1}{c}{$S(r^2)$} & \multicolumn{1}{c}{$S(f)$} & \multicolumn{1}{c}{$A_f$} & \multicolumn{1}{c}{$TS_\mathrm{PSF}$} & \multicolumn{1}{c}{$A_\mathrm{PSF}$} &
+%%     \multicolumn{1}{c}{$\ln P(TS)$} \\
+%%     \hline
+
+%% Vela             & $128.84$ & $-45.18$ & 172081 & $0.167$ & $0.507$ & $-478.9$ & $   9.7$ & $0.98$ & $156105.48$ & $0.96$ & $-78058.94$ \\ 
+%% Geminga          & $ 98.48$ & $ 17.77$ &  90450 & $0.162$ & $0.503$ & $-352.3$ & $   3.4$ & $0.99$ & $ 84019.36$ & $0.98$ & $-42015.58$ \\ 
+%% Crab             & $ 83.64$ & $ 22.02$ &  26547 & $0.189$ & $0.528$ & $-175.4$ & $  15.9$ & $0.92$ & $ 21557.26$ & $0.90$ & $-10783.85$ \\ 
+%% PSR J1709-4429   & $257.42$ & $-44.48$ &  33105 & $0.258$ & $0.589$ & $-152.8$ & $  56.0$ & $0.73$ & $ 17373.25$ & $0.70$ & $ -8691.73$ \\ 
+%% PSR J1836+5925   & $279.06$ & $ 59.43$ &  16605 & $0.163$ & $0.491$ & $-150.3$ & $  -4.0$ & $1.03$ & $ 15372.34$ & $0.97$ & $ -7691.22$ \\ 
+%% 3C 454.3	 & $343.50$ & $ 16.15$ &  14021 & $0.169$ & $0.511$ & $-135.7$ & $   4.6$ & $0.97$ & $ 12422.41$ & $0.96$ & $ -6216.15$ \\ 
+%% PSR J0007.0+7303 & $  1.76$ & $ 73.05$ &  13610 & $0.212$ & $0.540$ & $-116.2$ & $  16.3$ & $0.88$ & $  9440.20$ & $0.83$ & $ -4724.90$ \\ 
+%% PSR J2021.5+4026 & $305.39$ & $ 40.45$ &  30942 & $0.324$ & $0.665$ & $-107.0$ & $ 100.4$ & $0.52$ & $  8803.10$ & $0.51$ & $ -4406.32$ \\ 
+%% PSR J1057-5226   & $164.49$ & $-52.46$ &   8222 & $0.227$ & $0.560$ & $ -85.8$ & $  18.9$ & $0.82$ & $  5301.47$ & $0.79$ & $ -2655.25$ \\ 
+%% PSR J2021+3651	 & $305.26$ & $ 36.85$ &  22744 & $0.352$ & $0.699$ & $ -77.5$ & $ 103.8$ & $0.43$ & $  4612.93$ & $0.42$ & $ -2310.91$ \\ 
 \end{tabular}
 \end{table*}
 
 \begin{figure*}
-  \includegraphics[width=\textwidth]{source_plot}
-  \caption{Sources with $\ln P(TS)<-12.5$ (i.e. five sigma) in the 1~GeV catalogue (small blue circles), in the 100~GeV catalogue (big red circles) and the 3FGL (black dots).}
+  \includegraphics[width=\textwidth,clip,trim=0.6in 1in 0.8in
+    1in]{source_plot}
+  \caption{Sources with $\ln P(\log L)<-12.5$ (i.e. five sigma) in the
+    1~GeV catalogue (small blue circles), in the 100~GeV catalogue
+    (big red circles) and the 3PSC (black dots).}
   \label{fig:sources}
 \end{figure*}
 
-\begin{figure*}
-\includegraphics[width=\columnwidth]{cumfermi.pdf}
-\includegraphics[width=\columnwidth]{cumff.pdf}
+All of the sources detected by FermiFAST above five sigma in the 1~GeV
+and the 100~MeV sample are depicted in Fig.~\ref{fig:sources}.  One
+can see that nearly all of the FermiFAST sources correspond to 3PSC
+sources and in fact a few may correspond to several sources.  On the
+other hand, there are many 3PSC sources that do not have counterparts
+in the FermiFAST catalogue.  We can examine the statistics of the
+correspondances more carefully by examining the distance across the
+sky between the nearest neighbours in each of the two catalogues:
+FermiFAST and 3PSC.  These are plotted as the red curves in
+Fig.~\ref{fig:corresponances} and the cyan curve is a multi-Rayleigh
+distribution fit to the red curves.  We find that the nearest
+neighbour in the 3PSC of each almost source in the FermiFAST catalogue
+lies within about 1-2 arcminutes.  We must assess whether these are
+chance coincidences.  If the sources in the two catalogues are not
+correlated with each other ({\em i.e.} there are no real counterparts),
+then one would expect that the cumulative distribution of nearest
+neighbour distances to grow as a $1-\exp(\lambda \Omega)$ where
+$\lambda$ is the density of sources on the sky and $\Omega$ is solid
+angle enclosed by a circle centred on the object and passing through
+the nearest neighbour.  Given that there are 3029 Fermi 3PSC sources
+on the sky, the cumulative distribution in this case would
+approximately be $1-\exp(r^2/2\sigma^2)$ where $\sigma\approx
+1.5^\circ$, so it is unlikely that these counterparts at a typical
+distance of 1 arcminutes are by chance.
 
-\includegraphics[width=\columnwidth]{cumfermi_hib.pdf}
+\begin{figure*}
+\includegraphics[width=\columnwidth]{cumff.pdf}
 \includegraphics[width=\columnwidth]{cumff_hib.pdf}
-\caption{The upper panels give the results for all sources and the lower panels have
-  $|b|>10^\circ$.   Left: The distance from a Fermi 2PSC source to the nearest
-  Fermi FAST source.  This demonstrates that Fermi FAST finds about
-  half of the Fermi 2PSC sources.  Right: The distance from a Fermi
-  FAST source to the nearest Fermi 2PSC source.  This demonstrates
-  that ninety percent of the Fermi FAST sources are associated with
-  sources in the FERMI 2PSC.  The red curve give the observed
-  cumulative distribution of nearest distances.  The green curves give
-  the cumulative distribution that one would expect if there were no
-  associated between the Fermi FAST and Fermi 2PSC sources.  This is
-  calculated by performing the same analysis as the red curves but
-  with the Galactic coordinates inverted.  The blue curve yields the
-  detection rate in the case of the left panels and the false positive
-  rate for the right panels. The cyan and magneta curves are Rayleigh
-  distributions that are fit to the observed distributions.  The
-  typical positional error between associated 2PSC and FAST sources is
-  four arcminutes.  }
+%\includegraphics[width=\columnwidth]{cumfermi.pdf}
+%\includegraphics[width=\columnwidth]{cumfermi_hib.pdf}
+\caption{The left panel give the results for all sources and the right
+  panels have $|b|>10^\circ$. The distance from a Fermi FAST source to
+  the nearest Fermi 3PSC source.  This demonstrates that ninety
+  percent of the Fermi FAST sources are associated with sources in the
+  FERMI 3PSC (across the whole sky) and nearly all at Galactic
+  latitudes greater than ten degrees..  The red curve give the
+  observed cumulative distribution of nearest distances.  The green
+  curves give the cumulative distribution that one would expect if
+  there were no associated between the Fermi FAST and Fermi 3PSC
+  sources.  This is calculated by performing the same analysis as the
+  red curves but with the Galactic coordinates inverted.  The blue
+  curve yields the false positive rate.  The cyan and magneta curves
+  are Rayleigh distributions that are fit to the observed
+  distributions.  The typical positional error between associated 3PSC
+  and FAST sources is 1-2~arcminutes.  }
+%% \caption{The upper panels give the results for all sources and the
+%%   lower panels have $|b|>10^\circ$. Left: The distance from a Fermi
+%%   FAST source to the nearest Fermi 3PSC source.  This demonstrates
+%%   that ninety percent of the Fermi FAST sources are associated with
+%%   sources in the FERMI 3PSC.  The red curve give the observed
+%%   cumulative distribution of nearest distances.  The green curves give
+%%   the cumulative distribution that one would expect if there were no
+%%   associated between the Fermi FAST and Fermi 3PSC sources.  This is
+%%   calculated by performing the same analysis as the red curves but
+%%   with the Galactic coordinates inverted.  Right: The distance from a
+%%   Fermi 3PSC source to the nearest Fermi FAST source.  This
+%%   demonstrates that Fermi FAST finds about one third of the Fermi 3PSC
+%%   sources.  The blue curve yields the false positive rate in the case
+%%   of the left panels and the completeness rate for the right panels.
+%%   The cyan and magneta curves are Rayleigh distributions that are fit
+%%   to the observed distributions.  The typical positional error between
+%%   associated 3PSC and FAST sources is 1-2~arcminutes.  }
 \label{fig:corresponances}
 \end{figure*}
+
+We also can determine the distribution of unassociated pairs from the
+data itself by inverting the coordinates of the sources in one
+catalogue and looking for the nearest neighbours again.  To be precise
+we change the sign of the Galactic latitude and longitude of each
+source in the 3PSC and repeat the nearest neighbour search.  Here all
+of the correspondances will be by chance.  These results are given by
+the green curves in the various panels and let us assess that nearly
+all of the sources in the FermiFAST have counterparts in the 3PSC.  In
+the all-sky map (left panel) in the FermiFAST, we can assess the
+number of FermiFAST sources that are not in the 3PSC by fitting the
+cumulative distribution with several Rayleigh distributions that
+quantify the positional error for the true counterparts and the chance
+of a false counterpart determined by fitting the cumulative
+distribution of false counterparts with a Rayleigh distribution as
+well.  We find that about 50 of the 800 sources do not have a
+counterpart in 3PSC.  If we now focus on the right panel of
+Fig.~\ref{fig:corresponances} we find that out of the 580
+high-latitude sources in FermiFAST at most only a few lack a
+counterpart in 3PSC.
+
+One thing that is glaringly obvious from Fig.~\ref{fig:sources} is
+that most sources in the 3PSC lack a counterpart in the FermiFAST
+catalogue.  Both the 1~GeV and the 100~GeV version.  Given that the
+algorithm outlined here is much less comprehensive that the techniques
+used to generate the Fermi catalogues (there is no modelling of the
+background, multiple sources or spectra), this is not surprising.
+However, it is useful to figure out what sources are missing from the
+FermiFAST catalogue and why.  Fig.~\ref{fig:fermi_comp} in the left
+panel shows the relationship between the significances of a source
+assigned by FermiFAST and by the 3PSC.  In particular the 3PSC
+significances are three times larger (the upper line) than FermiFAST
+typically, so if both apply a threshold of five sigma, FermiFAST will
+find fewer sources.  However, there is a large population of sources
+for which the two likelihoods are similar or the FermiFAST likelihood
+is larger.  Since FermiFAST does not perform any spectral modelling,
+perhaps these sources have poor spectral fits in the 3PSC, yielding
+smaller likelihoods.  Furthermore, this indicates a discovery space
+for FermiFAST to find point sources where we do not have a good prior
+notion of the spectral model.  The outlying point in the lower-right
+is the Crab pulsar whose 3PSC likelihood is artificially too low due
+to the way it is fit within the catalogue.
+
+To understand further whether FermiFAST is simply missing less
+significant 3PSC sources we can look at the cumulative distribution of
+3PSC significances of sources that appear in the FermiFAST 1~GeV
+catalogue and all of the 3PSC sources in the right panel of
+Fig.~\ref{fig:fermi_comp}.  We see that FermiFAST catalogue is
+essentially complete for all 3PSC sources above 15-sigma, so FermiFAST
+can quickly (in 90 seconds) generate a sample from the Fermi data
+stream of the top third of sources that would appear a Fermi catalogue
+using the full likelihood technique to construct the catalogue.
 
 \begin{figure*}
 \includegraphics[width=\columnwidth]{sign-comp}
 \includegraphics[width=\columnwidth]{sign-dist}
-\caption{Left: 3FGL Significances vs Fermi FAST.  Right: Cumulative distribution of 3FGL significances for the entire 3FGL (green)
+\caption{Left: 3PSC Significances vs Fermi FAST.
+  Right: Cumulative distribution of 3PSC significances for the entire 3PSC (green)
   and Fermi FAST (red).}
+\label{fig:fermi_comp}
 \end{figure*}
 \section*{Acknowledgments}
 

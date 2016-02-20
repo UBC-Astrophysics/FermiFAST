@@ -126,7 +126,7 @@ main(int argc,char *argv[]) {
    -nl nleaf           default %d\n\
    -r  readmode        default %d\n\
        0     - loop from healpixmin to healpixmax\n\
-       1 (h) - read healpix from STDIN\n\
+       1 (h) - read healpix from STDIN (not yet working)\n\
        2 (e) - read RA and DEC from STDIN (degrees)\n\
        3 (s) - read RA and DEC from STDIN (sexagesimal)\n\
        4 (g) - read l and b from STDIN (degrees)\n\

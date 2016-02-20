@@ -64,9 +64,11 @@ def _parse_command_line_arguments():
 
 
 def texprint(file,skiprows=0):
-    print("""\\begin{tabular}{llrrrrrrrrrrr}
+    print("""\\begin{tabular}{lrrrrrrrrrrrr}
+
     \hline
-    Fermi & Source & \multicolumn{1}{c}{RA} & \multicolumn{1}{c}{Dec}  & \multicolumn{1}{c}{$N_\mathrm{photons}$}  &\multicolumn{1}{c}{$\bar r^2$} & \multicolumn{1}{c}{$\bar f$} & \multicolumn{1}{c}{$S(r^2)$} & \multicolumn{1}{c}{$S(f)$} & \multicolumn{1}{c}{$A_f$} & \multicolumn{1}{c}{$TS_\mathrm{PSF}$} & \multicolumn{1}{c}{$A_\mathrm{PSF}$} & \multicolumn{1}{c}{$\ln P(TS)$} \\\\
+    Fermi & Source & \multicolumn{1}{c}{RA} & \multicolumn{1}{c}{Dec}  & \multicolumn{1}{c}{$N_\mathrm{photons}$}  &\multicolumn{1}{c}{$\\bar r^2$} & \multicolumn{1}{c}{$\\bar f$} & \multicolumn{1}{c}{$S(r^2)$} & \multicolumn{1}{c}{$S(f)$} & \multicolumn{1}{c}{$A_f$} & \multicolumn{1}{c}{$TS_\mathrm{PSF}$} & \multicolumn{1}{c}{$A_\mathrm{PSF}$} & \multicolumn{1}{c}{$S(\mathrm{FF}$} & \multicolumn{1}{c}{$S(\mathrm{3GFL})$} 
+ \\\\
     \hline
 """)
     with open(file,"r") as data:
@@ -77,7 +79,7 @@ def texprint(file,skiprows=0):
                 fnal=''
                 for i in row[fermicat+2:]:
                     fnal=fnal+' '+i
-                print('%20s & %20s & $%6.2f$ & $%6.2f$ & %6d & $%5.3f$ & $%5.3f$ & $%6.1f$ & $%6.1f$ & $%4.2f$ & $%9.2f$ & $%4.2f$ & $%9.2f$ \\\\ ' % (row[fermicat]+' '+row[fermicat+1],fnal.strip(),float(row[54]),float(row[55]),float(row[1]),float(row[3]),float(row[4]),float(row[5]),float(row[6]),float(row[7]),float(row[22]),float(row[23]),float(row[24])))
+                print('%20s & %20s & $%6.2f$ & $%6.2f$ & %6d & $%5.3f$ & $%5.3f$ & $%6.1f$ & $%6.1f$ & $%4.2f$ & $%9.2f$ & $%4.2f$ & $%9.2f$ & $%9.2f$  \\\\ ' % (row[fermicat]+' '+row[fermicat+1],fnal.strip(),float(row[54]),float(row[55]),float(row[1]),float(row[3]),float(row[4]),float(row[5]),float(row[6]),float(row[7]),float(row[22]),float(row[23]),(-2*float(row[24]))**0.5,float(row[fermicat-1])))
 
     print("\end{tabular}")
 
