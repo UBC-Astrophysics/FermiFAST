@@ -70,6 +70,11 @@ def _parse_command_line_arguments():
                         help='number of rows to skip at the top (default 26)',
                         required=False)
     parser.set_defaults(skiprows=26)
+    parser.add_argument('--siglevel',
+                        type=float,
+                        help='significance level to stop at  (default -12.5)',
+                        required=False)
+    parser.set_defaults(siglevel=-12.5)
     parser.add_argument('--column',
                         type=int,
                         help='number of the column to use starting from zero (default 24)',
@@ -122,7 +127,7 @@ def _main():
     """
 
     args=_parse_command_line_arguments()
-    get_peaks(args['ts-file'],args['peak-file'],skiprows=args['skiprows'],column=args['column'])
+    get_peaks(args['ts-file'],args['peak-file'],skiprows=args['skiprows'],column=args['column'],siglevel=args['siglevel'])
 
 
 #------------------------------------------------------------------------------

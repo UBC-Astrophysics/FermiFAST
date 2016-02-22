@@ -6,6 +6,7 @@
 %\usepackage{url}
 \newcommand{\aj}{Astron. J.}
 \newcommand{\apj}{Astrophys. J.}
+\newcommand{\apjs}{Astrophys. J. Supp.}
 \newcommand{\pasp}{Publ. Ast. Soc. Pac.}
 \newcommand{\pasa}{Publ. Ast. Soc. Aust.}
 \newcommand{\ao}{Appl. Opt.}
@@ -65,8 +66,8 @@
 
 \title[FermiFAST]{FermiFAST: A Fast Algorithm for Finding Point Sources
 in the Fermi Data Stream}
-\author[J. S. Heyl, A. Ashathaman and A. Barton]{Jeremy S. Heyl$^{1}$\thanks{Email:
-    heyl@phas.ubc.ca; Canada Research Chair}, Asha Ashathaman and Alistair Barton\\
+\author[A. Ashathaman, A. Barton and J. S. Heyl]{Asha Ashathaman$^{1}$, Alistair Barton,
+  Jeremy S. Heyl$^{1}$\thanks{Email: heyl@phas.ubc.ca; Canada Research Chair} \\
 $^{1}$Department of Physics and Astronomy, University of British
 Columbia, 6224 Agricultural Road, Vancouver, BC V6T 1Z1, Canada}
 
@@ -324,15 +325,6 @@ photons with energies exceeding 1~GeV.
   \label{fig:acorr}
 \end{figure*}
 
-Lorem Ipsum is simply dummy text of the printing and typesetting
-industry. Lorem Ipsum has been the industry's standard dummy text ever
-since the 1500s, when an unknown printer took a galley of type and
-scrambled it to make a type specimen book. It has survived not only
-five centuries, but also the leap into electronic typesetting,
-remaining essentially unchanged. It was popularised in the 1960s with
-the release of Letraset sheets containing Lorem Ipsum passages, and
-more recently with desktop publishing software like Aldus PageMaker
-including versions of Lorem Ipsum.
 
 \begin{figure*}
   \includegraphics[width=\columnwidth]{changelogL}
@@ -347,49 +339,6 @@ including versions of Lorem Ipsum.
 \end{figure*}
 
 
-It is a long established fact that a reader will be distracted by the
-readable content of a page when looking at its layout. The point of
-using Lorem Ipsum is that it has a more-or-less normal distribution of
-letters, as opposed to using 'Content here, content here', making it
-look like readable English. Many desktop publishing packages and web
-page editors now use Lorem Ipsum as their default model text, and a
-search for 'lorem ipsum' will uncover many web sites still in their
-infancy. Various versions have evolved over the years, sometimes by
-accident, sometimes on purpose (injected humour and the like).
-
- Contrary to popular belief, Lorem Ipsum is not simply random text. It
-has roots in a piece of classical Latin literature from 45 BC, making
-it over 2000 years old. Richard McClintock, a Latin professor at
-Hampden-Sydney College in Virginia, looked up one of the more obscure
-Latin words, consectetur, from a Lorem Ipsum passage, and going
-through the cites of the word in classical literature, discovered the
-undoubtable source. Lorem Ipsum comes from sections 1.10.32 and
-1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and
-Evil) by Cicero, written in 45 BC. This book is a treatise on the
-theory of ethics, very popular during the Renaissance. The first line
-of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in
-section 1.10.32.
-
-The standard chunk of Lorem Ipsum used since the 1500s is reproduced
-below for those interested. Sections 1.10.32 and 1.10.33 from "de
-Finibus Bonorum et Malorum" by Cicero are also reproduced in their
-exact original form, accompanied by English versions from the 1914
-translation by H. Rackham.
-
-There are many variations of passages of Lorem Ipsum available, but
-the majority have suffered alteration in some form, by injected
-humour, or randomised words which don't look even slightly
-believable. If you are going to use a passage of Lorem Ipsum, you need
-to be sure there isn't anything embarrassing hidden in the middle of
-text. All the Lorem Ipsum generators on the Internet tend to repeat
-predefined chunks as necessary, making this the first true generator
-on the Internet. It uses a dictionary of over 200 Latin words,
-combined with a handful of model sentence structures, to generate
-Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is
-therefore always free from repetition, injected humour, or
-non-characteristic words etc.
-
-
 
 \section{Results}
 
@@ -400,10 +349,11 @@ is, photons detected between 2008 August 4 (15:45:36 UTC) and 2012
 July 26 (01:07:25 UTC) nearly four years and about five days shorter
 than the span of the 3PSC observations.  We used the good-time
 intervals (GTI) as defined by the Fermi team and the PASS 7 response
-function (\texttt{P7REP\_SOURCE\_V15}) and the PASS 7 reprocessed data.
-From the form of the likelihood function, Eq.~\ref{eq:2}, we do not
-use a model for the background and the key ingredient of the instrument response
-if the estimate of the point-spread function.
+function (\texttt{P7REP\_SOURCE\_V15}) and the PASS 7 reprocessed
+data.  From the form of the likelihood function, Eq.~\ref{eq:2}, it is
+apparent that we do not use a model for the background and the key
+ingredient of the instrument response if the estimate of the
+point-spread function.
 
 We create two catalogues: one using photons above 1~GeV and the second
 with all photons above 100~MeV.  The ten most significant sources in
@@ -555,8 +505,8 @@ algorithm outlined here is much less comprehensive that the techniques
 used to generate the Fermi catalogues (there is no modelling of the
 background, multiple sources or spectra), this is not surprising.
 However, it is useful to figure out what sources are missing from the
-FermiFAST catalogue and why.  Fig.~\ref{fig:fermi_comp} in the left
-panel shows the relationship between the significances of a source
+FermiFAST catalogue and why.  Fig.~\ref{fig:fermi_comp} 
+shows the relationship between the significances of a source
 assigned by FermiFAST and by the 3PSC.  In particular the 3PSC
 significances are three times larger (the upper line) than FermiFAST
 typically, so if both apply a threshold of five sigma, FermiFAST will
@@ -573,31 +523,91 @@ to the way it is fit within the catalogue.
 To understand further whether FermiFAST is simply missing less
 significant 3PSC sources we can look at the cumulative distribution of
 3PSC significances of sources that appear in the FermiFAST 1~GeV
-catalogue and all of the 3PSC sources in the right panel of
-Fig.~\ref{fig:fermi_comp}.  We see that FermiFAST catalogue is
-essentially complete for all 3PSC sources above 15-sigma, so FermiFAST
-can quickly (in 90 seconds) generate a sample from the Fermi data
-stream of the top third of sources that would appear a Fermi catalogue
-using the full likelihood technique to construct the catalogue.
-
-\begin{figure*}
+catalogue and all of the 3PSC sources in Fig.~\ref{fig:sign-dist}.  We
+see that FermiFAST catalogue is essentially complete for all 3PSC
+sources above 15-sigma, so FermiFAST can quickly (in 90 seconds)
+generate a sample from the Fermi data stream of the quartile of
+sources that would appear a Fermi catalogue using the full likelihood
+technique to construct the catalogue.
+\begin{figure}
 \includegraphics[width=\columnwidth]{sign-comp}
-\includegraphics[width=\columnwidth]{sign-dist}
-\caption{Left: 3PSC Significances vs Fermi FAST.
-  Right: Cumulative distribution of 3PSC significances for the entire 3PSC (green)
-  and Fermi FAST (red).}
+\caption{3PSC Significances vs Fermi FAST.  The red points are
+  where the counterparts lie within $0.2^\circ$ of each other, the
+  green the counterparts lies between $0.2^\circ$ and $1^\circ$, and
+  the blue have counterparts further than $1^\circ$ away. }
 \label{fig:fermi_comp}
-\end{figure*}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=\columnwidth]{sign-dist}
+\caption{
+  Cumulative distribution of 3PSC significances for the entire 3PSC
+  (blue) and the entire Fermi FAST 1-GeV catalogue with a five-sigma
+  cut (green) and Fermi FAST where the 3PSC counterpart lies within
+  $0.2^\circ$ (red) again with a five-sigma cut.  The blue and cyan
+  give the same as green and red but with a three-sigma cut.}
+\label{fig:sign-dist}
+\end{figure}
+
+The question arises it is possible to do better. We can reduce the
+significant threshold for find sources in the 1-GeV FermiFAST
+catalogue.  We expect that the number of sources that do not have firm
+associations in the 3PSC to increase but also for the completeless to
+increase as well.  We can used the empirical distance distribution for
+the false matches depicted in yellow in Fig.~\ref{fig:ffl_comp} to
+split the distribution of the matches between Fermi FAST and the 3PSC
+statistcally into the true matches and the false matches to measure
+the completeness and purity of the samples.  The distribution of the
+close matches here is somewhat different than in
+Fig.~\ref{fig:corresponances} because we have not used the improved
+localizations to find the matches.  The localization improvement tends
+to fail more often for sources of low significance (see
+Fig.~\ref{fig:position}).  Tab.~\ref{tab:comppure} gives the results
+of this trial.  The key result is that the five-sigma sample is very
+pure; only about five percent of the sources lack firm associations in
+the 3PSC.  On the other hand, if one is willing to sacrifice the
+purity of the sample, one can achieve nearly 50\% completeness
+relative to the 3PSC by reducing the significance threshold to
+$3-\sigma.$
+\begin{table}
+  \caption{Completeness and Purity}
+  \label{tab:comppure}
+  \begin{tabular}{l|rrrrr}
+    \hline
+    Threshold & \multicolumn{1}{c}{Sources} & \multicolumn{1}{c}{True} & \multicolumn{1}{c}{False} & \multicolumn{1}{c}{Purity} & \multicolumn{1}{c}{Comp} \\
+    \hline
+    $3-\sigma$   & 1727 & 1400 & 327 & 81.1\% & 46\% \\
+    $3.5-\sigma$ & 1312 & 1180 & 132 & 89.9\% & 39\% \\
+    $4-\sigma$   & 1076 &  995 &  81 & 92.5\% & 33\% \\
+    $4.5-\sigma$ &  923 &  865 &  58 & 93.7\% & 29\% \\
+    $5-\sigma$   &  800 &  755 &  45 & 94.3\% & 25\%  
+  \end{tabular}
+\end{table}
+
+\begin{figure}
+  \includegraphics[width=\columnwidth]{cumfflo_comp}
+  \caption{The cumulative distribution of distances between sources in
+    Fermi FAST and 3PSC for various significance thresholds from top
+    to bottom of 3-sigma, 3.5-sigma, 4-sigma, 4.5-sigma and 5-sigma.
+    The curves that start above zero and join each cumulative
+    distribution at large radii trace the cumulative distribution of
+    distances for the false matches in each sample.}
+  \label{fig:ffl_comp}
+\end{figure}
+
 \section*{Acknowledgments}
 
-The software used in this paper is available at
+Jeremy Heyl would like to thank Elisa Antolini for the 
+conversations that formed the impetus for this paper.  The software
+used in this paper is available at
 \url{http://ubc-astrophysics.github.io}.  We used the VizieR Service,
-the NASA ADS service, the Fermi Science Support Center, the astrometry.net
-$k-d$~tree library, the HEALPix and HEALPy libraries and arXiv.org. This work
-was supported by the Natural Sciences and Engineering Research Council
-of Canada, the Canadian Foundation for Innovation, the British
-Columbia Knowledge Development Fund and the Bertha and Louis Weinstein
-Research Fund at the University of British Columbia.
+the NASA ADS service, the Fermi Science Support Center, the
+astrometry.net $k-d$~tree library, the HEALPix and HEALPy libraries
+and arXiv.org. This work was supported by the Natural Sciences and
+Engineering Research Council of Canada, the Canadian Foundation for
+Innovation, the British Columbia Knowledge Development Fund and the
+Bertha and Louis Weinstein Research Fund at the University of British
+Columbia.
 
 \bibliography{fermi}
 \bibliographystyle{mn2e}
