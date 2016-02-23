@@ -94,6 +94,8 @@ image processing --- astrometry
 
 \section{Introduction}
 
+{\bf more to add here and references everywhere }
+
 \section{The Photon Database}
 
 The key to the speed of this algorithm is the database that contains
@@ -433,7 +435,7 @@ PSR J0534+2200 (Crab)     & $ 83.64$ & $ 22.02$ &  26443 & $0.204$ & $0.558$ & $
   \includegraphics[width=\textwidth,clip,trim=0.6in 1in 0.8in
     1in]{source_plot}
   \caption{Sources with $\ln P(\log L)<-12.5$ (i.e. five sigma) in the
-    1~GeV catalogue (small blue circles), in the 100~GeV catalogue
+    1~GeV catalogue (small blue circles), in the 100~MeV catalogue
     (big red circles) and the 3PSC (black dots).}
   \label{fig:sources}
 \end{figure*}
@@ -459,7 +461,7 @@ $\lambda$ is the density of sources on the sky and $\Omega$ is solid
 angle enclosed by a circle centred on the object and passing through
 the nearest neighbour.  Given that there are 3029 Fermi 3PSC sources
 on the sky, the cumulative distribution in this case would
-approximately be $1-\exp(r^2/2\sigma^2)$ where $\sigma\approx
+approximately be $1-\exp(-r^2/2\sigma^2)$ where $\sigma\approx
 1.5^\circ$, so it is unlikely that these counterparts at a typical
 distance of 1 arcminutes are by chance.
 
@@ -550,7 +552,7 @@ significant 3PSC sources we can look at the cumulative distribution of
 3PSC significances of sources that appear in the FermiFAST 1~GeV
 catalogue and all of the 3PSC sources in Fig.~\ref{fig:sign-dist}.  We
 see that FermiFAST catalogue is essentially complete for all 3PSC
-sources above 15-sigma, so FermiFAST can quickly (in 90 seconds)
+sources above about 18-sigma, so FermiFAST can quickly (in 90 seconds)
 generate a sample from the Fermi data stream of the quartile of
 sources that would appear a Fermi catalogue using the full likelihood
 technique to construct the catalogue.
@@ -584,8 +586,8 @@ split the distribution of the matches between Fermi FAST and the 3PSC
 statistcally into the true matches and the false matches to measure
 the completeness and purity of the samples.  The contribution of the
 false matches to the cumulative distributions is depicted in the same
-colour as the measured distributions but dashed.
-The distribution of the close matches here is somewhat different than in
+colour as the measured distributions but dashed.  The distribution of
+the close matches here is somewhat different than in
 Fig.~\ref{fig:corresponances} because we have not used the improved
 localizations to find the matches.  The localization improvement tends
 to fail more often for sources of low significance (see
@@ -595,7 +597,9 @@ pure; only about five percent of the sources lack firm associations in
 the 3PSC.  On the other hand, if one is willing to sacrifice the
 purity of the sample, one can achieve nearly 50\% completeness
 relative to the 3PSC by reducing the significance threshold to
-$3-\sigma.$
+$3-\sigma$.  Fig.~\ref{fig:sign-dist} shows by accepting a lower
+purity one can get a complete 3PSC sample about about ten-sigma,
+comprising nearly half of the 3PSC sample.
 \begin{table}
   \caption{Completeness and Purity}
   \label{tab:comppure}
@@ -622,19 +626,154 @@ $3-\sigma.$
   \label{fig:ffl_comp}
 \end{figure}
 
+We saw in Fig.~\ref{fig:fermi_comp} that in general the FermiFAST
+significances and the 3PSC significances are well correlated with
+However, for about one fifth of the sources $S(\mathrm{3PSC}) < 2 S(\mathrm{FF})$
+and for about one tenth $S(\mathrm{3PSC}) < S(\mathrm{FF})$.
+This demonstrates that at least for a fraction of
+the 3PSC the FermiFAST technique is more sensitive, so the sources
+that do lie in the FermiFAST catalogue but not the 3PSC may just be a
+class of sources to which the 3PSC is less sensitive, perhaps sources
+for which the suite of spectral models employed in the construction of
+the 3PSC to do apply.  On the other hand, these unassociated sources
+could simply be regions where the diffuse background is especially
+bright and clumpy.  Because the FermiFAST technique assumes that the
+background is smooth on the scale of the PSF, it would find a source
+where the background is locally strong.  We possibly see the opposite
+of this effect in Fig.~\ref{fig:acorr} where FermiFAST finds negative
+sources that are most likely places where the background is locally
+weak.
+
+\section{Discussion}
+
+We have outlined a technique that can rapidly find point sources from
+the photon data from the Fermi telescope.  If one focusses on the
+photons above 1~GeV, one can reproduce about half of the 3PSC using
+the 3PSC data set in about 90 seconds with a false association rate of
+less than twenty percent.  There are several immediate applications of
+this technique that come to mind as well as seceral avenues of
+potential improvements to increase the sensitivity and specificity
+and the data that we learn about each source.  First, we will discuss
+some potential applications.
+
+The speed of the technique opens several possible exploratory research
+paths.  One can search fractions of the data stream for potential
+sources that we active for a portion of the complete 3PSC observation
+time and so did not reach the threshold for detectability over the
+entire observation but were sufficiently bright to be detected over a
+shorter window.  Given the large variability of blazars which form the
+bulk of the sources outside the plane of the Galaxy, this is an
+interesting avenue.  In fact although the 3PSC catalogue contains many
+more sources than the 2PSC, many sources are absent in the 3PSC that
+were in the 2PSC.  Some of these may have been spurious, but others
+could have simply been variable, so the search for variable sources
+provides an exciting avenue.  Furthermore, the sources in the
+FermiFAST catalogue that are not in the 3PSC would be great seeds for
+a full characterization using the Fermi tools.  Are these potential
+sources simply knots in the gamma-ray background or do they remain
+significant even with the full analysis?
+
+
+A second important direction is to use the FermiFAST algorithm to
+generate a catalogue of sources, most likely not as deep as the 3PSC
+and then use the catalogue for further statistical analysis of the
+various populations.  Now what are the advantages of this when one
+considers that the 3PSC already exists?  Because the FermiFAST
+catalogue only requires a few minutes to generate one can explore the
+statistical biases, selection and uncertainities in the catalogue
+through simulated data much more easily than for the full 3PSC
+catalogue.  A first step would be to insert artificial sources of
+known fluxes and spectra into the data stream.  This could be down in
+parallel by again inserting the sources on a HEALPix grid so that the
+regions of interest for each source (Fig.~\ref{fig:expmap}) do not
+overlap over the energy range considered.  Now we can measure the
+relationship between the flux and significance throughout the sky to
+obtain the selection function for the survey.  This is crucial
+ingredient to determine the luminosity function of the underlying
+population.  Because the underlying sources may be variable, we could
+also insert variable sources into the data stream as well and combine
+this with the time slicing analysis described in the previous
+paragraph and develop for example a catalogue of blazars as a function
+of mean luminosity and variability that is both statistically well
+characterized and possibly contains new objects that were not
+discovered in the previous Fermi catalogues.  Of course, many of the sources
+will have already been detected by Fermi and possibly followed up
+with further measurements, the key element here would be that the sample
+would be statistically well characterized, so clear conclusions about the
+population could be obtained.
+
+Using the existing data stream without inserting sources, one could
+characterize whether the measurement significances of the individual
+sources are reasonable and whether the variability measurement
+determined say in an analysis as outlined earlier is significant.  The
+first step would be to resample the photon data stream through a
+bootstrap --- this would generate a new list of photons by selecting
+the same number of photons from the original list but with
+replacement, so that the same photon could appear many times in the
+new sample and of course some photons won't appear at all.  Each new
+list of photons would generate new catalogue to determine what
+properties of the sources and the catalogue as a whole are robust
+against the Poisson fluctuations in the data stream.  This would
+verify the underlying assumptions of the significances of the sources
+as well as determine how sources near the detection threshold enter
+and leave the sample.  Because the sample is dominated by the faintest
+sources near the detection threshold (see Fig.~\ref{fig:fermi_comp}),
+understanding this effect is again crucial to understand the sample.
+
+To detect point sources from the Fermi photon data stream, we only
+used the data stream and the estimates of the point-spread
+function. There is additional data available that could help to
+improve the sensitivity of the technique, reduce the number of false
+positives and better characterize the sources detected.  First, the
+likelihood function, Eq.~(\ref{eq:2}, assumes that the gamma-ray
+background is smooth everywhere.  However, we know from independent
+measurements, for example the Galactic synchrotron emission, that the
+gamma-ray background is likely to be clumpy and the Fermi team
+provides estimates of this background.  By combining this background
+estimate along with the integral of the effective area and time that a
+particular direction and energy was observed, we can develop an
+improved likelihood function that includes the estimated background.
+This could reduce both the number of candidate sources detected with
+$A_\mathrm{PSF}<0$ and the number of candidate sources without
+counterparts in the 3PSC.  The addition of this information would not
+dramatically increase the time to construct the catalogue (we have
+already included this functionality in the software but it is not yet
+well characterized).
+
+One could also take an alternative route.  Looking again at
+Eq.~\ref{eq:2}, we can use the relative size of the two terms in the
+brackets to assign a fraction of each photon to the source and to the
+background.  Again if we include information on the effective area and
+the exposure time, we obtain an estimate of the spectrum from each
+source and from the background.  Because a given photon could be
+assigned to several sources as well as the background, we would also
+have to develop a good statistical model to split the photon among the
+sources.  Of course, a first estimate could be obtained by ignoring
+the fact that several potential sources could claim a given photon.
+This would provide an independent confirmation of the structure of the
+gamma-ray background, but perhaps more importantly it would yield an
+estimate of the spectrum of each source.  One could include a fit to
+the source spectrum as in the standard Fermi analysis either in the
+initial likelihood calculation or after the sources have been
+detected.  In the first case this might improve both the sensitivity
+as we could find fainter sources against the background if they follow
+one of the spectral models and the specificity by excluding potential
+sources that do not follow the models.
+
+{\bf more to add here and references everywhere }
+
 \section*{Acknowledgments}
 
-Jeremy Heyl would like to thank Elisa Antolini for the 
-conversations that formed the impetus for this paper.  The software
-used in this paper is available at
-\url{http://ubc-astrophysics.github.io}.  We used the VizieR Service,
-the NASA ADS service, the Fermi Science Support Center, the
-astrometry.net $k-d$~tree library, the HEALPix and HEALPy libraries
-and arXiv.org. This work was supported by the Natural Sciences and
-Engineering Research Council of Canada, the Canadian Foundation for
-Innovation, the British Columbia Knowledge Development Fund and the
-Bertha and Louis Weinstein Research Fund at the University of British
-Columbia.
+Jeremy Heyl would like to thank Elisa Antolini for the conversations
+that formed the impetus for this paper.  The software used in this
+paper is available at \url{http://ubc-astrophysics.github.io}.  We
+used the VizieR Service, the NASA ADS service, the Fermi Science
+Support Center, the astrometry.net $k-d$~tree library, the HEALPix and
+HEALPy libraries and arXiv.org. This work was supported by the Natural
+Sciences and Engineering Research Council of Canada, the Canadian
+Foundation for Innovation, the British Columbia Knowledge Development
+Fund and the Bertha and Louis Weinstein Research Fund at the
+University of British Columbia.
 
 \bibliography{fermi}
 \bibliographystyle{mn2e}
