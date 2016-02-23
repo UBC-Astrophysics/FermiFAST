@@ -313,7 +313,19 @@ and 967 unique peaks of which 310 have $A_\mathrm{PSF}>0$.
 Before discussing the results ({\em i.e.} the catalogue of sources and
 how they compare with the third Fermi catalogue, we will examine the
 performance of the technique and focus on the sources detected from
-photons with energies exceeding 1~GeV.
+photons with energies exceeding 1~GeV.  The left-panel of
+Fig.~\ref{fig:acorr} depicts the results of the initial set of peaks
+with $P(\log L)<e^{-12.5}$ before position refinement.  We see that
+for $A_f>0$ there is a strong linear correlation between the value of
+$A_f$ and $A_\mathrm{PSF}$.  Whereas for negative values of $A_f$
+where there is a hole in the photon distribution, the value of
+$A_\mathrm{PSF}$ saturates at $-0.1$. The right panel shows the values
+of $A_\mathrm{PSF}$ against the significance.  There are both
+significant sources and holes in the photon distribution.  The
+fractional deficit in the ``hole'' regions is limited to one tenth.
+Because of the focus of this paper is to look for gamma-ray sources,
+we won't discuss these ``holes'' further, but they would be an
+interesting focus of further investigation. 
 \begin{figure*}
   \includegraphics[width=\columnwidth]{acorr}
   \includegraphics[width=\columnwidth]{asigcorr}
@@ -326,6 +338,20 @@ photons with energies exceeding 1~GeV.
 \end{figure*}
 
 
+For the sources in the preliminary catalogue ({\em i.e.} those with
+$A_\mathrm{PSF}>0$ we further refine the source estimate of hte
+source.  The left panel of Fig.~\ref{fig:position} depicts the change
+in $\log L$ during the optimization.  Sometimes the value of $\log L$
+actually decreases, but usually it increases modestly by say ten
+percent.  The right panel shows the change in the position of the
+source.  The size of each HEALPix region is about 0.2 degrees on a
+side, so an optimization within a given HEALPix cell would result in a
+typical movement of about one tenth of a degree, and the results bear
+this output.  Occasionally the estmated source position moves by a
+large distance indicating that the optimization has found another
+nearby peak.  We use the optimized position only if the value of $\log
+L$ has actually increases, and the estimated position of the source
+has shifted by less than 0.5 degrees.
 \begin{figure*}
   \includegraphics[width=\columnwidth]{changelogL}
   \includegraphics[width=\columnwidth]{change_position}
@@ -337,7 +363,6 @@ photons with energies exceeding 1~GeV.
     whose likelihood decreased.}
   \label{fig:position}
 \end{figure*}
-
 
 
 \section{Results}
@@ -549,16 +574,18 @@ technique to construct the catalogue.
 \label{fig:sign-dist}
 \end{figure}
 
-The question arises it is possible to do better. We can reduce the
+The question arises: is it possible to do better? We can reduce the
 significant threshold for find sources in the 1-GeV FermiFAST
 catalogue.  We expect that the number of sources that do not have firm
-associations in the 3PSC to increase but also for the completeless to
-increase as well.  We can used the empirical distance distribution for
+associations in the 3PSC to increase but also for the completeness to
+increase as well.  We can use the empirical distance distribution for
 the false matches depicted in yellow in Fig.~\ref{fig:ffl_comp} to
 split the distribution of the matches between Fermi FAST and the 3PSC
 statistcally into the true matches and the false matches to measure
-the completeness and purity of the samples.  The distribution of the
-close matches here is somewhat different than in
+the completeness and purity of the samples.  The contribution of the
+false matches to the cumulative distributions is depicted in the same
+colour as the measured distributions but dashed.
+The distribution of the close matches here is somewhat different than in
 Fig.~\ref{fig:corresponances} because we have not used the improved
 localizations to find the matches.  The localization improvement tends
 to fail more often for sources of low significance (see
@@ -589,7 +616,7 @@ $3-\sigma.$
   \caption{The cumulative distribution of distances between sources in
     Fermi FAST and 3PSC for various significance thresholds from top
     to bottom of 3-sigma, 3.5-sigma, 4-sigma, 4.5-sigma and 5-sigma.
-    The curves that start above zero and join each cumulative
+    The dashed curves that start above zero and join each cumulative
     distribution at large radii trace the cumulative distribution of
     distances for the false matches in each sample.}
   \label{fig:ffl_comp}

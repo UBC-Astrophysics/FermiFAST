@@ -13,6 +13,7 @@ ctioga2 --mark --name cumfflo_comp \
 	cum_all_ts_data_1GeV_hires_6.125_uniq_fermi_match@'log10($2*45/atan(1.0)):$1' \
 	cum_all_ts_data_1GeV_hires_4.5_uniq_fermi_match@'log10($2*45/atan(1.0)):$1' \
 	cum_all_ts_data_1GeV_hires_4.5_uniq_fermi_match_flipped@'log10($2*45/atan(1.0)):$1' \
+	--line-style Dashes \
 	cum_all_ts_data_1GeV_hires_4.5_uniq_fermi_match_flipped@'log10($2*45/atan(1.0)):(800-755)/1727.0*$1+755' \
 	cum_all_ts_data_1GeV_hires_4.5_uniq_fermi_match_flipped@'log10($2*45/atan(1.0)):(923-865)/1727.0*$1+865' \
 	cum_all_ts_data_1GeV_hires_4.5_uniq_fermi_match_flipped@'log10($2*45/atan(1.0)):(1076-995)/1727.0*$1+995' \
