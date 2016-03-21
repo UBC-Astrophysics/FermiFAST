@@ -82,9 +82,19 @@ Columbia, 6224 Agricultural Road, Vancouver, BC V6T 1Z1, Canada}
 \label{firstpage}
 
 \begin{abstract}
-  This paper presents new and efficient algorithms for finding point
-  sources in the photon event data stream from the 
-  Fermi Gamma-Ray Space Telescope.
+  This paper presents a new and efficient algorithm for finding point
+  sources in the photon event data stream from the Fermi Gamma-Ray
+  Space Telescope.  It can rapidly construct about most significant
+  half of the Fermi Third Point Source catalogue (3PSC) with greater
+  than 80\% purity from the four years of data used to construct the
+  catalogue.  If a higher purity sample is desirable, one can achieve
+  a sample that includes the upper quartile of Fermi 3PSC with only
+  five percent of the sources unassociated with Fermi sources.
+  Outside the galaxy plane, the contamination is essentially
+  negligible.  This software allows for rapid exploration of the Fermi
+  data, simulation of the source detection to calculate the selection
+  function of various sources and the errors in the obtained parameters
+  of the sources detected.
 \end{abstract}
 
 \begin{keywords}
@@ -235,12 +245,14 @@ of photons that come from the point source would be
 and we can estimate the significance of the value of $A_f$ by
 \begin{equation}
   S(r^2) = \left ( \bar r^2-\frac{1}{2} \right ) \sqrt{12 N_\mathrm{photons}}
+\label{eq:2}
 \end{equation}
 and the probabilty of getting a value of $S(r^2)$ larger than $x$ by
 chance is
 \begin{equation}
   P\left [ S(r^2) > x \right ] = \frac{1}{2} \mathrm{erfc} \left ( \frac{x}{\sqrt{2}} \right
-    ) \approx \exp \left (-\frac{x^2}{2} \right )
+  ) \approx \exp \left (-\frac{x^2}{2} \right )
+  \label{eq:3}
 \end{equation}
 if we take the limit of many photons in the region of interest where
 the Bates distribution tends to the normal distribution.  
@@ -278,7 +290,7 @@ likelihood
 \begin{equation}
   \log L = \sum_\mathrm{photons} \log \left [ A_\mathrm{PSF} \frac{\mathrm{PSF}_i \Omega_{\mathrm{max},i} }{0.95} + (1
     - A_\mathrm{PSF}) \right ]
-  \label{eq:2}
+  \label{eq:4}
 \end{equation}
 where we have dropped $N_\mathrm{pred}$ from the usual definition
 because we have defined the model in such a way that
@@ -291,7 +303,7 @@ of $\log L$ larger than $x$ by chance is
 \begin{equation}
   P(\log L > x) = \sqrt{\pi} \mathrm{erfc} \left ( \sqrt{\frac{x}{2}}
   \right ) \approx \exp \left (-\frac{x}{2} \right ).
-  \label{eq:4}
+  \label{eq:5}
 \end{equation}
 From Tab.~\ref{tab:topten} we can see that the values of $A_f$ are
 similar to those of $A_\mathrm{PSF}$ at least for highly significant
@@ -366,21 +378,20 @@ has shifted by less than 0.5 degrees.
   \label{fig:position}
 \end{figure*}
 
-
 \section{Results}
 
 To test the algorithm we used essentially the same data set as used to
 construct the Fermi Large Area Telescope Third Source Catalog
 \cite[3PSC][]{2015ApJS..218...23A}.  We used weeks 9 through 216. That
 is, photons detected between 2008 August 4 (15:45:36 UTC) and 2012
-July 26 (01:07:25 UTC) nearly four years and about five days shorter
-than the span of the 3PSC observations.  We used the good-time
-intervals (GTI) as defined by the Fermi team and the PASS 7 response
-function (\texttt{P7REP\_SOURCE\_V15}) and the PASS 7 reprocessed
-data.  From the form of the likelihood function, Eq.~\ref{eq:2}, it is
-apparent that we do not use a model for the background and the key
-ingredient of the instrument response if the estimate of the
-point-spread function.
+July 26 (01:07:25 UTC), a span of nearly four years.  This is about
+five days shorter than the span of the 3PSC observations.  We used the
+good-time intervals (GTI) as defined by the Fermi team and the Pass 7
+response function (\texttt{P7REP\_SOURCE\_V15}) and the Pass 7
+reprocessed data.  From the form of the likelihood function,
+Eq.~\ref{eq:4}, it is apparent that we do not use a model for the
+background, and the key ingredient of the instrument response is the
+estimate of the point-spread function \citep{2012ApJS..203....4A}.
 
 We create two catalogues: one using photons above 1~GeV and the second
 with all photons above 100~MeV.  The ten most significant sources in
@@ -552,8 +563,8 @@ significant 3PSC sources we can look at the cumulative distribution of
 3PSC significances of sources that appear in the FermiFAST 1~GeV
 catalogue and all of the 3PSC sources in Fig.~\ref{fig:sign-dist}.  We
 see that FermiFAST catalogue is essentially complete for all 3PSC
-sources above about 18-sigma, so FermiFAST can quickly (in 90 seconds)
-generate a sample from the Fermi data stream of the quartile of
+sources above about 18-sigma, so FermiFAST can quickly (in six minutes)
+generate a sample from the Fermi data stream of the upper quartile of
 sources that would appear a Fermi catalogue using the full likelihood
 technique to construct the catalogue.
 \begin{figure}
@@ -644,14 +655,16 @@ of this effect in Fig.~\ref{fig:acorr} where FermiFAST finds negative
 sources that are most likely places where the background is locally
 weak.
 
+{\bf talk about the 100~MeV catalogue }
+
 \section{Discussion}
 
 We have outlined a technique that can rapidly find point sources from
 the photon data from the Fermi telescope.  If one focusses on the
 photons above 1~GeV, one can reproduce about half of the 3PSC using
-the 3PSC data set in about 90 seconds with a false association rate of
+the 3PSC data set in about six minutes with a false association rate of
 less than twenty percent.  There are several immediate applications of
-this technique that come to mind as well as seceral avenues of
+this technique that come to mind as well as several avenues of
 potential improvements to increase the sensitivity and specificity
 and the data that we learn about each source.  First, we will discuss
 some potential applications.
@@ -725,11 +738,12 @@ used the data stream and the estimates of the point-spread
 function. There is additional data available that could help to
 improve the sensitivity of the technique, reduce the number of false
 positives and better characterize the sources detected.  First, the
-likelihood function, Eq.~(\ref{eq:2}, assumes that the gamma-ray
+likelihood function, Eq.~\ref{eq:4}, assumes that the gamma-ray
 background is smooth everywhere.  However, we know from independent
 measurements, for example the Galactic synchrotron emission, that the
 gamma-ray background is likely to be clumpy and the Fermi team
-provides estimates of this background.  By combining this background
+provides estimates of this background \citep[e.g.][]{Fermi1602.07246}.
+By combining this background
 estimate along with the integral of the effective area and time that a
 particular direction and energy was observed, we can develop an
 improved likelihood function that includes the estimated background.
@@ -741,7 +755,7 @@ already included this functionality in the software but it is not yet
 well characterized).
 
 One could also take an alternative route.  Looking again at
-Eq.~\ref{eq:2}, we can use the relative size of the two terms in the
+Eq.~\ref{eq:4}, we can use the relative size of the two terms in the
 brackets to assign a fraction of each photon to the source and to the
 background.  Again if we include information on the effective area and
 the exposure time, we obtain an estimate of the spectrum from each
@@ -749,31 +763,40 @@ source and from the background.  Because a given photon could be
 assigned to several sources as well as the background, we would also
 have to develop a good statistical model to split the photon among the
 sources.  Of course, a first estimate could be obtained by ignoring
-the fact that several potential sources could claim a given photon.
-This would provide an independent confirmation of the structure of the
-gamma-ray background, but perhaps more importantly it would yield an
-estimate of the spectrum of each source.  One could include a fit to
-the source spectrum as in the standard Fermi analysis either in the
-initial likelihood calculation or after the sources have been
-detected.  In the first case this might improve both the sensitivity
-as we could find fainter sources against the background if they follow
-one of the spectral models and the specificity by excluding potential
-sources that do not follow the models.
+the fact that several potential sources could claim a given photon and
+resolve the gamma-ray data into sources and background \citep[as done
+  by][]{2015A&A...581A.126S}. This would provide an independent
+confirmation of the structure of the gamma-ray background, but perhaps
+more importantly it would yield an estimate of the spectrum of each
+source. One could include a fit to the source spectrum as in the
+standard Fermi analysis either in the initial likelihood calculation
+or after the sources have been detected.  In the first case this might
+improve both the sensitivity as we could find fainter sources against
+the background if they follow one of the spectral models and the
+specificity by excluding potential sources that do not follow the
+models.
 
-{\bf more to add here and references everywhere }
+FermiFAST provides the infrastructure both for exploratory analysis of
+the Fermi data to find new sources and new variable sources and also
+to create a sample of sources for population studies that can be
+characterized comprehensively by Monte Carlo simulation of the
+detection technique.  The latter may allow new understanding of the
+population of Galactic and extragalactic gamma-ray sources and their
+evolution.
 
 \section*{Acknowledgments}
 
 Jeremy Heyl would like to thank Elisa Antolini for the conversations
 that formed the impetus for this paper.  The software used in this
-paper is available at \url{http://ubc-astrophysics.github.io}.  We
-used the VizieR Service, the NASA ADS service, the Fermi Science
-Support Center, the astrometry.net $k-d$~tree library, the HEALPix and
-HEALPy libraries and arXiv.org. This work was supported by the Natural
-Sciences and Engineering Research Council of Canada, the Canadian
-Foundation for Innovation, the British Columbia Knowledge Development
-Fund and the Bertha and Louis Weinstein Research Fund at the
-University of British Columbia.
+paper and the catalogues generated are available at
+\url{http://ubc-astrophysics.github.io}.  We used the VizieR Service,
+the NASA ADS service, the Fermi Science Support Center, the
+astrometry.net $k-d$~tree library, the HEALPix and HEALPy libraries
+and arXiv.org. This work was supported by the Natural Sciences and
+Engineering Research Council of Canada, the Canadian Foundation for
+Innovation, the British Columbia Knowledge Development Fund and the
+Bertha and Louis Weinstein Research Fund at the University of British
+Columbia.
 
 \bibliography{fermi}
 \bibliographystyle{mn2e}

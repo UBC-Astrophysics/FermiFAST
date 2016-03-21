@@ -4,10 +4,23 @@
   et~al.}{2015}]{2015ApJS..218...23A}
 {Acero} F.,  et~al., 2015, \apjs, 218, 23
 
+\bibitem[\protect\citeauthoryear{Acero et~al.,}{Acero
+  et~al.}{2016}]{Fermi1602.07246}
+Acero F.,  et~al., 2016, \apjs, accepted (1602.07246)
+
+\bibitem[\protect\citeauthoryear{{Ackermann} et~al.,}{{Ackermann}
+  et~al.}{2012}]{2012ApJS..203....4A}
+{Ackermann} M.,  et~al., 2012, \apjs, 203, 4
+
 \bibitem[\protect\citeauthoryear{Bentley}{Bentley}{1975}]{Bentley:1975:MBS:361002.361007}
 Bentley J.~L.,  1975, Commun. ACM, 18, 509
 
 \bibitem[\protect\citeauthoryear{Lang}{Lang}{2009}]{LangPhD}
 Lang D.,  2009, PhD thesis, University of Toronto
+
+\bibitem[\protect\citeauthoryear{{Selig}, {Vacca}, {Oppermann} \&
+  {En{\ss}lin}}{{Selig} et~al.}{2015}]{2015A&A...581A.126S}
+{Selig} M.,  {Vacca} V.,  {Oppermann} N.,    {En{\ss}lin} T.~A.,  2015, \aap,
+  581, A126
 
 \end{thebibliography}
