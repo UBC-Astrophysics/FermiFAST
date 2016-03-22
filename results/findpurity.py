@@ -35,5 +35,7 @@ c2all=np.cumsum(n2all)
 n1wins=np.sum(n1all*c2all)
 n2wins=np.sum(n2all*c1all)
 
-print("list 1 wins= %g (%g)\nlist 2 wins= %g (%g)\n total = %g (%g) frac= %g\n" % (n1wins,n1wins/tot,n2wins,n2wins/tot,tot,n2wins+n1wins-tot,2*n2wins/tot-1))
-
+frac=2*n2wins/tot-1
+print(sys.argv[1])
+print("list 1 wins= %g (%g)\nlist 2 wins= %g (%g)\n total = %g (%g) frac= %g" % (n1wins,n1wins/tot,n2wins,n2wins/tot,tot,n2wins+n1wins-tot,frac))
+print("%4d & %4d & %4.2f%%\n" % (frac*len(r1),(1-frac)*len(r1),frac*100)) 
