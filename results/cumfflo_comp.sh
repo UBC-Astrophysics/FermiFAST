@@ -25,7 +25,7 @@ ctioga2 --mark --name cumfflo_comp \
 	cum_all_ts_data_1GeV_hires_8_uniq_fermi_match_flipped@'log10($2*45/atan(1.0)):(1-0.937972)*$1+0.937972*1076' \
 	cum_all_ts_data_1GeV_hires_10.125_uniq_fermi_match_flipped@'log10($2*45/atan(1.0)):(1-0.95124)*$1+0.95124*923' \
 	cum_all_ts_data_1GeV_hires_12.5_uniq_fermi_match_flipped@'log10($2*45/atan(1.0)):(1-0.957478)*$1+0.957478*800' \
-	-x 'Distance to Nearest Fermi 3PSC Source [Degrees]' \
+	-x 'Distance to Nearest Fermi 3FGL Source [Degrees]' \
 	-y 'Cumulative Number' --xrange -2:1  --xlog --yrange 0:1800
 #	--math /xrange -4:1 \
 #	'1400*10**(2*(x+0.895))' \

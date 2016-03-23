@@ -6,6 +6,7 @@
 %\usepackage{url}
 \newcommand{\aj}{Astron. J.}
 \newcommand{\apj}{Astrophys. J.}
+\newcommand{\aap}{Astron. Astrophys.}
 \newcommand{\apjs}{Astrophys. J. Supp.}
 \newcommand{\pasp}{Publ. Ast. Soc. Pac.}
 \newcommand{\pasa}{Publ. Ast. Soc. Aust.}
@@ -85,10 +86,10 @@ Columbia, 6224 Agricultural Road, Vancouver, BC V6T 1Z1, Canada}
   This paper presents a new and efficient algorithm for finding point
   sources in the photon event data stream from the Fermi Gamma-Ray
   Space Telescope.  It can rapidly construct about most significant
-  half of the Fermi Third Point Source catalogue (3PSC) with nearly
+  half of the Fermi Third Point Source catalogue (3FGL) with nearly
   80\% purity from the four years of data used to construct the
   catalogue.  If a higher purity sample is desirable, one can achieve
-  a sample that includes the most significant third of the Fermi 3PSC
+  a sample that includes the most significant third of the Fermi 3FGL
   with only five percent of the sources unassociated with Fermi
   sources.  Outside the galaxy plane, the contamination is essentially
   negligible.  This software allows for rapid exploration of the Fermi
@@ -151,12 +152,12 @@ Fig.~\ref{fig:sphere}.
       (2,2.0) node [right] {$y_i=\sin\alpha_i\cos\delta_i$}
       (2,1.65) node [right] {$z_i=\sin\delta_i$};
 \begin{scope}[shift={(0,-6)}]
-\draw (-4,-2) -- (-2,2) -- (6,2) -- (4,-2) -- cycle;
-\draw (4,-2) node [above left] {Celestial sphere};
+\draw (-4,-2) -- (-2,2) -- (5,2) -- (3,-2) -- cycle;
+\draw (3,-2) node [above left] {Celestial sphere};
 \filldraw[ball color=white] (0:\R) arc (0:180:\R)
 (0,0) (0:\R) arc (0:-180:2.5 and 1.433904196);
 \foreach \t in {0,20,...,80} { \DrawLatitudeCircle[\R]{\t} }
-\draw (2.1,1.7) node [right] {$w_i=\pm\sqrt{R^2_\mathrm{max}-R^2_i}$};
+\draw (2.1,2.3) node [right] {$w_i=\pm\sqrt{R^2_\mathrm{max}-R^2_i}$};
 \draw (0,0.2) -- node [above] {$R_\mathrm{max}$} (\R,0)
       (0,0.2) -- node [left] {$R_\mathrm{max}$} (0,0.81916*\R);
 \draw [dashed] (0,1.6) -- ++(1.79,-0.6855) -- ++(0,-1.4) 
@@ -382,10 +383,10 @@ has shifted by less than 0.5 degrees.
 
 To test the algorithm we used essentially the same data set as used to
 construct the Fermi Large Area Telescope Third Source Catalog
-\cite[3PSC][]{2015ApJS..218...23A}.  We used weeks 9 through 216. That
+\cite[3FGL][]{2015ApJS..218...23A}.  We used weeks 9 through 216. That
 is, photons detected between 2008 August 4 (15:45:36 UTC) and 2012
 July 26 (01:07:25 UTC), a span of nearly four years.  This is about
-five days shorter than the span of the 3PSC observations.  We used the
+five days shorter than the span of the 3FGL observations.  We used the
 good-time intervals (GTI) as defined by the Fermi team and the Pass 7
 response function (\texttt{P7REP\_SOURCE\_V15}) and the Pass 7
 reprocessed data.  From the form of the likelihood function,
@@ -397,19 +398,19 @@ We create two catalogues: one using photons above 1~GeV and the second
 with all photons above 100~MeV.  The ten most significant sources in
 the 1~GeV map are given in Tab.~\ref{tab:topten} with the refined
 positions and the original detection significances.  We see a general
-trend that the significances in sigma-units of the 3GFL are about
+trend that the significances in sigma-units of the 3FGL are about
 three times that of the FermiFAST technique.  The one exception in the
 table is the Crab pulsar which in the Fermi analysis is split among
 three sources the pulsar itself, the synchrotron and inverse Compton
 components of the pulsar wind nebulae.  The FermiFAST source most
-closely coincides with the pulsar, and the 3GFL significance for this
+closely coincides with the pulsar, and the 3FGL significance for this
 component alone is quoted in the table.
 \begin{table*}
   \caption{The results for the ten most significant peaks in the 1~GeV map}
   \label{tab:topten}
   \begin{tabular}{lrrrrrrrrrrr}
     \hline
-     Source & \multicolumn{1}{c}{RA} & \multicolumn{1}{c}{Dec}  & \multicolumn{1}{c}{$N_\mathrm{photons}$}  &\multicolumn{1}{c}{$\bar r^2$} & \multicolumn{1}{c}{$\bar f$} & \multicolumn{1}{c}{$S(r^2)$} & \multicolumn{1}{c}{$S(f)$} & \multicolumn{1}{c}{$A_f$}  & \multicolumn{1}{c}{$A_\mathrm{PSF}$} & \multicolumn{1}{c}{$S(\mathrm{FF})$} & \multicolumn{1}{c}{$S(\mathrm{3GFL})$} \\
+     Source & \multicolumn{1}{c}{RA} & \multicolumn{1}{c}{Dec}  & \multicolumn{1}{c}{$N_\mathrm{photons}$}  &\multicolumn{1}{c}{$\bar r^2$} & \multicolumn{1}{c}{$\bar f$} & \multicolumn{1}{c}{$S(r^2)$} & \multicolumn{1}{c}{$S(f)$} & \multicolumn{1}{c}{$A_f$}  & \multicolumn{1}{c}{$A_\mathrm{PSF}$} & \multicolumn{1}{c}{$S(\mathrm{FF})$} & \multicolumn{1}{c}{$S(\mathrm{3FGL})$} \\
     \hline
 
 PSR J0835-4510 (Vela)     & $128.84$ & $-45.18$ & 171821 & $0.174$ & $0.521$ & $-467.5$ & $  29.5$ & $0.94$  & $0.94$ & $   378.92$ & $  1048.96$  \\ 
@@ -447,22 +448,22 @@ PSR J0534+2200 (Crab)     & $ 83.64$ & $ 22.02$ &  26443 & $0.204$ & $0.558$ & $
     1in]{source_plot}
   \caption{Sources with $\ln P(\log L)<-12.5$ (i.e. five sigma) in the
     1~GeV catalogue (small blue circles), in the 100~MeV catalogue
-    (big red circles) and the 3PSC (black dots).}
+    (big red circles) and the 3FGL (black dots).}
   \label{fig:sources}
 \end{figure*}
 
 All of the sources detected by FermiFAST above five sigma in the 1~GeV
 and the 100~MeV sample are depicted in Fig.~\ref{fig:sources}.  One
-can see that nearly all of the FermiFAST sources correspond to 3PSC
+can see that nearly all of the FermiFAST sources correspond to 3FGL
 sources and in fact a few may correspond to several sources.  On the
-other hand, there are many 3PSC sources that do not have counterparts
+other hand, there are many 3FGL sources that do not have counterparts
 in the FermiFAST catalogue.  We can examine the statistics of the
 correspondances more carefully by examining the distance across the
 sky between the nearest neighbours in each of the two catalogues:
-FermiFAST and 3PSC.  These are plotted as the red curves in
+FermiFAST and 3FGL.  These are plotted as the red curves in
 Fig.~\ref{fig:corresponances} and the cyan curve is a multi-Rayleigh
 distribution fit to the red curves.  We find that the nearest
-neighbour in the 3PSC of each almost source in the FermiFAST catalogue
+neighbour in the 3FGL of each almost source in the FermiFAST catalogue
 lies within about 1-2 arcminutes.  We must assess whether these are
 chance coincidences.  If the sources in the two catalogues are not
 correlated with each other ({\em i.e.} there are no real counterparts),
@@ -470,7 +471,7 @@ then one would expect that the cumulative distribution of nearest
 neighbour distances to grow as a $1-\exp(\lambda \Omega)$ where
 $\lambda$ is the density of sources on the sky and $\Omega$ is solid
 angle enclosed by a circle centred on the object and passing through
-the nearest neighbour.  Given that there are 3029 Fermi 3PSC sources
+the nearest neighbour.  Given that there are 3029 Fermi 3FGL sources
 on the sky, the cumulative distribution in this case would
 approximately be $1-\exp(-r^2/2\sigma^2)$ where $\sigma\approx
 1.5^\circ$, so it is unlikely that these counterparts at a typical
@@ -481,38 +482,38 @@ distance of 1 arcminutes are by chance.
 \includegraphics[width=\columnwidth]{cumff_hib.pdf}
 %\includegraphics[width=\columnwidth]{cumfermi.pdf}
 %\includegraphics[width=\columnwidth]{cumfermi_hib.pdf}
-\caption{The left panel give the results for all sources and the right
-  panels have $|b|>10^\circ$. The distance from a Fermi FAST source to
-  the nearest Fermi 3PSC source.  This demonstrates that ninety
+\caption{The left panel gives the results for all sources, and the right
+  panel has $|b|>10^\circ$. The distance from a Fermi FAST source to
+  the nearest Fermi 3FGL source.  This demonstrates that ninety
   percent of the Fermi FAST sources are associated with sources in the
-  FERMI 3PSC (across the whole sky) and nearly all at Galactic
+  FERMI 3FGL (across the whole sky) and nearly all at Galactic
   latitudes greater than ten degrees..  The red curve give the
   observed cumulative distribution of nearest distances.  The green
   curves give the cumulative distribution that one would expect if
-  there were no associated between the Fermi FAST and Fermi 3PSC
+  there were no associated between the Fermi FAST and Fermi 3FGL
   sources.  This is calculated by performing the same analysis as the
   red curves but with the Galactic coordinates inverted.  The blue
   curve yields the false positive rate.  The cyan and magneta curves
   are Rayleigh distributions that are fit to the observed
-  distributions.  The typical positional error between associated 3PSC
+  distributions.  The typical positional error between associated 3FGL
   and FAST sources is 1-2~arcminutes.  }
 %% \caption{The upper panels give the results for all sources and the
 %%   lower panels have $|b|>10^\circ$. Left: The distance from a Fermi
-%%   FAST source to the nearest Fermi 3PSC source.  This demonstrates
+%%   FAST source to the nearest Fermi 3FGL source.  This demonstrates
 %%   that ninety percent of the Fermi FAST sources are associated with
-%%   sources in the FERMI 3PSC.  The red curve give the observed
+%%   sources in the FERMI 3FGL.  The red curve give the observed
 %%   cumulative distribution of nearest distances.  The green curves give
 %%   the cumulative distribution that one would expect if there were no
-%%   associated between the Fermi FAST and Fermi 3PSC sources.  This is
+%%   associated between the Fermi FAST and Fermi 3FGL sources.  This is
 %%   calculated by performing the same analysis as the red curves but
 %%   with the Galactic coordinates inverted.  Right: The distance from a
-%%   Fermi 3PSC source to the nearest Fermi FAST source.  This
-%%   demonstrates that Fermi FAST finds about one third of the Fermi 3PSC
+%%   Fermi 3FGL source to the nearest Fermi FAST source.  This
+%%   demonstrates that Fermi FAST finds about one third of the Fermi 3FGL
 %%   sources.  The blue curve yields the false positive rate in the case
 %%   of the left panels and the completeness rate for the right panels.
 %%   The cyan and magneta curves are Rayleigh distributions that are fit
 %%   to the observed distributions.  The typical positional error between
-%%   associated 3PSC and FAST sources is 1-2~arcminutes.  }
+%%   associated 3FGL and FAST sources is 1-2~arcminutes.  }
 \label{fig:corresponances}
 \end{figure*}
 
@@ -520,24 +521,24 @@ We also can determine the distribution of unassociated pairs from the
 data itself by inverting the coordinates of the sources in one
 catalogue and looking for the nearest neighbours again.  To be precise
 we change the sign of the Galactic latitude and longitude of each
-source in the 3PSC and repeat the nearest neighbour search.  Here all
+source in the 3FGL and repeat the nearest neighbour search.  Here all
 of the correspondances will be by chance.  These results are given by
 the green curves in the various panels and let us assess that nearly
-all of the sources in the FermiFAST have counterparts in the 3PSC.  In
+all of the sources in the FermiFAST have counterparts in the 3FGL.  In
 the all-sky map (left panel) in the FermiFAST, we can assess the
-number of FermiFAST sources that are not in the 3PSC by fitting the
+number of FermiFAST sources that are not in the 3FGL by fitting the
 cumulative distribution with several Rayleigh distributions that
 quantify the positional error for the true counterparts and the chance
 of a false counterpart determined by fitting the cumulative
 distribution of false counterparts with a Rayleigh distribution as
 well.  We find that about 50 of the 800 sources do not have a
-counterpart in 3PSC.  If we now focus on the right panel of
+counterpart in 3FGL.  If we now focus on the right panel of
 Fig.~\ref{fig:corresponances} we find that out of the 580
 high-latitude sources in FermiFAST at most only a few lack a
-counterpart in 3PSC.
+counterpart in 3FGL.
 
 One thing that is glaringly obvious from Fig.~\ref{fig:sources} is
-that most sources in the 3PSC lack a counterpart in the FermiFAST
+that most sources in the 3FGL lack a counterpart in the FermiFAST
 catalogue.  Both the 1~GeV and the 100~GeV version.  Given that the
 algorithm outlined here is much less comprehensive that the techniques
 used to generate the Fermi catalogues (there is no modelling of the
@@ -545,31 +546,31 @@ background, multiple sources or spectra), this is not surprising.
 However, it is useful to figure out what sources are missing from the
 FermiFAST catalogue and why.  Fig.~\ref{fig:fermi_comp} 
 shows the relationship between the significances of a source
-assigned by FermiFAST and by the 3PSC.  In particular the 3PSC
+assigned by FermiFAST and by the 3FGL.  In particular the 3FGL
 significances are three times larger (the upper line) than FermiFAST
 typically, so if both apply a threshold of five sigma, FermiFAST will
 find fewer sources.  However, there is a large population of sources
 for which the two likelihoods are similar or the FermiFAST likelihood
 is larger.  Since FermiFAST does not perform any spectral modelling,
-perhaps these sources have poor spectral fits in the 3PSC, yielding
+perhaps these sources have poor spectral fits in the 3FGL, yielding
 smaller likelihoods.  Furthermore, this indicates a discovery space
 for FermiFAST to find point sources where we do not have a good prior
 notion of the spectral model.  The outlying point in the lower-right
-is the Crab pulsar whose 3PSC likelihood is artificially too low due
+is the Crab pulsar whose 3FGL likelihood is artificially too low due
 to the way it is fit within the catalogue.
 
 To understand further whether FermiFAST is simply missing less
-significant 3PSC sources we can look at the cumulative distribution of
-3PSC significances of sources that appear in the FermiFAST 1~GeV
-catalogue and all of the 3PSC sources in Fig.~\ref{fig:sign-dist}.  We
-see that FermiFAST catalogue is essentially complete for all 3PSC
+significant 3FGL sources we can look at the cumulative distribution of
+3FGL significances of sources that appear in the FermiFAST 1~GeV
+catalogue and all of the 3FGL sources in Fig.~\ref{fig:sign-dist}.  We
+see that FermiFAST catalogue is essentially complete for all 3FGL
 sources above about 18-sigma, so FermiFAST can quickly (in six minutes)
 generate a sample from the Fermi data stream of the upper quartile of
 sources that would appear a Fermi catalogue using the full likelihood
 technique to construct the catalogue.
 \begin{figure}
 \includegraphics[width=\columnwidth]{sign-comp}
-\caption{3PSC Significances vs Fermi FAST.  The red points are
+\caption{3FGL Significances vs Fermi FAST.  The red points are
   where the counterparts lie within $0.2^\circ$ of each other, the
   green the counterparts lies between $0.2^\circ$ and $1^\circ$, and
   the blue have counterparts further than $1^\circ$ away. }
@@ -579,38 +580,42 @@ technique to construct the catalogue.
 \begin{figure}
 \includegraphics[width=\columnwidth]{sign-dist}
 \caption{
-  Cumulative distribution of 3PSC significances for the entire 3PSC
+  Cumulative distribution of 3FGL significances for the entire 3FGL
   (blue) and the entire Fermi FAST 1-GeV catalogue with a five-sigma
-  cut (green) and Fermi FAST where the 3PSC counterpart lies within
+  cut (green) and Fermi FAST where the 3FGL counterpart lies within
   $0.2^\circ$ (red) again with a five-sigma cut.  The blue and cyan
   give the same as green and red but with a three-sigma cut.}
 \label{fig:sign-dist}
 \end{figure}
 
 The question arises: is it possible to do better? We can reduce the
-significant threshold for find sources in the 1-GeV FermiFAST
+significance threshold for find sources in the 1-GeV FermiFAST
 catalogue.  We expect that the number of sources that do not have firm
-associations in the 3PSC to increase but also for the completeness to
+associations in the 3FGL to increase but also for the completeness to
 increase as well.  We can use the empirical distance distribution for
 the false matches depicted in yellow in Fig.~\ref{fig:ffl_comp} to
-split the distribution of the matches between Fermi FAST and the 3PSC
+split the distribution of the matches between Fermi FAST and the 3FGL
 statistcally into the true matches and the false matches to measure
-the completeness and purity of the samples.  The contribution of the
-false matches to the cumulative distributions is depicted in the same
-colour as the measured distributions but dashed.  The distribution of
-the close matches here is somewhat different than in
-Fig.~\ref{fig:corresponances} because we have not used the improved
+the completeness and purity of the samples.  To do this we assume that
+all of the true matches are closer than any of the false matches and
+use a ranked-sum-test to determine the fraction of true matches
+from the observed distribution of matches (see Appendix for details).  For
+the 1-GeV catalogue this appears to be a good assumption.  The
+contribution of the false matches to the cumulative distributions is
+depicted in the same colour as the measured distributions but dashed.
+The distribution of the close matches here is somewhat different than
+in Fig.~\ref{fig:corresponances} because we have not used the improved
 localizations to find the matches.  The localization improvement tends
 to fail more often for sources of low significance (see
 Fig.~\ref{fig:position}).  Tab.~\ref{tab:comppure} gives the results
 of this trial.  The key result is that the five-sigma sample is very
 pure; only about five percent of the sources lack firm associations in
-the 3PSC.  On the other hand, if one is willing to sacrifice the
+the 3FGL.  On the other hand, if one is willing to sacrifice the
 purity of the sample, one can achieve nearly 50\% completeness
-relative to the 3PSC by reducing the significance threshold to
+relative to the 3FGL by reducing the significance threshold to
 $3-\sigma$.  Fig.~\ref{fig:sign-dist} shows by accepting a lower
-purity one can get a complete 3PSC sample about about ten-sigma,
-comprising nearly half of the 3PSC sample.
+purity one can get a complete 3FGL sample about about ten-sigma,
+comprising nearly half of the 3FGL sample.
 \begin{table}
   \caption{Completeness and Purity}
   \label{tab:comppure}
@@ -629,7 +634,7 @@ comprising nearly half of the 3PSC sample.
 \begin{figure}
   \includegraphics[width=\columnwidth]{cumfflo_comp}
   \caption{The cumulative distribution of distances between sources in
-    Fermi FAST and 3PSC for various significance thresholds from top
+    Fermi FAST and 3FGL for various significance thresholds from top
     to bottom of 3-sigma, 3.5-sigma, 4-sigma, 4.5-sigma and 5-sigma.
     The dashed curves that start above zero and join each cumulative
     distribution at large radii trace the cumulative distribution of
@@ -638,15 +643,15 @@ comprising nearly half of the 3PSC sample.
 \end{figure}
 
 We saw in Fig.~\ref{fig:fermi_comp} that in general the FermiFAST
-significances and the 3PSC significances are well correlated with
-However, for about one fifth of the sources $S(\mathrm{3PSC}) < 2 S(\mathrm{FF})$
-and for about one tenth $S(\mathrm{3PSC}) < S(\mathrm{FF})$.
+significances and the 3FGL significances are well correlated with
+However, for about one fifth of the sources $S(\mathrm{3FGL}) < 2 S(\mathrm{FF})$
+and for about one tenth $S(\mathrm{3FGL}) < S(\mathrm{FF})$.
 This demonstrates that at least for a fraction of
-the 3PSC the FermiFAST technique is more sensitive, so the sources
-that do lie in the FermiFAST catalogue but not the 3PSC may just be a
-class of sources to which the 3PSC is less sensitive, perhaps sources
+the 3FGL the FermiFAST technique is more sensitive, so the sources
+that do lie in the FermiFAST catalogue but not the 3FGL may just be a
+class of sources to which the 3FGL is less sensitive, perhaps sources
 for which the suite of spectral models employed in the construction of
-the 3PSC to do apply.  On the other hand, these unassociated sources
+the 3FGL to do apply.  On the other hand, these unassociated sources
 could simply be regions where the diffuse background is especially
 bright and clumpy.  Because the FermiFAST technique assumes that the
 background is smooth on the scale of the PSF, it would find a source
@@ -655,14 +660,43 @@ of this effect in Fig.~\ref{fig:acorr} where FermiFAST finds negative
 sources that are most likely places where the background is locally
 weak.
 
-{\bf talk about the 100~MeV catalogue }
+It is apparent from Fig.~\ref{fig:sources} that there are fewer
+100-MeV sources and that most of these sources coincide with 3FGL and
+1-GeV FAST sources.  In Fig.~\ref{fig:cum0.1GeV} the localization is
+slightly poorer than Fig.~\ref{fig:ffl_comp} because we have used a
+coarser HEALPix grid to sample the likelihoods. For the 100-MeV
+catalogue we have not optimized the likelihood to determine more
+accurate positions, so Fig.~\ref{fig:ffl_comp} is the best comparison
+not Fig.~\ref{fig:corresponances}.  Again we have used a rank-sum test
+to determine the sources that are likely to be shared between the
+catalogues and also to determine those sources that appear in the
+100-MeV catalogue but not the others.  The 100-MeV catalogue contains
+312 sources of which 23 are in the 3FGL but not the 1-GeV catalogue,
+16 are in the 1-GeV catagloue but not the 3FGL and 24 are in neither
+of the other catalogues (249 are in all three).  If one takes the
+union of the five-sigma 1-GeV and the five-sigma 100-MeV FermiFAST
+catalogues, there is a total of 788 sources that correspond to 836
+3FGL sources ({\em i.e.} one FermiFAST source can correspond to
+several 3FGL sources) for a slightly higher completeness fraction of
+27.6\%.
+
+\begin{figure}
+  \includegraphics[width=\columnwidth]{cum0p1GeV}
+  \caption{The cumulative distribution distances between sources in
+    the 100-MeV catalogue and the 3FGL (blue, leftmost and higher) and
+    the 1-GeV catalogue (red, second from left) and for the false
+    matches between the 100-MeV and 3FGL (cyan, second from right) and
+    100-MeV and 1-GeV catalogue (green, rightmost).}
+  \label{fig:cum0.1GeV}
+\end{figure}
+
 
 \section{Discussion}
 
 We have outlined a technique that can rapidly find point sources from
 the photon data from the Fermi telescope.  If one focusses on the
-photons above 1~GeV, one can reproduce about half of the 3PSC using
-the 3PSC data set in about six minutes with a false association rate of
+photons above 1~GeV, one can reproduce about half of the 3FGL using
+the 3FGL data set in about six minutes with a false association rate of
 less than twenty percent.  There are several immediate applications of
 this technique that come to mind as well as several avenues of
 potential improvements to increase the sensitivity and specificity
@@ -671,30 +705,30 @@ some potential applications.
 
 The speed of the technique opens several possible exploratory research
 paths.  One can search fractions of the data stream for potential
-sources that we active for a portion of the complete 3PSC observation
+sources that we active for a portion of the complete 3FGL observation
 time and so did not reach the threshold for detectability over the
 entire observation but were sufficiently bright to be detected over a
 shorter window.  Given the large variability of blazars which form the
 bulk of the sources outside the plane of the Galaxy, this is an
-interesting avenue.  In fact although the 3PSC catalogue contains many
-more sources than the 2PSC, many sources are absent in the 3PSC that
+interesting avenue.  In fact although the 3FGL catalogue contains many
+more sources than the 2PSC, many sources are absent in the 3FGL that
 were in the 2PSC.  Some of these may have been spurious, but others
 could have simply been variable, so the search for variable sources
 provides an exciting avenue.  Furthermore, the sources in the
-FermiFAST catalogue that are not in the 3PSC would be great seeds for
+FermiFAST catalogue that are not in the 3FGL would be great seeds for
 a full characterization using the Fermi tools.  Are these potential
 sources simply knots in the gamma-ray background or do they remain
 significant even with the full analysis?
 
 
 A second important direction is to use the FermiFAST algorithm to
-generate a catalogue of sources, most likely not as deep as the 3PSC
+generate a catalogue of sources, most likely not as deep as the 3FGL
 and then use the catalogue for further statistical analysis of the
 various populations.  Now what are the advantages of this when one
-considers that the 3PSC already exists?  Because the FermiFAST
+considers that the 3FGL already exists?  Because the FermiFAST
 catalogue only requires a few minutes to generate one can explore the
 statistical biases, selection and uncertainities in the catalogue
-through simulated data much more easily than for the full 3PSC
+through simulated data much more easily than for the full 3FGL
 catalogue.  A first step would be to insert artificial sources of
 known fluxes and spectra into the data stream.  This could be down in
 parallel by again inserting the sources on a HEALPix grid so that the
@@ -749,7 +783,7 @@ particular direction and energy was observed, we can develop an
 improved likelihood function that includes the estimated background.
 This could reduce both the number of candidate sources detected with
 $A_\mathrm{PSF}<0$ and the number of candidate sources without
-counterparts in the 3PSC.  The addition of this information would not
+counterparts in the 3FGL.  The addition of this information would not
 dramatically increase the time to construct the catalogue (we have
 already included this functionality in the software but it is not yet
 well characterized).
@@ -800,6 +834,55 @@ Columbia.
 
 \bibliography{fermi}
 \bibliographystyle{mn2e}
+
+\section*{Appendix}
+
+We use a ranked-sum test to estimate the fraction of coincidences
+between members of two catalogues that are likely to be true
+counterparts rather that chance coincidences.  We have the
+distribution of the nearest-neighbour separations between the two
+catalogues and also an estimate of the distribution of the
+nearest-neighbour separations for the chance coincidences.  We
+furthermore assume that the true matches all have smaller separations
+than the chance coincidences.
+
+The basic idea is to compare the list of observed separations to the
+list of separations of chance coincidences in pair-by-pair match ups
+where the winner is the member of the pair that is smaller.  If there
+were actually no true counterparts in the observed list, then the
+observed list and the list of chance coincidences would have the same
+distribution and one would expect the half of pairwise matches to be
+won by members of the observed list and half to be won by members of
+the chance list.  On the other hand, if the entire observed list
+consists of true matches, then the members of the observed list should
+win all of the time, so we have
+$$
+f_\textrm{\scriptsize True Matches} = 2 f_\textrm{\scriptsize Observed Wins} - 1.
+$$
+This formula holds even if the two lists have differing numbers of
+elements.
+
+To calculate the fraction of wins, we do not actually perform a pair-by-pair
+comparision which would require ${\cal O}(N^2)$ comparisons but rather sort the
+two lists together, ${\cal O}(N \ln N)$, and keep track of which elements
+come from which list as in the following Python snippet:
+\begin{verbatim}
+rall=np.concatenate((r1,r2))
+n1all=np.concatenate((np.ones(len(r1)),
+                      np.zeros(len(r2))))
+n2all=np.concatenate((np.zeros(len(r1)),
+                      np.ones(len(r2))))
+index=np.argsort(rall)
+n1all=n1all[index]
+n2all=n2all[index]
+c1all=np.cumsum(n1all)
+obswins=np.sum(n2all*c1all)
+frac=2*obswins/(len(r1)*len(r2))-1
+\end{verbatim}
+where ${\tt r1}$ contains the list of observed separations of the
+nearest neighbours in the two catalogues and ${\tt r2}$ contains the
+list of separations of the chance nearest neighbours.
+    
 
 
 \label{lastpage}

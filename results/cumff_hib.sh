@@ -6,6 +6,6 @@ ctioga2 --mark --name cumff_hib \
 	--math /xrange -4:1 \
 	'300*(1-exp(-10**(2*x)/2/0.0035/0.0035))+250*(1-exp(-10**(2*x)/2/0.015/0.015))+30*(1-exp(-10**(2*x)/2/0.05/0.05))' \
 	'580*(1-exp(-10**(2*x)/2/0.75/0.75))' \
-	-x 'Distance to Nearest Fermi 3PSC Source [Degrees]' \
+	-x 'Distance to Nearest Fermi 3FGL Source [Degrees]' \
 	-y 'Cumulative Number' --xrange -4:1  --xlog --yrange 0:650
 

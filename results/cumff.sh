@@ -6,5 +6,5 @@ ctioga2 --mark --name cumff \
 	--math /xrange -4:1 \
 	'325*(1-exp(-10**(2*x)/2/0.005/0.005))+325*(1-exp(-10**(2*x)/2/0.02/0.02))+125*(1-exp(-10**(2*x)/2/0.15/0.15))+25.0*(1-exp(-10**(2*x)/2/1.5/1.5))' \
 	'800*(1-exp(-10**(2*x)/2/1.5/1.5))' \
-	-x 'Distance to Nearest Fermi 3PSC Source [Degrees]' \
+	-x 'Distance to Nearest Fermi 3FGL Source [Degrees]' \
 	-y 'Cumulative Number' --xrange -4:1  --xlog --yrange 0:800
