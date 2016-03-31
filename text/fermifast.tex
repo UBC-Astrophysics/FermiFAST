@@ -11,6 +11,8 @@
 \newcommand{\pasp}{Publ. Ast. Soc. Pac.}
 \newcommand{\pasa}{Publ. Ast. Soc. Aust.}
 \newcommand{\ao}{Appl. Opt.}
+\newcommand{\apss}{Astrophys. Sp. Sci.}
+\newcommand{\mnras}{Mon. Not. R. Ast. Soc.}
 
 
 \newcommand\pgfmathsinandcos[3]{%
@@ -67,10 +69,11 @@
 
 \title[FermiFAST]{FermiFAST: A Fast Algorithm for Finding Point Sources
 in the Fermi Data Stream}
-\author[A. Ashathaman, A. Barton and J. S. Heyl]{Asha Ashathaman$^{1}$, Alistair Barton,
+\author[A. Ashathaman, A. Barton and J. S. Heyl]{Asha Ashathaman$^{1}$, Alistair Barton$^{2}$,
   Jeremy S. Heyl$^{1}$\thanks{Email: heyl@phas.ubc.ca; Canada Research Chair} \\
 $^{1}$Department of Physics and Astronomy, University of British
-Columbia, 6224 Agricultural Road, Vancouver, BC V6T 1Z1, Canada}
+  Columbia, 6224 Agricultural Road, Vancouver, BC V6T 1Z1, Canada\\
+$^{2}$Department of Physics, McGill University, Montr´eal, QC, H3A 2T8, Canada}
 
 
 \begin{document}
@@ -105,9 +108,67 @@ image processing --- astrometry
 
 \section{Introduction}
 
-{\bf more to add here and references everywhere }
+The launch of the Fermi Gamma-Ray Telescope in July 2008 brought
+dramatically more sensitive instruments to bear on the study of the
+Universe in gamma rays.  The observations of the Fermi LAT
+\citep[e.g.][]{2012ApJS..203....4A} have resulted in a series of
+catalogues of point sources both within the Galaxy and beyond
+\citep[e.g.][]{2010ApJS..188..405A,2011ApJ...743..171A,
+  2012ApJS..199...31N,2013ApJS..208...17A,
+  2013ApJS..209...34A,2015ApJS..218...23A}.  Both the identification
+of sources and their characterisation rely on the calculation of a
+likelihood ratio for the observed data with and without a source and
+for different characteristics for the potential source
+\citep{1979ApJ...228..939C,1992MNRAS.259..413S,1996ApJ...461..396M}.
+These telescopes as well as Cerenkov telescopes on the ground rely on
+the conversion of gamma-rays into electron-positron pairs as they
+enter the telescope (or the atmosphere).  By tracing the motion of
+these pairs, one can reconstruct the momentum of the incoming gamma
+ray.  For low gamma-ray energies the reconstruction is poorer than at
+higher energies.  Because of this broad point-spread
+function of gamma-ray telescopes the contribution of several potential
+sources will overlap in a particular region of the sky making the
+generation of a catalogue even more difficult and time consuming.
+
+Although both Fermi and EGRET before it used the likelihood ratio to
+assess the significance of potential point sources, several
+alternatives have been proposed to search for point sources to account
+for the photons observed by these instruments.
+\citet{2009arXiv0912.3843M,2008MNRAS.383.1166C} developed an algorithm
+to build a minimal spanning tree from the arrival directions of the
+photons over a large portion of the sky.  They then divide the tree
+into subclusters by remove branches larger than a particular
+threshold.  If a subcluster contains more than a particular number of
+photons, it is considered to be a potential point soource.
+\citet{2013Ap&SS.347..169C} extended the technique to include a noisy
+background.
+\citet{1997ApJ...483..350D,1997ApJ...483..370D,2007AIPC..921..546C}
+propose to use wavelets to find point sources from photon counts for
+ROSAT, EGRET and Fermi data.  Althoguh these techniques are
+significantly faster than the traditional likelihood ratio, they
+require simulated data to assess the significance of the sources
+detected because they do not rely of statistics with well understood
+distributions given the null hypothesis of no point source at a
+particular location.  In general the estimated significances are
+proportional to those found in the full likelihood analysis.
+
+In this paper we propose a technique to calculate likelihood ratios
+much more quickly that the usual tehcniques by storing the photon data
+stream in a data structure optimized for finding photons within a
+given percentile of the point spread function of the instrument from a
+potential source.  Furthermore, we will assume a simple expression for
+the likelihood that assumes that the photons from within a particular
+region of the sky come from the combination of a point source at the
+centre of the region and a flat background.  Because we assume that
+the point-spread function is circularly symmetric, a flat background
+or even a background with a uniform gradient do not affect the
+likelihood ratio. We do not assume a particular spectral model but
+only that the measured momenta of photons from a point source follow
+the measured distribution \citep{2013ApJ...765...54A} from the
+telescope.
 
 \section{The Photon Database}
+\label{sec:photon-database}
 
 The key to the speed of this algorithm is the database that contains
 the position of the observed photons on the sky.  Each photon is
@@ -214,6 +275,7 @@ example 786,426 queries require 5,600 seconds of CPU time (7~ms each)
 or only six minutes on sixteen cores.
 
 \section{Source Likelihood}
+\label{sec:source-likelihood}
 
 Using the $k-d$~tree to determine the photons that would like within
 the 95\% enclosure region of the point-spread function, we calculate
@@ -311,6 +373,7 @@ similar to those of $A_\mathrm{PSF}$ at least for highly significant
 sources.
 
 The first pass is to determine the value of $\log L$ on a HEALPix grid
+\citep{2005ApJ...622..759G}
 of potential sources.  For example for the photons above 1~GeV we used
 $\mathtt{NSIDE}=256$ or 786,432 grid points.  Of these 786,432 points,
 18,425 have $P(\log L >x) < e^{-12.5} \approx 4 \times 10^{-6}$.  Next
@@ -380,7 +443,7 @@ has shifted by less than 0.5 degrees.
 \end{figure*}
 
 \section{Results}
-
+\label{sec:results}
 To test the algorithm we used essentially the same data set as used to
 construct the Fermi Large Area Telescope Third Source Catalog
 \cite[3FGL][]{2015ApJS..218...23A}.  We used weeks 9 through 216. That
@@ -539,7 +602,7 @@ counterpart in 3FGL.
 
 One thing that is glaringly obvious from Fig.~\ref{fig:sources} is
 that most sources in the 3FGL lack a counterpart in the FermiFAST
-catalogue.  Both the 1~GeV and the 100~GeV version.  Given that the
+catalogue.  Both the 1~GeV and the 100~MeV version.  Given that the
 algorithm outlined here is much less comprehensive that the techniques
 used to generate the Fermi catalogues (there is no modelling of the
 background, multiple sources or spectra), this is not surprising.
@@ -673,12 +736,13 @@ catalogues and also to determine those sources that appear in the
 100-MeV catalogue but not the others.  The 100-MeV catalogue contains
 312 sources of which 23 are in the 3FGL but not the 1-GeV catalogue,
 16 are in the 1-GeV catagloue but not the 3FGL and 24 are in neither
-of the other catalogues (249 are in all three).  If one takes the
+of the other catalogues (249 are in all three). Relative to the 3FGL catalogue
+the purity is 88.1\% and the completeness is 12.1\%. If one takes the
 union of the five-sigma 1-GeV and the five-sigma 100-MeV FermiFAST
 catalogues, there is a total of 788 sources that correspond to 836
 3FGL sources ({\em i.e.} one FermiFAST source can correspond to
 several 3FGL sources) for a slightly higher completeness fraction of
-27.6\%.
+27.6\% than that of the five-sigma 1-GeV FermiFAST catalogue.
 
 \begin{figure}
   \includegraphics[width=\columnwidth]{cum0p1GeV}
@@ -692,6 +756,7 @@ several 3FGL sources) for a slightly higher completeness fraction of
 
 
 \section{Discussion}
+\label{sec:discussion}
 
 We have outlined a technique that can rapidly find point sources from
 the photon data from the Fermi telescope.  If one focusses on the
@@ -711,8 +776,8 @@ entire observation but were sufficiently bright to be detected over a
 shorter window.  Given the large variability of blazars which form the
 bulk of the sources outside the plane of the Galaxy, this is an
 interesting avenue.  In fact although the 3FGL catalogue contains many
-more sources than the 2PSC, many sources are absent in the 3FGL that
-were in the 2PSC.  Some of these may have been spurious, but others
+more sources than the 2FGL, many sources are absent in the 3FGL that
+were in the 2FGL.  Some of these may have been spurious, but others
 could have simply been variable, so the search for variable sources
 provides an exciting avenue.  Furthermore, the sources in the
 FermiFAST catalogue that are not in the 3FGL would be great seeds for
@@ -816,7 +881,11 @@ to create a sample of sources for population studies that can be
 characterized comprehensively by Monte Carlo simulation of the
 detection technique.  The latter may allow new understanding of the
 population of Galactic and extragalactic gamma-ray sources and their
-evolution.
+evolution. In this paper we have purposefully used the Pass 7 response
+functions and just four years of data to compare with the 3FGL.
+Nearly an additional four years of data are now available with the
+Pass 8 reductions \citep{2013arXiv1303.3514A}, so a sneak preview of
+the 4FGL would be a very natural next step.
 
 \section*{Acknowledgments}
 
@@ -883,8 +952,6 @@ where ${\tt r1}$ contains the list of observed separations of the
 nearest neighbours in the two catalogues and ${\tt r2}$ contains the
 list of separations of the chance nearest neighbours.
     
-
-
 \label{lastpage}
 
 \end{document}
