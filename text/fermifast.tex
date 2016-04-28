@@ -245,7 +245,7 @@ will yield all of the photons that are within the ninety-fifth
 percentile of the PSF.  In other words, if there is a point source
 located at that particular point the query will return on average 95\%
 of the photons from that source.  Of course, it will also return
-photons from the background and other nearby sources.  This means that
+photons from the background and other nearby sources.  Additionally,
 the region of interest for a particular prospective source is energy
 dependent.  The form of the exposure map also is energy dependent as
 shown in Fig.~\ref{fig:expmap}.  It peaks at 0.95 times the exposure
@@ -349,7 +349,7 @@ compare two numbers about the distribution of the photons within the
 region of interest.  We can use the detailed knowledge of the point
 spread function to develop a more comprehensive test of the
 distribution of photons.  In particular we define the unbinned
-likelihood
+likelihood \citep[this is very similar to the expression used by][for neutrino telescopes]{2008APh....29..299B}
 \begin{equation}
   \log L = \sum_\mathrm{photons} \log \left [ A_\mathrm{PSF} \frac{\mathrm{PSF}_i \Omega_{\mathrm{max},i} }{0.95} + (1
     - A_\mathrm{PSF}) \right ]
