@@ -24,7 +24,7 @@
 # Column 23 - TSPSF (test statistic from just fitting the PSF)
 # Column 24 - APSF (best-fitting coefficient of PSF -- fraction of photons from point source)
 # Column 25 - ln(ProbPSF) (probability of null hypothesis of no source)
-# Column 26 - Distance in radians between best position (55, 56) and nearest 3FGL Source
+# Column 26 - Distance in radians between position (9, 10) and nearest 3FGL Source
 # Column 27 - Number of nearest 3FGL source
 # Column 28 - RA of nearest 3FGL Source [degrees]
 # Column 29 - Dec of nearest 3FGL Source [degrees]
