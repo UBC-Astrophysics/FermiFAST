@@ -164,8 +164,8 @@ the point-spread function is circularly symmetric, a flat background
 or even a background with a uniform gradient do not affect the
 likelihood ratio. We do not assume a particular spectral model but
 only that the measured momenta of photons from a point source follow
-the measured distribution \citep{2013ApJ...765...54A} from the
-telescope.
+the expected distribution from a point source as determined by
+measurments and simulations \citep{2013ApJ...765...54A}.
 
 \section{The Photon Database}
 \label{sec:photon-database}
@@ -277,12 +277,12 @@ or only six minutes on sixteen cores.
 \section{Source Likelihood}
 \label{sec:source-likelihood}
 
-Using the $k-d$~tree to determine the photons that would like within
-the 95\% enclosure region of the point-spread function, we calculate
-several statistics of the observed photons to assess the likelihood of
-a source being at a particular position on the sky.  We first
-determine two statistics whose distributions are known. First, if all
-of the photons within the region of interest (all photons that lie
+Using the $k-d$~tree to determine the photons that lie within the 95\%
+enclosure region of the point-spread function, we calculate several
+statistics of the observed photons to assess the likelihood of a
+source being at a particular position on the sky.  We first determine
+two statistics whose distributions are potentially known. First, if
+all of the photons within the region of interest (all photons that lie
 within the 95th-percentile cone of the potential source) indeed come
 from a uniform background, the ratio of the solid angle enclosed in a
 circle centred on the potential source and running through the
@@ -290,12 +290,12 @@ observed to the total solid angle within the region of interest for
 that particular photon should be uniformly distributed between zero
 and one.  We denote the mean of this ratio over the observed photons
 $\bar r^2$.  This is a Bates distribution with mean of $1/2$ and
-variance of $1/(12 N_\mathrm{photons})$.  Second, if all of the photons within the
-region of interest indeed come from a point source at the centre of
-the region of interest, the ratio of the percentile of a given photon
-within the cumulative PSF distribution for that particular photon to
-0.95 should be uniformly distributed between zero and one.  We denote
-this statistic by $\bar f$.
+variance of $1/(12 N_\mathrm{photons})$.  Second, if all of the
+photons within the region of interest indeed come from a point source
+at the centre of the region of interest, the ratio of the percentile
+of a given photon within the cumulative PSF distribution for that
+particular photon to 0.95 should be uniformly distributed between zero
+and one.  We denote this statistic by $\bar f$.
 
 If we assume that the observed photons originate from a linear
 combination of these two possiblities, we can determine the ratio of
@@ -417,7 +417,7 @@ interesting focus of further investigation.
 
 
 For the sources in the preliminary catalogue ({\em i.e.} those with
-$A_\mathrm{PSF}>0$ we further refine the source estimate of hte
+$A_\mathrm{PSF}>0$ we further refine the source estimate of the
 source.  The left panel of Fig.~\ref{fig:position} depicts the change
 in $\log L$ during the optimization.  Sometimes the value of $\log L$
 actually decreases, but usually it increases modestly by say ten
@@ -677,7 +677,7 @@ the 3FGL.  On the other hand, if one is willing to sacrifice the
 purity of the sample, one can achieve nearly 50\% completeness
 relative to the 3FGL by reducing the significance threshold to
 $3-\sigma$.  Fig.~\ref{fig:sign-dist} shows by accepting a lower
-purity one can get a complete 3FGL sample about about ten-sigma,
+purity one can get a complete 3FGL sample to about ten-sigma,
 comprising nearly half of the 3FGL sample.
 \begin{table}
   \caption{Completeness and Purity}
@@ -714,7 +714,7 @@ the 3FGL the FermiFAST technique is more sensitive, so the sources
 that do lie in the FermiFAST catalogue but not the 3FGL may just be a
 class of sources to which the 3FGL is less sensitive, perhaps sources
 for which the suite of spectral models employed in the construction of
-the 3FGL to do apply.  On the other hand, these unassociated sources
+the 3FGL do not apply.  On the other hand, these unassociated sources
 could simply be regions where the diffuse background is especially
 bright and clumpy.  Because the FermiFAST technique assumes that the
 background is smooth on the scale of the PSF, it would find a source
