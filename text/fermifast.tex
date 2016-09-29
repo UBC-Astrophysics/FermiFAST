@@ -69,7 +69,7 @@
 
 \title[FermiFAST]{A Fast Algorithm for Finding Point Sources
 in the Fermi Data Stream: FermiFAST}
-\author[A. Ashathaman, A. Barton and J. S. Heyl]{Asha Ashathaman$^{1}$, Alistair Barton$^{2}$,
+\author[A. Asvathaman {\em et al.}]{Asha Asvathaman$^{1}$, Conor Omand$^{1}$, Alistair Barton$^{2}$,
   Jeremy S. Heyl$^{1}$\thanks{Email: heyl@phas.ubc.ca; Canada Research Chair} \\
 $^{1}$Department of Physics and Astronomy, University of British
   Columbia, 6224 Agricultural Road, Vancouver, BC V6T 1Z1, Canada\\
@@ -88,17 +88,21 @@ $^{2}$Department of Physics, McGill University, Montr´eal, QC, H3A 2T8, Canada}
 \begin{abstract}
   This paper presents a new and efficient algorithm for finding point
   sources in the photon event data stream from the Fermi Gamma-Ray
-  Space Telescope.  It can rapidly construct about most significant
-  half of the Fermi Third Point Source catalogue (3FGL) with nearly
-  80\% purity from the four years of data used to construct the
-  catalogue.  If a higher purity sample is desirable, one can achieve
-  a sample that includes the most significant third of the Fermi 3FGL
-  with only five percent of the sources unassociated with Fermi
-  sources.  Outside the galaxy plane, the contamination is essentially
-  negligible.  This software allows for rapid exploration of the Fermi
-  data, simulation of the source detection to calculate the selection
-  function of various sources and the errors in the obtained
-  parameters of the sources detected.
+  Space Telescope.  The key advantage of the algorithm is that it can
+  construct a catalogue of potential sources within a few minutes from
+  four years of photon data for the Fermi Observatory.  To do this it
+  uses an efficient data structure to store the photon positions and
+  energies, a four-dimensional $k-d$ tree.  It can rapidly construct
+  about most significant half of the Fermi Third Point Source
+  catalogue (3FGL) with nearly 80\% purity from the four years of data
+  used to construct the catalogue.  If a higher purity sample is
+  desirable, one can achieve a sample that includes the most
+  significant third of the Fermi 3FGL with only five percent of the
+  sources unassociated with Fermi sources.  Outside the galaxy plane,
+  the contamination is essentially negligible.  This software allows
+  for rapid exploration of the Fermi data, simulation of the source
+  detection to calculate the selection function of various sources and
+  the errors in the obtained parameters of the sources detected.
 \end{abstract}
 
 \begin{keywords}
@@ -173,15 +177,20 @@ measurments and simulations \citep{2013ApJ...765...54A}.
 The key to the speed of this algorithm is the database that contains
 the position of the observed photons on the sky.  Each photon is
 stored in a four-dimensional $k-d$~tree
-\citep{Bentley:1975:MBS:361002.361007}.  We use the particularly
-memory efficient implementation of \citet{LangPhD} (used in
-astrometry.net).  The coordinates are actually stored as shorts
-instead of floats to save additional memory.  The typical coordinates
-range from $-1$ to $+1$, so using shorts yields an angular precision
-of about six arcseconds much finer than that of the Fermi point-spread
-function (PSF).  This memory efficient implementation allows us to
-store all of the photons detected by Fermi above 100~MeV and within a
-zenith angle of 100 degrees in memory simulataneously.
+\citep{Bentley:1975:MBS:361002.361007}.  A $k-d$~tree is a binary tree
+in which each successive branching splits the space in two regions
+along a plane perpendicular to the last splitting, so in our case, we
+split the data along a plane with constant $x-$coordinate, constant
+$y$, constant $z$, constant $w$ and then repeat with the
+$x-$coordinate.  We use the particularly memory efficient
+implementation of \citet{LangPhD} (used in astrometry.net).  The
+coordinates are actually stored as shorts instead of floats to save
+additional memory.  The typical coordinates range from $-1$ to $+1$,
+so using shorts yields an angular precision of about six arcseconds
+much finer than that of the Fermi point-spread function (PSF).  This
+memory efficient implementation allows us to store all of the photons
+detected by Fermi above 100~MeV and within a zenith angle of 100
+degrees in memory simulataneously.
 
 The first three dimensions contain the position of the photon on the
 celestial sphere as shown in the upper portion of
@@ -754,6 +763,9 @@ several 3FGL sources) for a slightly higher completeness fraction of
   \label{fig:cum0.1GeV}
 \end{figure}
 
+We examine a few of the FermiFAST sources that were absent from the
+Fermi catalogue in more detail using the standard unbinned likelihood
+techinque ({\tt gtlike} in the Fermi tools).
 
 \section{Discussion}
 \label{sec:discussion}
