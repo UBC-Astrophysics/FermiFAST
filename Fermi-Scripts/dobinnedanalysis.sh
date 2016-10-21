@@ -78,7 +78,7 @@ runcmd "gtbin evfile=${1}_gti.fits scfile=Spacecraft.fits outfile=${1}_ccube.fit
 
 runcmd "gtltcube evfile=${1}_gti.fits scfile=Spacecraft.fits outfile=${1}_ltcube.fits dcostheta=0.025 binsz=1" ${1}_ltcube.fits
 
-runcmd "gtexpcube2 evfile=${1}_gti.fits scfile=Spacecraft.fits infile=${1}_ltcube.fits outfile=${1}_expcube.fits irfs=P7REP_SOURCE_V15 xref=$xref yref=$yref nxpix=360 nypix=360 pixscale=0.25 coordsys=GAL axisrot=0 proj=AIT emin=100 emax=300000 enumbins=30" ${1}_expcube.fits
+runcmd "gtexpcube2 infile=${1}_ltcube.fits outfile=${1}_expcube.fits irfs=P7REP_SOURCE_V15 xref=$xref yref=$yref nxpix=360 nypix=360 pixscale=0.25 coordsys=GAL axisrot=0 proj=AIT emin=100 emax=300000 enumbins=30" ${1}_expcube.fits
 
 runcmd "gtsrcmaps cmap=${1}_ccube.fits expcube=${1}_ltcube.fits srcmdl=${1}_input_model.xml bexpmap=${1}_expcube.fits outfile=${1}_srcmaps.fits irfs=P7REP_SOURCE_V15" ${1}_srcmaps.fits
 
