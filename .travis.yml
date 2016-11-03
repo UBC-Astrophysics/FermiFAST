@@ -1,7 +1,5 @@
 before_install:
-- sudo apt-get update && sudo apt-get install --no-install-recommends texlive-fonts-recommended
-  texlive-latex-extra texlive-fonts-extra texlive-latex-recommended texlive-pictures
-  dvipng
+- sudo apt-get update && sudo apt-get install --no-install-recommends texlive-full dvipng
 script:
 - cd text
 - pdflatex  \\nonstopmode\\input fermifast.tex && bibtex fermifast &&  pdflatex \\nonstopmode\\input fermifast.tex &&  pdflatex \\nonstopmode\\input fermifast.tex
