@@ -4,12 +4,12 @@ before_install:
   dvipng
 script:
 - cd text
-- pdflatex  \\nonstopmode\\input fermifast.tex && bibtex fermifast &&  pdflatex \\nonstopmode\\input fermifast.tex &&  pdflatex \\nonstopmode\\input fermifast.tex
+- pdflatex  \\nonstopmode\\input fermifast.tex && bibtex fermifast &&  pdflatex \\nonstopmode\\input
+  fermifast.tex &&  pdflatex \\nonstopmode\\input fermifast.tex
 deploy:
   provider: releases
   api_key:
-    secure: Xz1ae+4aiEdROKaKmh3dVO7wd7pgZzJc3DHwhnRcJW0F0LhAXyr7+0lTAViBjVSlvJpN2FzqAeaXKm3QP7gHhH9RldF2Blza8O9fTFcL74roPdu1+h1DgsspoSTYRMIKFxxmOa/uaGePrXWwiv9SRnzRHrOPI5aIK57pMnYIauCx8MqdRII57uuQNKEIxLXwADpkn+YOVchvGP/VueccXSV/nShglSBLB4H/NRlE7WBgTEukT0FerM/OkFEhoi7a3J0IjcFxNUrn3zfzhr/s+ny3k2R8lxRxXg/8Erqo/8p9BcNkLf419osaR5bbSlLJUSZXL1PKD0g+zgg9aNRUzUTaAeuop2C50unP+DDRCLXDEiO5ffIMxoSsQkN41oEbWvXjZf+R28Jrkesq48m6Akx5etDM6tOjVBMKUBUmJ9RRAWFnw3MungOoCBQvqp8ZYyR05fSFPvLK3q5pcJ/Dww9dSsvflZbR4naHSbY+kRM0U5STZKeWABUSdvGY++pEMgYennqF69dsol8LSxUGDXYmDhrgidodzWEx9xG71w+w/5rEzZVqfhPJai+sscBSQQ60Y3yYClu1LWRWFRkS8B0yMPSU4D3XCmXDLJUucUoRKjU8u5/FzVhFp7rpjndaKp1D5y6Y3JTmKy3LW4egpnhthBVqTeYeOEzL8XunYmo=
+    secure: OwnZeVAyNHNB7DokAhVVFSXW9WegcDtD9PZpwSqQf5WF49tMr/C9kpWSlx81QtZV4m0cdGPiFl9U9AZkWuD8Xuli1fftdos0SRfayIl4yfq0BH21YXiro7a9VuLuCsXGJ+ruyiXSOwNalKFwXy9zgq4PCLWEHfz5B2pCssskD4fnO17eL50c8+wPp9Ggqxb2p58d8/1Z/5NHkGIEGlJYGWMJxAAZo7r3z4UcfIQWGuiTNUekwlvT1XMMnVaKGwYRt3t7xdMdZvtZCW61fHB7iwQRlaDVTmtVUYYqtXsmRqp05GhiZX6Q7ia/mOEo+WUUc6bJKlLkbuDSfJ00rkQKJ18P3pBs8plMVWQwTB6amRl+IEr5cKz5myLUhsGflFbv4uKSXNUTI7gO6FoPd9lyZHhF9CmOwMiedb0AjempHu2/rt559TEgEms2qO0dfI+MYBSiItKh+hdxc5OfOaG3GBhakSWK32NyqRrVMXNuoZmggBLOf7j+b35smLCAfPlYPBX5Sc7ZBTdqW+ISRYE/8ti3Cx+KfkV0E97Kn2+P4EG0ccjmtH3vlFnenfv68dYMNlvmKqjy4gcPe4MUVuQecF7IeHBoPGj6rw2CQY0qujrRfSS9SDXgofCreVw0th9Ky4z2dmDsjL3zklysFr1TeXt3F5wqWtya8EkzAw9X6bM=
   file: text/fermifast.pdf
   on:
     repo: UBC-Astrophysics/FermiFAST
-    tags: true
