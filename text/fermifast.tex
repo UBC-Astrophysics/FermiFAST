@@ -767,6 +767,49 @@ We examine a few of the FermiFAST sources that were absent from the
 Fermi catalogue in more detail using the standard unbinned likelihood
 techinque ({\tt gtlike} in the Fermi tools).
 
+A final test that we perform is to examine the high-significance
+FermiFAST detections that do not lie near sources within the 3FGL.
+There are thirty-five of these sources.  We will be analysing the
+Fermi data over a six-year span, weeks X through Y (even longer than
+the 3FGL).  To reduce the computational effort, we will focus only on
+sources that lie well outside the Galactic plane (nine remain) and
+with without extended sources within the source inclusion region (four
+remain).  We include photons within a radius of interest of 20 degrees
+about the FermiFAST detection and include 3FGL sources out to 30
+degrees in the likelihood fit.  We perform both an unbinned likelihood
+analysis using photons with energies above 1~GeV and a binned likihood
+analysis for photons with energies above 100~GeV.
+
+\begin{table*}
+  \caption{The four FermiFAST exclusive detections outside of the
+    Galactic plane and further than 30 degrees from an extended
+    source}
+  \label{tab:fermisig}
+\begin{tabular}{crrrrrrrrrrrrr}
+    \hline
+    Source & \multicolumn{1}{c}{RA} & \multicolumn{1}{c}{Dec}  & \multicolumn{1}{c}{$N_\mathrm{photons}$}  &\multicolumn{1}{c}{$\bar r^2$} & \multicolumn{1}{c}{$\bar f$} & \multicolumn{1}{c}{$S(r^2)$} & \multicolumn{1}{c}{$S(f)$} & \multicolumn{1}{c}{$A_f$} & \multicolumn{1}{c}{$TS_\mathrm{PSF}$} & \multicolumn{1}{c}{$A_\mathrm{PSF}$} & \multicolumn{1}{c}{$S(\mathrm{FF})$} & \multicolumn{1}{c}{$S(\mathrm{1Gev})$}  & \multicolumn{1}{c}{$TS(\mathrm{100~GeV})$} 
+ \\
+    \hline
+   18  & $ 85.43$ & $ -1.94$ &   2775 & $0.433$ & $0.790$ & $ -12.3$ & $  52.9$ & $0.19$ & $    81.83$ & $0.15$ & $     9.31$ & $-$    & $-$\\ 
+   20  & $ 85.39$ & $ -8.22$ &   3419 & $0.434$ & $0.793$ & $ -13.4$ & $  59.3$ & $0.18$ & $    73.96$ & $0.13$ & $     8.87$ & $4.41$ & $63045.6$ \\ 
+   29  & $ 52.28$ & $ 31.20$ &   2493 & $0.453$ & $0.802$ & $  -8.2$ & $  52.2$ & $0.14$ & $    33.44$ & $0.10$ & $     6.12$ & $2.92$ & $10258.2$ \\ 
+   43  & $ 64.51$ & $ 28.29$ &   2260 & $0.457$ & $0.805$ & $  -7.1$ & $  50.3$ & $0.12$ & $    22.24$ & $0.09$ & $     5.09$ & $-$    & $-$ \\ 
+\end{tabular}
+\end{table*}
+
+\begin{table}
+  \caption{The two most significant sources from Tab.~\ref{tab:fermisig}}
+  \label{tab:refit}
+\begin{tabular}{crrrr}
+  \hline
+           & \multicolumn{2}{c}{1 GeV $[10^{-10}]$} & \multicolumn{2}{c}{100 MeV $[10^{-7}]$} \\
+    Source & \multicolumn{1}{c}{Flux} & \multicolumn{1}{c}{$\Gamma$}  & \multicolumn{1}{c}{Flux}  &\multicolumn{1}{c}{$\Gamma$}
+    \\
+    \hline
+    20  & $9.02\pm0.47$ & $-3.01\pm0.01$ & $8.49\pm0.06$ & $-2.43\pm0.01$ \\
+    29  & $4.74\pm1.54$ & $-3.88\pm1.75$ & $2.49\pm0.05$ & $-2.29\pm0.01$ \\
+\end{tabular}
+\end{table}
 \section{Discussion}
 \label{sec:discussion}
 
