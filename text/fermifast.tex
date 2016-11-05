@@ -763,14 +763,10 @@ several 3FGL sources) for a slightly higher completeness fraction of
   \label{fig:cum0.1GeV}
 \end{figure}
 
-We examine a few of the FermiFAST sources that were absent from the
-Fermi catalogue in more detail using the standard unbinned likelihood
-techinque ({\tt gtlike} in the Fermi tools).
-
 A final test that we perform is to examine the high-significance
 FermiFAST detections that do not lie near sources within the 3FGL.
 There are thirty-five of these sources.  We will be analysing the
-Fermi data over a six-year span, weeks X through Y (even longer than
+Fermi data over a six-year span, weeks 9 through 316 (even longer than
 the 3FGL).  To reduce the computational effort, we will focus only on
 sources that lie well outside the Galactic plane (nine remain) and
 with without extended sources within the source inclusion region (four
@@ -797,17 +793,38 @@ analysis for photons with energies above 100~GeV.
 \end{tabular}
 \end{table*}
 
+\begin{figure}
+  \includegraphics[width=0.45\columnwidth]{src_18_1GeV}
+  \includegraphics[width=0.45\columnwidth]{src_20_1GeV}
+
+  \includegraphics[width=0.45\columnwidth]{src_29_1GeV}
+  \includegraphics[width=0.45\columnwidth]{src_43_1GeV}
+  \caption{ff}
+  \label{fig:1GeVcmap}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\columnwidth]{src_20_combo}
+  
+  \includegraphics[width=\columnwidth]{src_29_combo}
+  \caption{ff}
+  \label{fig:100GeVcmap}
+\end{figure}
+
 \begin{table}
   \caption{The two most significant sources from Tab.~\ref{tab:fermisig}}
   \label{tab:refit}
-\begin{tabular}{crrrr}
+  \centering
+\begin{tabular}{crr}
   \hline
-           & \multicolumn{2}{c}{1 GeV $[10^{-10}]$} & \multicolumn{2}{c}{100 MeV $[10^{-7}]$} \\
-    Source & \multicolumn{1}{c}{Flux} & \multicolumn{1}{c}{$\Gamma$}  & \multicolumn{1}{c}{Flux}  &\multicolumn{1}{c}{$\Gamma$}
+    Source & \multicolumn{1}{c}{Flux} & \multicolumn{1}{c}{$\Gamma$} \\
     \\
     \hline
-    20  & $9.02\pm0.47$ & $-3.01\pm0.01$ & $8.49\pm0.06$ & $-2.43\pm0.01$ \\
-    29  & $4.74\pm1.54$ & $-3.88\pm1.75$ & $2.49\pm0.05$ & $-2.29\pm0.01$ \\
+    20  & $9.02\pm0.47 \times 10^{-10}$ & $-3.01\pm0.01$ \\
+    29  & $4.74\pm1.54 \times 10^{-10}$ & $-3.88\pm1.75$ \\
+    \hline
+    20  & $8.49\pm0.06 \times 10^{-7}$ & $-2.43\pm0.01$ \\
+    29  & $2.49\pm0.05 \times 10^{-7}$ & $-2.29\pm0.01$ \\
 \end{tabular}
 \end{table}
 \section{Discussion}
