@@ -86,23 +86,23 @@ $^{2}$Department of Physics, McGill University, Montr´eal, QC, H3A 2T8, Canada}
 \label{firstpage}
 
 \begin{abstract}
-  This paper presents a new and efficient algorithm for finding point
-  sources in the photon event data stream from the Fermi Gamma-Ray
-  Space Telescope.  The key advantage of the algorithm is that it can
-  construct a catalogue of potential sources within a few minutes from
-  four years of photon data for the Fermi Observatory.  To do this it
-  uses an efficient data structure to store the photon positions and
-  energies, a four-dimensional $k-d$ tree.  It can rapidly construct
-  about most significant half of the Fermi Third Point Source
-  catalogue (3FGL) with nearly 80\% purity from the four years of data
-  used to construct the catalogue.  If a higher purity sample is
-  desirable, one can achieve a sample that includes the most
-  significant third of the Fermi 3FGL with only five percent of the
-  sources unassociated with Fermi sources.  Outside the galaxy plane,
-  the contamination is essentially negligible.  This software allows
-  for rapid exploration of the Fermi data, simulation of the source
-  detection to calculate the selection function of various sources and
-  the errors in the obtained parameters of the sources detected.
+This paper presents a new and efficient algorithm for finding point
+sources in the photon event data stream from the Fermi Gamma-Ray
+Space Telescope.  The key advantage of the algorithm is that it can
+construct a catalogue of potential sources within a few minutes from
+four years of photon data for the Fermi Observatory.  To do this it
+uses an efficient data structure to store the photon positions and
+energies, a four-dimensional $k-d$ tree.  It can rapidly construct
+about most significant half of the Fermi Third Point Source
+catalogue (3FGL) with nearly 80\% purity from the four years of data
+used to construct the catalogue.  If a higher purity sample is
+desirable, one can achieve a sample that includes the most
+significant third of the Fermi 3FGL with only five percent of the
+sources unassociated with Fermi sources.  Outside the galaxy plane,
+the contamination is essentially negligible.  This software allows
+for rapid exploration of the Fermi data, simulation of the source
+detection to calculate the selection function of various sources and
+the errors in the obtained parameters of the sources detected.
 \end{abstract}
 
 \begin{keywords}
@@ -169,7 +169,7 @@ or even a background with a uniform gradient do not affect the
 likelihood ratio. We do not assume a particular spectral model but
 only that the measured momenta of photons from a point source follow
 the expected distribution from a point source as determined by
-measurments and simulations \citep{2013ApJ...765...54A}.
+measurements and simulations \citep{2013ApJ...765...54A}.
 
 \section{The Photon Database}
 \label{sec:photon-database}
@@ -188,15 +188,15 @@ coordinates are actually stored as shorts instead of floats to save
 additional memory.  The typical coordinates range from $-1$ to $+1$,
 so using shorts yields an angular precision of about six arcseconds
 much finer than that of the Fermi point-spread function (PSF).  This
-memory efficient implementation allows us to store all of the photons
+memory efficient implementation allows us to store all the photons
 detected by Fermi above 100~MeV and within a zenith angle of 100
-degrees in memory simulataneously.
+degrees in memory simultaneously.
 
 The first three dimensions contain the position of the photon on the
 celestial sphere as shown in the upper portion of
 Fig.~\ref{fig:sphere}.  Storing the direction of the photon momentum
 in this manner removes the coordinate singularity of the spherical
-coordinates.  Additionally it makes integrating over the celestial
+coordinates.  Additionally, it makes integrating over the celestial
 sphere straightforward because $\int d\Omega = \int 2\pi \delta p d
 \delta p$ where $\delta {\bf p} = {\bf p}' - {\bf p}$ is the three
 dimensional vector between two points on the sphere.  The fourth
@@ -204,7 +204,7 @@ coordinate that we denote by $w$ depends on the point-spread function
 for the photon in question.  In particular $w=\pm
 \sqrt{R^2_\mathrm{max}-R_i^2}$ where $R_i$ is the radius of the
 ninety-fifth percentile at the energy, entrance angle and front or
-back conversion for the photon.  For convenience we use positive
+back conversion for the photon.  For convenience, we use positive
 values of $w$ for front-converted photons and negative values of $w$
 for back-converted photons.  Furthermore, $R_\mathrm{max}$ is the
 ninety-fifth percentile for the photon with the poorest angular
@@ -244,13 +244,13 @@ Fig.~\ref{fig:sphere}.
 \label{fig:sphere}
 \end{figure}
 
-Once the $k-d$~tree is created, it is efficient to find all of the
+Once the $k-d$~tree is created, it is efficient to find all the
 entries within the database within a given Cartesian distance of a
-particular point.  In our case we query the database for all of the
+particular point.  In our case we query the database for all the
 photons within a distance $R_\mathrm{max}$ of a particular point on
 the celestial sphere and use $w=0$ for the fourth coordinate.  The
 particular choice of $w$ for the observed photons means that the query
-will yield all of the photons that are within the ninety-fifth
+will yield all the photons that are within the ninety-fifth
 percentile of the PSF.  In other words, if there is a point source
 located at that particular point the query will return on average 95\%
 of the photons from that source.  Of course, it will also return
@@ -291,7 +291,7 @@ enclosure region of the point-spread function, we calculate several
 statistics of the observed photons to assess the likelihood of a
 source being at a particular position on the sky.  We first determine
 two statistics whose distributions are potentially known. First, if
-all of the photons within the region of interest (all photons that lie
+all the photons within the region of interest (all photons that lie
 within the 95th-percentile cone of the potential source) indeed come
 from a uniform background, the ratio of the solid angle enclosed in a
 circle centred on the potential source and running through the
@@ -357,7 +357,7 @@ significant sources detected.  These basic statistics really just
 compare two numbers about the distribution of the photons within the
 region of interest.  We can use the detailed knowledge of the point
 spread function to develop a more comprehensive test of the
-distribution of photons.  In particular we define the unbinned
+distribution of photons.  In particular, we define the unbinned
 likelihood \citep[this is very similar to the expression used by][for neutrino telescopes]{2008APh....29..299B}
 \begin{equation}
   \log L = \sum_\mathrm{photons} \log \left [ A_\mathrm{PSF} \frac{\mathrm{PSF}_i \Omega_{\mathrm{max},i} }{0.95} + (1
@@ -367,7 +367,7 @@ likelihood \citep[this is very similar to the expression used by][for neutrino t
 where we have dropped $N_\mathrm{pred}$ from the usual definition
 because we have defined the model in such a way that
 $N_\mathrm{pred}=N_\mathrm{photons}$ automatically and
-$d N_\mathrm{pred}/dA_\mathrm{PSF}=0$.  Furthermore, for
+$d N_\mathrm{pred}/dA_\mathrm{PSF}=0$. Furthermore, for
 $A_\mathrm{PSF}=0$, $\log L=0$ and because we are fitting a single
 variable, $\log L$ is distributed as a chi-squared distribution with a
 single degree of freedom and the probability of getting a value
@@ -559,7 +559,7 @@ distance of 1 arcminutes are by chance.
   the nearest Fermi 3FGL source.  This demonstrates that ninety
   percent of the Fermi FAST sources are associated with sources in the
   FERMI 3FGL (across the whole sky) and nearly all at Galactic
-  latitudes greater than ten degrees..  The red curve give the
+  latitudes greater than ten degrees. The red curve give the
   observed cumulative distribution of nearest distances.  The green
   curves give the cumulative distribution that one would expect if
   there were no associated between the Fermi FAST and Fermi 3FGL
@@ -634,7 +634,7 @@ to the way it is fit within the catalogue.
 To understand further whether FermiFAST is simply missing less
 significant 3FGL sources we can look at the cumulative distribution of
 3FGL significances of sources that appear in the FermiFAST 1~GeV
-catalogue and all of the 3FGL sources in Fig.~\ref{fig:sign-dist}.  We
+catalogue and all the 3FGL sources in Fig.~\ref{fig:sign-dist}.  We
 see that FermiFAST catalogue is essentially complete for all 3FGL
 sources above about 18-sigma, so FermiFAST can quickly (in six minutes)
 generate a sample from the Fermi data stream of the upper quartile of
@@ -669,13 +669,13 @@ the false matches depicted in yellow in Fig.~\ref{fig:ffl_comp} to
 split the distribution of the matches between Fermi FAST and the 3FGL
 statistcally into the true matches and the false matches to measure
 the completeness and purity of the samples.  To do this we assume that
-all of the true matches are closer than any of the false matches and
+all the true matches are closer than any of the false matches and
 use a ranked-sum-test to determine the fraction of true matches
 from the observed distribution of matches (see Appendix for details).  For
 the 1-GeV catalogue this appears to be a good assumption.  The
 contribution of the false matches to the cumulative distributions is
 depicted in the same colour as the measured distributions but dashed.
-The distribution of the close matches here is somewhat different than
+The distribution of the close matches here is somewhat different from that
 in Fig.~\ref{fig:corresponances} because we have not used the improved
 localizations to find the matches.  The localization improvement tends
 to fail more often for sources of low significance (see
@@ -765,33 +765,17 @@ several 3FGL sources) for a slightly higher completeness fraction of
 
 A final test that we perform is to examine the high-significance
 FermiFAST detections that do not lie near sources within the 3FGL.
-There are thirty-five of these sources.  We will be analysing the
+There are thirty-five of these sources.  We analyse the
 Fermi data over a six-year span, weeks 9 through 316 (even longer than
-the 3FGL).  To reduce the computational effort, we will focus only on
-sources that lie well outside the Galactic plane (nine remain) and
-with without extended sources within the source inclusion region (four
-remain).  We include photons within a radius of interest of 20 degrees
-about the FermiFAST detection and include 3FGL sources out to 30
-degrees in the likelihood fit.  We perform both an unbinned likelihood
-analysis using photons with energies above 1~GeV and a binned likihood
-analysis for photons with energies above 100~GeV.
-
-\begin{table*}
-  \caption{The four FermiFAST exclusive detections outside of the
-    Galactic plane and further than 30 degrees from an extended
-    source}
-  \label{tab:fermisig}
-\begin{tabular}{crrrrrrrrrrrrr}
-    \hline
-    Source & \multicolumn{1}{c}{RA} & \multicolumn{1}{c}{Dec}  & \multicolumn{1}{c}{$N_\mathrm{photons}$}  &\multicolumn{1}{c}{$\bar r^2$} & \multicolumn{1}{c}{$\bar f$} & \multicolumn{1}{c}{$S(r^2)$} & \multicolumn{1}{c}{$S(f)$} & \multicolumn{1}{c}{$A_f$} & \multicolumn{1}{c}{$TS_\mathrm{PSF}$} & \multicolumn{1}{c}{$A_\mathrm{PSF}$} & \multicolumn{1}{c}{$S(\mathrm{FF})$} & \multicolumn{1}{c}{$S(\mathrm{1Gev})$}  & \multicolumn{1}{c}{$TS(\mathrm{100~GeV})$} 
- \\
-    \hline
-   18  & $ 85.43$ & $ -1.94$ &   2775 & $0.433$ & $0.790$ & $ -12.3$ & $  52.9$ & $0.19$ & $    81.83$ & $0.15$ & $     9.31$ & $-$    & $-$\\ 
-   20  & $ 85.39$ & $ -8.22$ &   3419 & $0.434$ & $0.793$ & $ -13.4$ & $  59.3$ & $0.18$ & $    73.96$ & $0.13$ & $     8.87$ & $4.41$ & $63045.6$ \\ 
-   29  & $ 52.28$ & $ 31.20$ &   2493 & $0.453$ & $0.802$ & $  -8.2$ & $  52.2$ & $0.14$ & $    33.44$ & $0.10$ & $     6.12$ & $2.92$ & $10258.2$ \\ 
-   43  & $ 64.51$ & $ 28.29$ &   2260 & $0.457$ & $0.805$ & $  -7.1$ & $  50.3$ & $0.12$ & $    22.24$ & $0.09$ & $     5.09$ & $-$    & $-$ \\ 
-\end{tabular}
-\end{table*}
+the 3FGL from 2008 August 4 to 2014 July 14).  To reduce the
+computational effort, we focus only on sources that lie well
+outside the Galactic plane (eight remain) and with without extended
+sources within the source inclusion region (four remain).  We include
+photons within a radius of interest of 20 degrees about the FermiFAST
+detection and include 3FGL sources out to 30 degrees in the likelihood
+fit.  We perform both an unbinned likelihood analysis using photons
+with energies above 1~GeV and a binned likihood analysis for photons
+with energies above 100~GeV.
 
 \begin{figure}
   \includegraphics[width=0.45\columnwidth]{src_18_1GeV}
@@ -799,20 +783,77 @@ analysis for photons with energies above 100~GeV.
 
   \includegraphics[width=0.45\columnwidth]{src_29_1GeV}
   \includegraphics[width=0.45\columnwidth]{src_43_1GeV}
-  \caption{ff}
+  \caption{The counts maps for photons with energies larger than 1~GeV
+    for source 18 and 20 (left and right top) and 29 and 43 (left and
+    right bottom).}
   \label{fig:1GeVcmap}
 \end{figure}
+Fig.~\ref{fig:1GeVcmap} depicts the counts maps for all four regions
+of interest for photons with energies larger than 1~GeV.  The
+FermiFAST sources lie in the centre of each image. Sources 18 and 20
+lie within five degrees of each other.  We performed fits for these
+sources both separately and together.  All the fits that contained
+source 18 failed to converge.  We found a similar result for source
+43.  On the other hand, the fits that included source 20 (on its own)
+and source 29 did converge both for the unbinned likelihood fit for
+photons above 1~GeV and the binned likelihood test for photons about
+100~MeV.  Tab.~\ref{tab:fermisig} gives the FermiFAST statistics as in
+Tab.~\ref{tab:topten} and the significance of the unbinned likelihood
+hood fit (in sigma units) and the test statistic for the binned
+likelihhod fit.  Fig.~\ref{fig:100GeVcmap} depicts the counts map
+above 100~MeV in blue, the model for the 3FGL sources included in the
+fit in red and the fitted FermiFAST source in green.
+\begin{table*}
+  \caption{Upper table: The four FermiFAST detections that lack a
+    counterpart in the 3FGL and lie outside of the Galactic plane and
+    further than 30 degrees from an extended source, results from a
+    six-year analysis.  The significance of the unbinned likelihood
+    fit for photons above 1~GeV and the test statistic, TS(100), for
+    the binned likelihood fit for photons about 100~MeV.  Lower table:
+    All of the FermiFAST detections that lack a 3FGL counterpart and
+    lie outside the Galactic place, results from a six-month analysis.
+    The FermiFAST columns have the same meanings as in
+    Tab.~\ref{tab:topten}.}
+  \label{tab:fermisig}
+\begin{tabular}{crrrrrrrrrrrrr}
+    \hline
+    Source & \multicolumn{1}{c}{RA} & \multicolumn{1}{c}{Dec}  & \multicolumn{1}{c}{$N_\mathrm{photons}$}  &\multicolumn{1}{c}{$\bar r^2$} & \multicolumn{1}{c}{$\bar f$} & \multicolumn{1}{c}{$S(r^2)$} & \multicolumn{1}{c}{$S(f)$} & \multicolumn{1}{c}{$A_f$} & \multicolumn{1}{c}{$TS_\mathrm{PSF}$} & \multicolumn{1}{c}{$A_\mathrm{PSF}$} & \multicolumn{1}{c}{$S(\mathrm{FF})$} & \multicolumn{1}{c}{$S(\mathrm{1Gev})$}  & \multicolumn{1}{c}{TS$(100)$} 
+ \\
+    \hline
+   18  & $ 85.43$ & $ -1.94$ &   2775 & $0.433$ & $0.790$ & $ -12.3$ & $  52.9$ & $0.19$ & $    81.83$ & $0.15$ & $     9.31$ & $-$    & $-$\\ 
+   20  & $ 85.39$ & $ -8.22$ &   3419 & $0.434$ & $0.793$ & $ -13.4$ & $  59.3$ & $0.18$ & $    73.96$ & $0.13$ & $     8.87$ & $4.41$ & $63045.6$ \\ 
+   29  & $ 52.28$ & $ 31.20$ &   2493 & $0.453$ & $0.802$ & $  -8.2$ & $  52.2$ & $0.14$ & $    33.44$ & $0.10$ & $     6.12$ & $2.92$ & $10258.2$ \\ 
+   43  & $ 64.51$ & $ 28.29$ &   2260 & $0.457$ & $0.805$ & $  -7.1$ & $  50.3$ & $0.12$ & $    22.24$ & $0.09$ & $     5.09$ & $-$    & $-$ \\ 
+\end{tabular}
+\begin{tabular}{crrrrrrrrrrrrr}
+    \hline
+    Source & \multicolumn{1}{c}{RA} & \multicolumn{1}{c}{Dec}  & \multicolumn{1}{c}{$N_\mathrm{photons}$}  &\multicolumn{1}{c}{$\bar r^2$} & \multicolumn{1}{c}{$\bar f$} & \multicolumn{1}{c}{$S(r^2)$} & \multicolumn{1}{c}{$S(f)$} & \multicolumn{1}{c}{$A_f$} & \multicolumn{1}{c}{$TS_\mathrm{PSF}$} & \multicolumn{1}{c}{$A_\mathrm{PSF}$} & \multicolumn{1}{c}{$S(\mathrm{FF})$} & \multicolumn{1}{c}{$S$}  & \multicolumn{1}{c}{$\Gamma$} 
+ \\
+ \hline
+ 5 & $ 84.56$ & $-69.20$ &   1960 & $0.381$ & $0.733$ & $ -18.3$ & $  35.7$ & $0.34$ & $   224.61$ & $0.32$ & $    15.18$ & $1.36$ & $-4.84\pm1.74$ \\ 
+10 & $232.90$ & $-56.21$ &  17522 & $0.461$ & $0.814$ & $ -17.9$ & $ 144.0$ & $0.11$ & $   157.84$ & $0.08$ & $    12.78$ & $2.34$ & $-1.40\pm0.02$ \\ 
+18 & $ 85.43$ & $ -1.94$ &   2775 & $0.433$ & $0.790$ & $ -12.3$ & $  52.9$ & $0.19$ & $    81.83$ & $0.15$ & $     9.31$ & $1.28$ & $-4.99\pm0.11$ \\ 
+20 & $ 85.39$ & $ -8.22$ &   3419 & $0.434$ & $0.793$ & $ -13.4$ & $  59.3$ & $0.18$ & $    73.96$ & $0.13$ & $     8.87$ & $3.63$ & $-2.27\pm0.37$ \\ 
+24 & $ 86.84$ & $  0.16$ &   2659 & $0.457$ & $0.805$ & $  -7.8$ & $  54.5$ & $0.12$ & $    43.52$ & $0.11$ & $     6.91$ & $0.97$ & $-4.94\pm0.72$ \\ 
+29 & $ 52.28$ & $ 31.20$ &   2493 & $0.453$ & $0.802$ & $  -8.2$ & $  52.2$ & $0.14$ & $    33.44$ & $0.10$ & $     6.12$ & $2.11$ & $-4.32\pm2.23$ \\ 
+31 & $ 70.17$ & $ 25.63$ &   3275 & $0.471$ & $0.808$ & $  -5.7$ & $  61.0$ & $0.09$ & $    31.18$ & $0.08$ & $     5.93$ & $1.98$ & $-2.94\pm0.82$ \\
+43 & $ 64.51$ & $ 28.29$ &   2260 & $0.457$ & $0.805$ & $  -7.1$ & $  50.3$ & $0.12$ & $    22.24$ & $0.09$ & $     5.09$ & $2.60$ & $-1.82\pm0.46$ \\ 
+\end{tabular}
+\end{table*}
 
 \begin{figure}
   \includegraphics[width=\columnwidth]{src_20_combo}
   
   \includegraphics[width=\columnwidth]{src_29_combo}
-  \caption{ff}
+  \caption{The counts maps (blue), Fermi 3FGL sources and the
+    FermiFAST source for source 20 and 29 for photons with energies
+    greater than 100~MeV..}
   \label{fig:100GeVcmap}
 \end{figure}
 
 \begin{table}
-  \caption{The two most significant sources from Tab.~\ref{tab:fermisig}}
+  \caption{The two detections from the upper panel of Tab.~\ref{tab:fermisig}. The upper rows are for photons above 1~GeV.  The lower rows are for photons above
+  100~MeV.}
   \label{tab:refit}
   \centering
 \begin{tabular}{crr}
@@ -827,6 +868,22 @@ analysis for photons with energies above 100~GeV.
     29  & $2.49\pm0.05 \times 10^{-7}$ & $-2.29\pm0.01$ \\
 \end{tabular}
 \end{table}
+
+Tab.~\ref{tab:refit} presents the results of the two successful fits.
+Both the photons abouve 100~MeV and 1~GeV for both sources are well
+characterized by a very hard photon spectrum with $dN/dE \propto
+E^{-\Gamma}$ with $\Gamma$ from $-2$ to nearly $-4$.  Both of the
+FermiFAST detections whose likelihood fits converge yielded fits with
+photon spectra increasing toward high energies.  To examine this
+further we analysed a six-month span of data from 2015 December 13 to
+2016 June 10, using an unbinned likelihood fit with all photons with
+energies greater than 100~MeV and models for the extended sources in
+the region of interest.  The lower half of Tab.~\ref{tab:fermisig}
+gives the results of these fits.  We see that all of the sources
+detected with FermiFAST that do not appear in the 3GFL have very hard
+spectra with $\Gamma < -1$.  On the other hand no 3GFL sources have
+negative spectral indices.
+
 \section{Discussion}
 \label{sec:discussion}
 
