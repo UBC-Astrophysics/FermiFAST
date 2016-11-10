@@ -2,10 +2,13 @@
 ctioga2 --mark --name cumff_hib \
 	cum_all_ts_data_1GeV_hires_uniq_fermi_match_hib@'log10($2*45/atan(1.0)):$1' \
 	cum_all_ts_data_1GeV_hires_uniq_fermi_match_flipped_hib@'log10($2*45/atan(1.0)):$1' \
-	cum_all_ts_data_1GeV_hires_uniq_fermi_match_flipped_hib@'log10($2*45/atan(1.0)):$1*(1082.0-1020.0)/1082.0+1020.0' \
 	--math /xrange -4:1 \
-	'300*(1-exp(-10**(2*x)/2/0.0035/0.0035))+250*(1-exp(-10**(2*x)/2/0.015/0.015))+30*(1-exp(-10**(2*x)/2/0.05/0.05))' \
-	'580*(1-exp(-10**(2*x)/2/0.75/0.75))' \
+	-c Cyan \
+	'300*(1-exp(-10**(2*x)/2/0.005/0.005))+230*(1-exp(-10**(2*x)/2/0.015/0.015))+42*(1-exp(-10**(2*x)/2/0.05/0.05))+8*(1-exp(-10**(2*x)/2/1.5/1.5))' \
+	-c Magenta \
+	'580*(1-exp(-10**(2*x)/2/1.5/1.5))' \
+	-c Blue --text \
+	cum_all_ts_data_1GeV_hires_uniq_fermi_match_flipped_hib@'log10($2*45/atan(1.0)):$1*(580.0-572.0)/580.0+572.0' \
 	-x 'Distance to Nearest Fermi 3FGL Source [Degrees]' \
 	-y 'Cumulative Number' --xrange -4:1  --xlog --yrange 0:650
 

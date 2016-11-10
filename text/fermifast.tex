@@ -86,26 +86,27 @@ $^{2}$Department of Physics, McGill University, Montr´eal, QC, H3A 2T8, Canada}
 \label{firstpage}
 
 \begin{abstract}
-We present a new and efficient algorithm for finding point sources in
-the photon event data stream from the Fermi Gamma-Ray Space Telescope,
-FermiFAST.  FermiFAST arranges the entire multi-year photon stream
-into a memory-efficient hierarchical data structure that can rapidly
-find the photons that could have originated from a potential gamma-ray
-source.  It calcuates a likehihood ratio for the contribution of the
-potential source using the angular distribution of the photons within
-the region of interest.  The key advantage of FermiFAST is that it
-constructs a catalogue of potential sources within a few minutes from
-four years of photon data from the Fermi Observatory.  It builds the
-most significant half of the Fermi Third Point Source catalogue (3FGL)
-with nearly 80\% purity from the four years of data used to construct
-the catalogue.  If a higher purity sample is desirable, one can
-achieve a sample that includes the most significant third of the Fermi
-3FGL with only five percent of the sources unassociated with Fermi
-sources.  Outside the galaxy plane, the contamination is nearly
-negligible.  This software allows for rapid exploration of the Fermi
-data, simulation of the source detection to calculate the selection
-function of various sources and the errors in the obtained parameters
-of the sources detected.
+  We present a new and efficient algorithm for finding point sources
+  in the photon event data stream from the Fermi Gamma-Ray Space
+  Telescope, FermiFAST. The key advantage of FermiFAST is that it
+  constructs a catalogue of potential sources within a few minutes
+  from four years of photon data from the Fermi Observatory.  It
+  builds the most significant half of the Fermi Third Point Source
+  catalogue (3FGL) with nearly 80\% purity from the four years of data
+  used to construct the catalogue.  If a higher purity sample is
+  desirable, one can achieve a sample that includes the most
+  significant third of the Fermi 3FGL with only five percent of the
+  sources unassociated with Fermi sources.  Outside the galaxy plane,
+  the contamination is nearly negligible. FermiFAST arranges the
+  entire multi-year photon stream into a memory-efficient hierarchical
+  data structure that can rapidly find the photons that could have
+  originated from a potential gamma-ray source.  It calcuates a
+  likehihood ratio for the contribution of the potential source using
+  the angular distribution of the photons within the region of
+  interest.  This software allows for rapid exploration of the Fermi
+  data, simulation of the source detection to calculate the selection
+  function of various sources and the errors in the obtained
+  parameters of the sources detected.
 \end{abstract}
 
 \begin{keywords}
@@ -146,7 +147,7 @@ to build a minimal spanning tree from the arrival directions of the
 photons over a large portion of the sky.  They then divide the tree
 into subclusters by remove branches larger than a particular
 threshold.  If a subcluster contains more than a particular number of
-photons, it is considered to be a potential point soource.
+photons, it is considered to be a potential point source.
 \citet{2013Ap&SS.347..169C} extended the technique to include a noisy
 background.
 \citet{1997ApJ...483..350D,1997ApJ...483..370D,2007AIPC..921..546C}
@@ -160,7 +161,7 @@ particular location.  In general the estimated significances are
 proportional to those found in the full likelihood analysis.
 
 In this paper we propose a technique to calculate likelihood ratios
-much more quickly that the usual tehcniques by storing the photon data
+much more quickly that the usual techniques by storing the photon data
 stream in a data structure optimized for finding photons within a
 given percentile of the point spread function of the instrument from a
 potential source.  Furthermore, we will assume a simple expression for
@@ -217,7 +218,7 @@ We use the particularly memory efficient implementation of
 actually stored as shorts instead of floats to save additional memory.
 The typical coordinates range from $-1$ to $+1$, so using shorts
 yields an angular precision of about six arcseconds much finer than
-that of the Fermi point-spread function (PSF).  This memory efficient
+that of the Fermi point-spread function (PSF). This memory efficient
 implementation allows us to store all the photons detected by Fermi
 above 100~MeV and within a zenith angle of 100 degrees in memory
 simultaneously.  The first three dimensions contain the position of
@@ -303,7 +304,7 @@ King functions that are used to characterise the Fermi PSF.
 \label{fig:expmap}
 \end{figure}
 
-Altough the construction of the tree is not done in parallel, the
+Although the construction of the tree is not done in parallel, the
 queries are performed in parallel using the tree held in shared
 memory.  For example if one uses all the photons above 100~MeV from
 weeks 9 through 216 with a standard zenith angle cut of less than 100
@@ -350,8 +351,9 @@ ratio of the percentile of a given photon within the cumulative PSF
 distribution for that particular photon to 0.95 should be uniformly
 distributed between zero and one.  For convenience because we only
 probe the photons out to the 95\% energy containment radius, we define
+the cumulative fraction of energy out to the ninety-fifth percentile
 \begin{equation}
-  C_\mathrm{PSF} (r) = \frac{1}{0.95} \int_0^r PSF(r^\prime) 2 \pi r^\prime d r
+  C_\mathrm{PSF} (r) = \frac{1}{0.95} \int_0^r \mathrm{PSF}(r^\prime) 2 \pi r^\prime d r
   \label{eq:1}
 \end{equation}
 and 
@@ -697,7 +699,7 @@ that the cumulative distribution of nearest neighbour distances to
 grow as a $1-\exp(\lambda \Omega)$ where $\lambda$ is the density of
 sources on the sky and $\Omega$ is solid angle enclosed by a circle
 centred on the object and passing through the nearest neighbour.
-Given that there are 3029 Fermi 3FGL sources on the sky, the
+Given that there are 3,029 Fermi 3FGL sources on the sky, the
 cumulative distribution in this case would approximately be
 $1-\exp(-r^2/2\sigma^2)$ where $\sigma\approx 1.5^\circ$, so it is
 unlikely that these counterparts at a typical distance of 1 arcminutes
@@ -750,20 +752,23 @@ we change the sign of the Galactic latitude and longitude of each
 source in the 3FGL and repeat the nearest neighbour search.  We invert
 the coordinates instead of assigning random positions in order to
 preserve the clustering of the sources on the sky and the density in
-Galactic latitude and longitude.  Here all the correspondances are
-by chance.  These results are given by the green curves in the
-various panels and let us assess that nearly all the sources in the
-FermiFAST have counterparts in the 3FGL.  In the all-sky map (left
-panel, we can assess the number of FermiFAST sources
-that are not in the 3FGL by fitting the cumulative distribution with
-several Rayleigh distributions that quantify the positional error for
-the true counterparts and the chance of a false counterpart determined
-by fitting the cumulative distribution of false counterparts with a
-Rayleigh distribution as well.  We find that about 50 of the 800
-sources do not have a counterpart in 3FGL.  If we now focus on the
-right panel of Fig.~\ref{fig:corresponances} we find that out of the
-580 high-latitude sources in FermiFAST only eight lack a
-counterpart in 3FGL.
+Galactic latitude and longitude.  Here all the correspondances are by
+chance.  These results are given by the green curves in the various
+panels and let us assess that nearly all the sources in the FermiFAST
+have counterparts in the 3FGL.  In the all-sky map (left panel, we can
+assess the number of FermiFAST sources that are not in the 3FGL by
+fitting the cumulative distribution with several Rayleigh
+distributions that quantify the positional error for the true
+counterparts and the chance of a false counterpart determined by
+fitting the cumulative distribution of false counterparts with a
+Rayleigh distribution as well.  The distribution of false counterparts
+(green curves in Fig.~\ref{fig:corresponances}) is well characterised
+by a Rayleigh distribution with $\sigma=1.5^\circ$ (magenta curves) as
+expected from the distribution of Fermi sources on the sky. We find
+that 35 of the 800 sources do not have a counterpart in 3FGL.  If we
+now focus on the right panel of Fig.~\ref{fig:corresponances} we find
+that out of the 580 high-latitude sources in FermiFAST only eight lack
+a counterpart in 3FGL.
 
 One thing that is glaringly obvious from Fig.~\ref{fig:sources} is
 that most sources in the 3FGL lack a counterpart in the FermiFAST
@@ -934,14 +939,14 @@ the entire five-sigma FermiFAST catalogue only 28\% lie within
 within the Galactic plane were distributed as those associated with
 3FGL sources, one would one expect 9.8 sources.  The probability of
 finding at least 27 sources when one expects just 9.8 is $5\times
-10^6$.  In the entire 3GFL a similar fraction (27\%) of the sources
+10^{-6}$.  In the entire 3GFL a similar fraction (27\%) of the sources
 lie within 10~degrees of the Galactic plane, so again we find it
 unlikely that the FermiFAST detections within the Galactic plane that
 are not associated with 3GFL sources are distributed as rest of the
 sources.  These observations and the fact that the gamma-ray
 background is complicated near the Galactic plane point to the
 conclusion that the unassociated detections near the Galactic plane are
-regions of complication background rather than true point sources.
+regions of complicated background rather than true point sources.
 
 To understand the unassociated detections outside of the Galactic plane
 we analyse the Fermi data over a six-year span, weeks 9 through 316
@@ -986,12 +991,12 @@ the photons with energies above 1~GeV.
   \label{tab:fermisig1GeV}
 \begin{tabular}{crrrrrrrrrrrrr}
     \hline
-    Source & \multicolumn{1}{c}{RA} & \multicolumn{1}{c}{Dec}  & \multicolumn{1}{c}{$N_\mathrm{photons}$}  &\multicolumn{1}{c}{$\bar r^2$} & \multicolumn{1}{c}{$\bar f$} & \multicolumn{1}{c}{$S(r^2)$} & \multicolumn{1}{c}{$S(f)$} & \multicolumn{1}{c}{$A_f$} & \multicolumn{1}{c}{$TS_\mathrm{PSF}$} & \multicolumn{1}{c}{$A_\mathrm{PSF}$} & \multicolumn{1}{c}{$S(\mathrm{FF})$} & \multicolumn{1}{c}{$S(\mathrm{1Gev})$}  & \multicolumn{1}{c}{TS$(100)$} 
+    Source & \multicolumn{1}{c}{RA} & \multicolumn{1}{c}{Dec}  & \multicolumn{1}{c}{$N_\mathrm{photons}$}  &\multicolumn{1}{c}{$\bar r^2$} & \multicolumn{1}{c}{$\bar f$} & \multicolumn{1}{c}{$S(r^2)$} & \multicolumn{1}{c}{$S(f)$} & \multicolumn{1}{c}{$A_f$} & \multicolumn{1}{c}{$TS_\mathrm{PSF}$} & \multicolumn{1}{c}{$A_\mathrm{PSF}$} & \multicolumn{1}{c}{$S(\mathrm{FF})$} & \multicolumn{1}{c}{$S(\mathrm{1Gev})$}  & \multicolumn{1}{c}{$\Gamma$}
  \\
     \hline
    18  & $ 85.43$ & $ -1.94$ &   2775 & $0.433$ & $0.790$ & $ -12.3$ & $  52.9$ & $0.19$ & $    81.83$ & $0.15$ & $     9.31$ & $~-~$    & $~-~$\\ 
-   20  & $ 85.39$ & $ -8.22$ &   3419 & $0.434$ & $0.793$ & $ -13.4$ & $  59.3$ & $0.18$ & $    73.96$ & $0.13$ & $     8.87$ & $4.41$ & $-3.01\pm0.01$ \\
-   29  & $ 52.28$ & $ 31.20$ &   2493 & $0.453$ & $0.802$ & $  -8.2$ & $  52.2$ & $0.14$ & $    33.44$ & $0.10$ & $     6.12$ & $2.92$ & $-3.88\pm1.75$ \\
+   20  & $ 85.39$ & $ -8.22$ &   3419 & $0.434$ & $0.793$ & $ -13.4$ & $  59.3$ & $0.18$ & $    73.96$ & $0.13$ & $     8.87$ & $4.41$ & $3.01\pm0.01$ \\
+   29  & $ 52.28$ & $ 31.20$ &   2493 & $0.453$ & $0.802$ & $  -8.2$ & $  52.2$ & $0.14$ & $    33.44$ & $0.10$ & $     6.12$ & $2.92$ & $3.88\pm1.75$ \\
    43  & $ 64.51$ & $ 28.29$ &   2260 & $0.457$ & $0.805$ & $  -7.1$ & $  50.3$ & $0.12$ & $    22.24$ & $0.09$ & $     5.09$ & $~-~$    & $~-~$ \\ 
 \end{tabular}
 \end{table*}
@@ -1016,18 +1021,19 @@ the photons with energies above 1~GeV.
 %% \end{table}
 
 Tab.~\ref{tab:fermisig100MeV} presents the results for the binned
-likelihhod fit for all of the unassociated FermiFAST sources outside
-of the Galactic plane.  In particular Fig.~\ref{fig:100MeVcmap}
-focusses on the two sources for which we successfully fit the data
-with unbinned likelihood fits.  It depicts the counts map above
-100~MeV in blue, the model for the 3FGL sources included in the fit in
-red and the fitted FermiFAST source in green.  Tab.~\ref{tab:fermisig100MeV} presents the
-result of all the binned likelihood fits. Again the spectra
-are well characterized by a very hard photon spectrum with
-$dN/dE \propto E^{-\Gamma}$ with $\Gamma$ from $-2$ to nearly $-4$.
-We see that all the sources detected with FermiFAST that do not appear
-in the 3GFL have very hard spectra with $\Gamma < -1$.  On the other
-hand no 3GFL sources have negative spectral indices.
+likelihhod fit for all the unassociated FermiFAST sources outside of
+the Galactic plane.  In particular Fig.~\ref{fig:100MeVcmap} focusses
+on the two sources for which we successfully fit the data with
+unbinned likelihood fits.  It depicts the counts map above 100~MeV in
+blue, the model for the 3FGL sources included in the fit in red and
+the fitted FermiFAST source in green.  Tab.~\ref{tab:fermisig100MeV}
+presents the result of all the binned likelihood fits.  The range of
+spectral indices is typical for 3FGL sources. One source of particular
+interest is 31 which has a 3FGL source (2FGL~J0440.0+2554c) within 20
+arcminutes, well beyond the typical positional uncertainty.  However, the
+combined fit for the FermiFAST source and 2FGL~J0440.0+2554c, results
+in a negative TS value for 2FGL~J0440.0+2554c, so it is unlikely that both
+sources exist.
 
 \begin{table*}
   \caption{ All of the FermiFAST detections that lack a 3FGL
@@ -1038,16 +1044,16 @@ hand no 3GFL sources have negative spectral indices.
   \label{tab:fermisig100MeV}
 \begin{tabular}{rrrrrrrrrrrrrr}
     \hline
-    \multicolumn{1}{c}{Source} & \multicolumn{1}{c}{RA} & \multicolumn{1}{c}{Dec}  & \multicolumn{1}{c}{$N_\mathrm{photons}$}  &\multicolumn{1}{c}{$\bar r^2$} & \multicolumn{1}{c}{$\bar f$} & \multicolumn{1}{c}{$S(r^2)$} & \multicolumn{1}{c}{$S(f)$} & \multicolumn{1}{c}{$A_f$} & \multicolumn{1}{c}{$TS_\mathrm{PSF}$} & \multicolumn{1}{c}{$A_\mathrm{PSF}$} & \multicolumn{1}{c}{$S(\mathrm{FF})$} & \multicolumn{1}{c}{$S$}  & \multicolumn{1}{c}{$\Gamma$} 
+    \multicolumn{1}{c}{Source} & \multicolumn{1}{c}{RA} & \multicolumn{1}{c}{Dec}  & \multicolumn{1}{c}{$N_\mathrm{photons}$}  &\multicolumn{1}{c}{$\bar r^2$} & \multicolumn{1}{c}{$\bar f$} & \multicolumn{1}{c}{$S(r^2)$} & \multicolumn{1}{c}{$S(f)$} & \multicolumn{1}{c}{$A_f$} & \multicolumn{1}{c}{$TS_\mathrm{PSF}$} & \multicolumn{1}{c}{$A_\mathrm{PSF}$} & \multicolumn{1}{c}{$S(\mathrm{FF})$} & \multicolumn{1}{c}{TS$(100)$}  & \multicolumn{1}{c}{$\Gamma$} 
  \\
  \hline
  5 & $ 84.56$ & $-69.20$ &   1960 & $0.381$ & $0.733$ & $ -18.3$ & $  35.7$ & $0.34$ & $   224.61$ & $0.32$ & $    15.18$ & $1.36$ & x$-4.84\pm1.74$ \\ 
 10 & $232.90$ & $-56.21$ &  17522 & $0.461$ & $0.814$ & $ -17.9$ & $ 144.0$ & $0.11$ & $   157.84$ & $0.08$ & $    12.78$ & $2.34$ & x$-1.40\pm0.02$ \\ 
 18 & $ 85.43$ & $ -1.94$ &   2775 & $0.433$ & $0.790$ & $ -12.3$ & $  52.9$ & $0.19$ & $    81.83$ & $0.15$ & $     9.31$ & $~-~$    & $~-~$ \\ 
-20 & $ 85.39$ & $ -8.22$ &   3419 & $0.434$ & $0.793$ & $ -13.4$ & $  59.3$ & $0.18$ & $    73.96$ & $0.13$ & $     8.87$ & $3.63$ & $-2.43\pm0.01$ \\ 
+20 & $ 85.39$ & $ -8.22$ &   3419 & $0.434$ & $0.793$ & $ -13.4$ & $  59.3$ & $0.18$ & $    73.96$ & $0.13$ & $     8.87$ & $63045$ & $2.43\pm0.01$ \\ 
 24 & $ 86.84$ & $  0.16$ &   2659 & $0.457$ & $0.805$ & $  -7.8$ & $  54.5$ & $0.12$ & $    43.52$ & $0.11$ & $     6.91$ & $0.97$ & x$-4.94\pm0.72$ \\ 
-29 & $ 52.28$ & $ 31.20$ &   2493 & $0.453$ & $0.802$ & $  -8.2$ & $  52.2$ & $0.14$ & $    33.44$ & $0.10$ & $     6.12$ & $2.11$ & $-2.29\pm0.01$ \\ 
-31 & $ 70.17$ & $ 25.63$ &   3275 & $0.471$ & $0.808$ & $  -5.7$ & $  61.0$ & $0.09$ & $    31.18$ & $0.08$ & $     5.93$ & $1.98$ & x$-2.94\pm0.82$ \\
+29 & $ 52.28$ & $ 31.20$ &   2493 & $0.453$ & $0.802$ & $  -8.2$ & $  52.2$ & $0.14$ & $    33.44$ & $0.10$ & $     6.12$ & $10258$ & $2.29\pm0.01$ \\ 
+31 & $ 70.17$ & $ 25.63$ &   3275 & $0.471$ & $0.808$ & $  -5.7$ & $  61.0$ & $0.09$ & $    31.18$ & $0.08$ & $     5.93$ & $45118$ & $2.591\pm0.002$ \\
 43 & $ 64.51$ & $ 28.29$ &   2260 & $0.457$ & $0.805$ & $  -7.1$ & $  50.3$ & $0.12$ & $    22.24$ & $0.09$ & $     5.09$ & $~-~$    & $~-~$ \\ 
 \end{tabular}
 \end{table*}
