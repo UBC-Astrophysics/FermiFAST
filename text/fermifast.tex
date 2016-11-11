@@ -236,7 +236,7 @@ for the photon in question.  In particular $w=\pm
 \sqrt{R^2_\mathrm{max}-R_i^2}$ where $R_i$ is the radius of the
 ninety-fifth percentile at the energy, entrance angle and front or
 back conversion for the photon.  The choice of the ninety-fifth
-percentile is arbitrary.  Choossing a smaller cut-off radius would
+percentile is arbitrary.  Choosing a smaller cut-off radius would
 decrease the number of photons from the candidate point source and also
 from the background.  For convenience, we use positive values of $w$
 for front-converted photons and negative values of $w$ for
@@ -978,11 +978,11 @@ lie within five degrees of each other.  We performed fits for these
 sources both separately and together.  Both the fits that contained
 source 18 failed to converge.  We found a similar result for source
 43.  On the other hand, the fits that included source 20 (on its own)
-and source 29 did converge for the unbinned likelihood fit for
-photons above 1~GeV. Tab.~\ref{tab:fermisig1GeV} gives the FermiFAST
+and source 29 did converge for the unbinned likelihood fit for photons
+above 1~GeV. Tab.~\ref{tab:fermisig1GeV} gives the FermiFAST
 statistics as in Tab.~\ref{tab:topten} and the significance of the
-unbinned likelihood hood fit (in sigma units) and spectral index for
-the photons with energies above 1~GeV.
+unbinned likelihood hood fit (in sigma units) and spectral index
+($\Gamma$) for the photons with energies above 1~GeV.
 \begin{table*}
   \caption{The four FermiFAST detections that lack a
     counterpart in the 3FGL and lie outside of the Galactic plane and
@@ -991,7 +991,7 @@ the photons with energies above 1~GeV.
   \label{tab:fermisig1GeV}
 \begin{tabular}{crrrrrrrrrrrrr}
     \hline
-    Source & \multicolumn{1}{c}{RA} & \multicolumn{1}{c}{Dec}  & \multicolumn{1}{c}{$N_\mathrm{photons}$}  &\multicolumn{1}{c}{$\bar r^2$} & \multicolumn{1}{c}{$\bar f$} & \multicolumn{1}{c}{$S(r^2)$} & \multicolumn{1}{c}{$S(f)$} & \multicolumn{1}{c}{$A_f$} & \multicolumn{1}{c}{$TS_\mathrm{PSF}$} & \multicolumn{1}{c}{$A_\mathrm{PSF}$} & \multicolumn{1}{c}{$S(\mathrm{FF})$} & \multicolumn{1}{c}{$S(\mathrm{1Gev})$}  & \multicolumn{1}{c}{$\Gamma$}
+    Detection & \multicolumn{1}{c}{RA} & \multicolumn{1}{c}{Dec}  & \multicolumn{1}{c}{$N_\mathrm{photons}$}  &\multicolumn{1}{c}{$\bar r^2$} & \multicolumn{1}{c}{$\bar f$} & \multicolumn{1}{c}{$S(r^2)$} & \multicolumn{1}{c}{$S(f)$} & \multicolumn{1}{c}{$A_f$} & \multicolumn{1}{c}{$TS_\mathrm{PSF}$} & \multicolumn{1}{c}{$A_\mathrm{PSF}$} & \multicolumn{1}{c}{$S(\mathrm{FF})$} & \multicolumn{1}{c}{$S(\mathrm{1Gev})$}  & \multicolumn{1}{c}{$\Gamma$}
  \\
     \hline
    18  & $ 85.43$ & $ -1.94$ &   2775 & $0.433$ & $0.790$ & $ -12.3$ & $  52.9$ & $0.19$ & $    81.83$ & $0.15$ & $     9.31$ & $~-~$    & $~-~$\\ 
@@ -1022,18 +1022,21 @@ the photons with energies above 1~GeV.
 
 Tab.~\ref{tab:fermisig100MeV} presents the results for the binned
 likelihhod fit for all the unassociated FermiFAST sources outside of
-the Galactic plane.  In particular Fig.~\ref{fig:100MeVcmap} focusses
+the Galactic plane.  In particular Fig.~\ref{fig:100MeVcmap} focuses
 on the two sources for which we successfully fit the data with
 unbinned likelihood fits.  It depicts the counts map above 100~MeV in
 blue, the model for the 3FGL sources included in the fit in red and
 the fitted FermiFAST source in green.  Tab.~\ref{tab:fermisig100MeV}
 presents the result of all the binned likelihood fits.  The range of
-spectral indices is typical for 3FGL sources. One source of particular
-interest is 31 which has a 3FGL source (2FGL~J0440.0+2554c) within 20
-arcminutes, well beyond the typical positional uncertainty.  However, the
-combined fit for the FermiFAST source and 2FGL~J0440.0+2554c, results
-in a negative TS value for 2FGL~J0440.0+2554c, so it is unlikely that both
-sources exist.
+spectral indices is typical for 3FGL sources. One detection of
+particular interest is 5 which resulted in a negative TS values.  It
+is within the Large Magellanic Cloud, so FermiFAST possibly identified
+a knot of gamma-ray emission from within the galaxy.  For detections
+18, 24 and 43 the likelihood fit failed to converge.  Therefore, we
+can only make definitive conclusions about five of the eight
+unassociated detections.  All but detection 5 appear to be new sources
+that were not found in the 3FGL catalogue, and each has a spectral index between
+$2.2$ and $2.6$, near the mode of the distribution within the 3FGL catalogue.
 
 \begin{table*}
   \caption{ All of the FermiFAST detections that lack a 3FGL
@@ -1044,17 +1047,20 @@ sources exist.
   \label{tab:fermisig100MeV}
 \begin{tabular}{rrrrrrrrrrrrrr}
     \hline
-    \multicolumn{1}{c}{Source} & \multicolumn{1}{c}{RA} & \multicolumn{1}{c}{Dec}  & \multicolumn{1}{c}{$N_\mathrm{photons}$}  &\multicolumn{1}{c}{$\bar r^2$} & \multicolumn{1}{c}{$\bar f$} & \multicolumn{1}{c}{$S(r^2)$} & \multicolumn{1}{c}{$S(f)$} & \multicolumn{1}{c}{$A_f$} & \multicolumn{1}{c}{$TS_\mathrm{PSF}$} & \multicolumn{1}{c}{$A_\mathrm{PSF}$} & \multicolumn{1}{c}{$S(\mathrm{FF})$} & \multicolumn{1}{c}{TS$(100)$}  & \multicolumn{1}{c}{$\Gamma$} 
+    \multicolumn{1}{c}{Detection} & \multicolumn{1}{c}{RA} & \multicolumn{1}{c}{Dec}  & \multicolumn{1}{c}{$N_\mathrm{photons}$}  &\multicolumn{1}{c}{$\bar r^2$} & \multicolumn{1}{c}{$\bar f$} & \multicolumn{1}{c}{$S(r^2)$} & \multicolumn{1}{c}{$S(f)$} & \multicolumn{1}{c}{$A_f$} & \multicolumn{1}{c}{$TS_\mathrm{PSF}$} & \multicolumn{1}{c}{$A_\mathrm{PSF}$} & \multicolumn{1}{c}{$S(\mathrm{FF})$} & \multicolumn{1}{c}{TS$(100)$}  & \multicolumn{1}{c}{$\Gamma$} 
  \\
  \hline
- 5 & $ 84.56$ & $-69.20$ &   1960 & $0.381$ & $0.733$ & $ -18.3$ & $  35.7$ & $0.34$ & $   224.61$ & $0.32$ & $    15.18$ & $1.36$ & x$-4.84\pm1.74$ \\ 
-10 & $232.90$ & $-56.21$ &  17522 & $0.461$ & $0.814$ & $ -17.9$ & $ 144.0$ & $0.11$ & $   157.84$ & $0.08$ & $    12.78$ & $2.34$ & x$-1.40\pm0.02$ \\ 
-18 & $ 85.43$ & $ -1.94$ &   2775 & $0.433$ & $0.790$ & $ -12.3$ & $  52.9$ & $0.19$ & $    81.83$ & $0.15$ & $     9.31$ & $~-~$    & $~-~$ \\ 
-20 & $ 85.39$ & $ -8.22$ &   3419 & $0.434$ & $0.793$ & $ -13.4$ & $  59.3$ & $0.18$ & $    73.96$ & $0.13$ & $     8.87$ & $63045$ & $2.43\pm0.01$ \\ 
-24 & $ 86.84$ & $  0.16$ &   2659 & $0.457$ & $0.805$ & $  -7.8$ & $  54.5$ & $0.12$ & $    43.52$ & $0.11$ & $     6.91$ & $0.97$ & x$-4.94\pm0.72$ \\ 
-29 & $ 52.28$ & $ 31.20$ &   2493 & $0.453$ & $0.802$ & $  -8.2$ & $  52.2$ & $0.14$ & $    33.44$ & $0.10$ & $     6.12$ & $10258$ & $2.29\pm0.01$ \\ 
-31 & $ 70.17$ & $ 25.63$ &   3275 & $0.471$ & $0.808$ & $  -5.7$ & $  61.0$ & $0.09$ & $    31.18$ & $0.08$ & $     5.93$ & $45118$ & $2.591\pm0.002$ \\
-43 & $ 64.51$ & $ 28.29$ &   2260 & $0.457$ & $0.805$ & $  -7.1$ & $  50.3$ & $0.12$ & $    22.24$ & $0.09$ & $     5.09$ & $~-~$    & $~-~$ \\ 
+ 5 & $ 84.56$ & $-69.20$ &   1960 & $0.381$ & $0.733$ & $ -18.3$ & $  35.7$ & $0.34$ & $   224.61$ & $0.32$ & $    15.18$ & $-0.193$ & $-$ \\ 
+10 & $232.90$ & $-56.21$ &  17522 & $0.461$ & $0.814$ & $ -17.9$ & $ 144.0$ & $0.11$ & $   157.84$ & $0.08$ & $    12.78$ & $11976.$ & $2.36\pm0.01$ \\
+% 18 & $ 85.43$ & $ -1.94$ &   2775 & $0.433$ & $0.790$ & $ -12.3$ & $  52.9$ & $0.19$ & $    81.83$ & $0.15$ & $     9.31$ & $42711$  & $2.28$ \\
+18 & $ 85.43$ & $ -1.94$ &   2775 & $0.433$ & $0.790$ & $ -12.3$ & $  52.9$ & $0.19$ & $    81.83$ & $0.15$ & $     9.31$ & $-$  & $-$ \\ 
+20 & $ 85.39$ & $ -8.22$ &   3419 & $0.434$ & $0.793$ & $ -13.4$ & $  59.3$ & $0.18$ & $    73.96$ & $0.13$ & $     8.87$ & $63045.$ & $2.43\pm0.01$ \\ 
+% 24 & $ 86.84$ & $  0.16$ &   2659 & $0.457$ & $0.805$ & $  -7.8$ & $  54.5$ & $0.12$ & $    43.52$ & $0.11$ & $     6.91$ & $41938$  & $2.27$ \\
+24 & $ 86.84$ & $  0.16$ &   2659 & $0.457$ & $0.805$ & $  -7.8$ & $  54.5$ & $0.12$ & $    43.52$ & $0.11$ & $     6.91$ & $-$  & $-$ \\
+29 & $ 52.28$ & $ 31.20$ &   2493 & $0.453$ & $0.802$ & $  -8.2$ & $  52.2$ & $0.14$ & $    33.44$ & $0.10$ & $     6.12$ & $10258.$ & $2.29\pm0.01$ \\ 
+31 & $ 70.17$ & $ 25.63$ &   3275 & $0.471$ & $0.808$ & $  -5.7$ & $  61.0$ & $0.09$ & $    31.18$ & $0.08$ & $     5.93$ & $45118.$ & $2.591\pm0.002$ \\
+% 43 & $ 64.51$ & $ 28.29$ &   2260 & $0.457$ & $0.805$ & $  -7.1$ & $  50.3$ & $0.12$ & $    22.24$ & $0.09$ & $     5.09$ & $44962$  & $2.26$ \\ 
+43 & $ 64.51$ & $ 28.29$ &   2260 & $0.457$ & $0.805$ & $  -7.1$ & $  50.3$ & $0.12$ & $    22.24$ & $0.09$ & $     5.09$ & $-$  & $-$ \\ 
 \end{tabular}
 \end{table*}
 
@@ -1131,8 +1137,10 @@ population could be obtained.
 
 Using the existing data stream without inserting sources, one could
 characterize whether the measurement significances of the individual
-sources are reasonable and whether the variability measurement
-determined say in an analysis as outlined earlier is significant.  The
+sources are accurate measurements of Poisson likelihood.  To be specific
+we would estimate the distribution of the values $\log L$ throughout
+the sky so that a given value of $\log L$ could be associated with
+the probability of the null hypothesis of no source. The
 first step would be to resample the photon data stream through a
 bootstrap --- this would generate a new list of photons by selecting
 the same number of photons from the original list but with
