@@ -90,25 +90,25 @@ $^{2}$Department of Physics, McGill University, Montr´eal, QC, H3A 2T8, Canada}
   in the photon event data stream from the Fermi Gamma-Ray Space
   Telescope, FermiFAST. The key advantage of FermiFAST is that it
   constructs a catalogue of potential sources very fast by arranging
-  the photon data in a hierarchical data structure. It can find within
-  a few minutes the most significant half of the Fermi Third Point
-  Source catalogue (3FGL) with nearly 80\% purity from the four years
-  of data used to construct the catalogue.  If a higher purity sample
-  is desirable, one can achieve a sample that includes the most
-  significant third of the Fermi 3FGL with only five percent of the
-  sources unassociated with Fermi sources.  Outside the galaxy plane,
-  all but eight of the 580 FermiFAST detections are associated with
-  3FGL sources.  And of these eight, six yield significant detections
-  of greater than five sigma when a further binned likelihood analysis
-  is performed.  FermiFAST arranges the entire multi-year photon
-  stream into a memory-efficient hierarchical data structure that can
-  rapidly find the photons that could have originated from a potential
-  gamma-ray source.  It calcuates a likehihood ratio for the
-  contribution of the potential source using the angular distribution
-  of the photons within the region of interest.  This software allows
-  for rapid exploration of the Fermi data, simulation of the source
-  detection to calculate the selection function of various sources and
-  the errors in the obtained parameters of the sources detected.
+  the photon data in a hierarchical data structure. Using this
+  structure FermiFAST rapidly finds the photons that could have
+  originated from a potential gamma-ray source.  It calcuates a
+  likehihood ratio for the contribution of the potential source using
+  the angular distribution of the photons within the region of
+  interest.  It can find within a few minutes the most significant
+  half of the Fermi Third Point Source catalogue (3FGL) with nearly
+  80\% purity from the four years of data used to construct the
+  catalogue.  If a higher purity sample is desirable, one can achieve
+  a sample that includes the most significant third of the Fermi 3FGL
+  with only five percent of the sources unassociated with Fermi
+  sources.  Outside the galaxy plane, all but eight of the 580
+  FermiFAST detections are associated with 3FGL sources.  And of these
+  eight, six yield significant detections of greater than five sigma
+  when a further binned likelihood analysis is performed.  This
+  software allows for rapid exploration of the Fermi data, simulation
+  of the source detection to calculate the selection function of
+  various sources and the errors in the obtained parameters of the
+  sources detected.
   
 \end{abstract}
 
@@ -145,16 +145,16 @@ Although both Fermi and EGRET before it used the likelihood ratio to
 assess the significance of potential point sources, several
 alternatives have been proposed to search for point sources to account
 for the photons observed by these instruments.
-\citet{2009arXiv0912.3843M,2008MNRAS.383.1166C} developed an algorithm
+\citet{2009arXiv0912.3843M} and \citet{2008MNRAS.383.1166C} developed an algorithm
 to build a minimal spanning tree from the arrival directions of the
 photons over a large portion of the sky.  They then divide the tree
-into subclusters by remove branches larger than a particular
+into subclusters by removing branches larger than a particular
 threshold.  If a subcluster contains more than a particular number of
 photons, it is considered to be a potential point source.
 \citet{2013Ap&SS.347..169C} extended the technique to include a noisy
 background.
-\citet{1997ApJ...483..350D,1997ApJ...483..370D,2007AIPC..921..546C}
-propose to use wavelets to find point sources from photon counts for
+\citet{1997ApJ...483..350D,1997ApJ...483..370D} and \citet{2007AIPC..921..546C}
+proposed to use wavelets to find point sources from photon counts for
 ROSAT, EGRET and Fermi data.  Althoguh these techniques are
 significantly faster than the traditional likelihood ratio, they
 require simulated data to assess the significance of the sources
@@ -184,7 +184,7 @@ simulations \citep{2013ApJ...765...54A}.
 \label{sec:photon-database}
 
 The key to the speed of this algorithm is the database that contains
-the position of the observed photons on the sky.  Each photon is
+the positions of the observed photons on the sky.  Each photon is
 stored in a four-dimensional $k-d$~tree
 \citep{Bentley:1975:MBS:361002.361007}.  A $k-d$~tree is a binary tree
 in which each successive branching splits the space in two regions
@@ -198,23 +198,26 @@ the process with only the points on the left branch and use the
 $y$-coordinate instead of the $x$-coordinate, so we now have
 left-upper branch with $x$-values less than the median $x$-value and
 $y$-values greater than the median $y$-value for the points on the
-left branch.  Similarly, we have a left-lower branch, and we repeat the
-process on the right branch, generating a right-upper and right-lower
-branches.  The next step in the two-dimensional $k-d$~tree is to
-repeat on each of the branches with the $x-$coordinate again.
-The branching points do not have to be the precise medians
-of the data; one can construct well-balanced and efficient trees by
-sampling a fraction of the points to estimate the medians.
-The process continues until all the branches end with single points.
-In our case, we construct a four-dimensional $k-d$~tree, so we split
-the data along a plane with constant $x-$coordinate, constant $y$,
-constant $z$, constant $w$ and then repeat with the $x-$coordinate.
-Once a $k-d$~tree is constructed for the data, one can search for
-points in our case photons within a given range of a particular
-position on the sky efficiently.  Because the points are arranged in a
-binary tree, finding the photons that arrived within a given angle
-of a particular direction takes only on order of $\log_2 N$ operations
-where $N$ is the total number of photons in the database.
+left branch.  Similarly, we have a left-lower branch, and we repeat
+the process on the right branch, generating a right-upper and
+right-lower branches.  The next step in the two-dimensional $k-d$~tree
+is to repeat on each of the branches with the $x-$coordinate again.
+The branching points do not have to be the precise medians of the
+data; one can construct well-balanced and efficient trees by sampling
+a fraction of the points to estimate the medians.  The process
+continues until all the branches end with single points.  Our photon
+data is four-dimensional.  We use $x$, $y$ and $z$ to represent a
+photon's position on the celestial sphere and $w$ to encode the
+95\%-energy-containment radius. Therefore, in our case, we construct a
+four-dimensional $k-d$~tree, so we split the data along a plane with
+constant $x-$coordinate, constant $y$, constant $z$, constant $w$ and
+then repeat with the $x-$coordinate.  Once a $k-d$~tree is constructed
+for the data, one can search for points in our case photons within a
+given range of a particular position on the sky efficiently.  Because
+the points are arranged in a binary tree, finding the photons that
+arrived within a given angle of a particular direction takes only on
+order of $\log_2 N$ operations where $N$ is the total number of
+photons in the database.
 
 We use the particularly memory efficient implementation of
 \citet{LangPhD} (used in astrometry.net).  The coordinates are
@@ -244,7 +247,7 @@ decrease the number of photons from the candidate point source and also
 from the background.  For convenience, we use positive values of $w$
 for front-converted photons and negative values of $w$ for
 back-converted photons.  Furthermore, $R_\mathrm{max}$ is the largest
-value of ninety-fifth percentile of all the photons in the sample,
+value of the ninety-fifth percentile of all the photons in the sample,
 {\em i.e.} the ninety-fifth percentile for the photon with the poorest
 angular resolution.  This is depicted in the lower panel of
 Fig.~\ref{fig:sphere}.
@@ -299,11 +302,19 @@ shown in Fig.~\ref{fig:expmap}.  It peaks at 0.95 times the exposure
 time in the direction of the potential source and slowly drops to the
 ninety-fifth percentile of the PSF in radius and then drops according
 to the power-law of the tail component of the linear combinations of
-King functions that are used to characterise the Fermi PSF. 
+King functions,
+\begin{equation}
+  K(\delta p; \sigma, \gamma) =\frac{1}{2\pi \sigma^2} \left ( 1- \frac{1}{\gamma} \right ) \left [ 1 + \frac{1}{2\gamma} \left (\frac{\delta p}{\sigma} \right )^2 \right ]^{-\gamma}
+\label{eq:1}
+\end{equation}
+that are used to characterise the Fermi PSF \citep{2013ApJ...765...54A}.  
 \begin{figure}
 \includegraphics[width=\columnwidth]{expmap2}
 \caption{The Exposure Map, Region of Interest (ROI)
-  and Point-Spread Function (PSF)}
+  and Point-Spread Function (PSF) with $\sigma$ and $\gamma$ characterise
+  the width of the King function and its asymptotic power-law dependence respectively
+  according to Eq.~\ref{eq:1}.
+}
 \label{fig:expmap}
 \end{figure}
 
@@ -328,18 +339,24 @@ or only six minutes on sixteen cores.
 \label{sec:source-likelihood}
 
 Using the $k-d$~tree to determine the photons that lie within the 95\%
-energy enclosure region of the point-spread function, we calculate several
-statistics of the observed photons to assess the likelihood of a
-source being at a particular position on the sky.  We first determine
-two statistics whose distributions are potentially known. First, if
-all the photons within the region of interest (all photons that lie
-within the 95th-percentile cone of the potential source) indeed come
-from a uniform background, the ratio of the solid angle enclosed in a
+energy enclosure region of the point-spread function, we calculate
+several statistics of the observed photons to assess the likelihood of
+a source being at a particular position on the sky.  We first
+determine two statistics whose distributions are potentially
+known. First, if all the photons within the region of interest (all
+photons that lie within the 95th-percentile cone of the potential
+source) indeed come from a uniform background, we would expect that
+the photons would be uniformly distributed in the region of interest.
+Therefore, in this case the ratio of the solid angle enclosed in a
 circle centred on the potential source and running through the
-observed to the total solid angle within the region of interest for
-that particular photon should be uniformly distributed between zero
-and one.  We denote the mean of this ratio over the observed photons
-$\bar r^2$, that is
+observed photon to the total solid angle within the region of interest
+for that particular photon should be uniformly distributed between
+zero and one. This is just a $V/V_\mathrm{max}$-test
+\citep{1968ApJ...151..393S} adapted to the distribution of the photons
+on the sky.
+
+We denote the mean of this ratio over the
+observed photons $\bar r^2$, that is
 \begin{equation}
   \bar r^2 = \sum_i \left ( \frac{r_i}{r_{\mathrm{max},i}} \right )^2 
 \end{equation}
@@ -347,7 +364,9 @@ where $r_i$ is the angular distance between the photon direction and
 the direction of the potential source and $r_{\mathrm{max},i}$ is the
 95\% energy containment radius for the photon.  This statistic is
 distributed as a Bates distribution with mean of $1/2$ and variance of
-$1/(12 N_\gamma)$.  Second, if all the photons within the
+$1/(12 N_\gamma)$.  
+
+Second, if all the photons within the
 region of interest indeed come from a point source at the centre of
 the region of interest that extends to the ninety-five percentile, the
 ratio of the percentile of a given photon within the cumulative PSF
@@ -357,12 +376,12 @@ probe the photons out to the 95\% energy containment radius, we define
 the cumulative fraction of energy out to the ninety-fifth percentile
 \begin{equation}
   C_\mathrm{PSF} (r) = \frac{1}{0.95} \int_0^r \mathrm{PSF}(r^\prime) 2 \pi r^\prime d r
-  \label{eq:1}
+  \label{eq:2}
 \end{equation}
 and 
 \begin{equation}
   \bar f = \sum_i C_\mathrm{PSF} (r_i).
-  \label{eq:2}
+  \label{eq:3}
 \end{equation}
 This will be distributed as a Bates distribution if all of the photons
 come from a point source.
@@ -371,45 +390,43 @@ If we assume that the observed photons originate from a linear
 combination of these two possiblities, we can determine the ratio of
 the two contributions from these statistics.  For $\bar r^2$ we have
 \begin{eqnarray}
-  \bar r^2 &=& A_f \int_0^1 \left (\frac{r}{r_\mathrm{max}} \right )^2 d \left (C_\mathrm{PSF} \right ) + \\
+  \bar r^2 &=& A_f \int_0^1 \left (\frac{r}{r_\mathrm{max}} \right )^2 d \left (C_\mathrm{PSF} \right ) + \label{eq:4} \\
   & & ~~~ 
    (1 - A_f) \int_0^1 \left (\frac{r}{r_\mathrm{max}} \right )^2 d \left (\frac{r}{r_\mathrm{max}} \right )^2 \nonumber
-    \label{eq:3}
 \end{eqnarray}
 and for $\bar f$ we have
 \begin{eqnarray}
-  \bar f^2 &=& A_f \int_0^1 C_\mathrm{PSF}  d \left (C_\mathrm{PSF} \right ) + \\
+  \bar f &=& A_f \int_0^1 C_\mathrm{PSF}  d \left (C_\mathrm{PSF} \right ) + \label{eq:5} \\
   & & ~~~  (1 - A_f) \int_0^1 C_\mathrm{PSF} d \left (\frac{r}{r_\mathrm{max}} \right )^2.
     \nonumber
-    \label{eq:4}
 \end{eqnarray}
 To move forward we examine the first term in $\bar r^2$
 \begin{eqnarray}
   B &=& \int_0^1 \left (\frac{r}{r_\mathrm{max}} \right )^2 d \left (C_\mathrm{PSF} \right )
   = \left . \left (\frac{r}{r_\mathrm{max}} \right )^2 C_\mathrm{PSF} \right |_0^1 - \\
-  \label{eq:5}
+  \label{eq:6}
   & & ~~~  \int_0^1 C_\mathrm{PSF} d \left (\frac{r}{r_\mathrm{max}} \right )^2. \nonumber \\
   &=& 1 - \int_0^1 C_\mathrm{PSF} d \left (\frac{r}{r_\mathrm{max}} \right )^2
-  \label{eq:6}
+  \label{eq:7}
 \end{eqnarray}
 where we have integrated the first term by parts to get one minus the
 second term in $\bar f$.  We can substitute these results into
-Eq.~\ref{eq:3} and~\ref{eq:4} to yield
+Eq.~\ref{eq:4} and~\ref{eq:5} to yield
 \begin{eqnarray}
-  \bar r^2 &=& A_f B + \frac{1-A_f}{2} \label{eq:7}
+  \bar r^2 &=& A_f B + \frac{1-A_f}{2} \label{eq:8}
   \\
-  \bar f^2 &=& \frac{A_f}{2} + (1 - A_f) (1 - B) \label{eq:8}
+  \bar f^2 &=& \frac{A_f}{2} + (1 - A_f) (1 - B) \label{eq:9}
 \end{eqnarray}
 Using this result, we can solve for the fraction of photons that come
 from the point source to yield
 \begin{equation}
   A_f=\frac{\frac{1}{2}-\bar r^2}{\bar f-\bar r^2}.
-  \label{eq:9}
+  \label{eq:10}
 \end{equation} 
 We can also find the value of $B$ to be
 \begin{equation}
   B = \bar r^2 - \bar f + \frac{1}{2}.
-  \label{eq:10}
+  \label{eq:11}
 \end{equation}
 The estimator $A_f$ is calculated from various statistics of the
 sample and assumes that the photons come from a single point source
@@ -419,7 +436,7 @@ be out of the range of 0 to 1, and systematics errors as well
 of this range. We can estimate the significance of the value of $A_f$ by
 \begin{equation}
   S(r^2) = \left ( \bar r^2-\frac{1}{2} \right ) \sqrt{12 N_\gamma}.
-\label{eq:11}
+\label{eq:12}
 \end{equation}
 We have retained the sign of the deviation from the source-free value,
 so that a negative value of $S(r^2)$ indicates that the photons within
@@ -428,7 +445,7 @@ getting a value of $|S(r^2)|$ larger than $x$ by chance is
 \begin{equation}
   P\left [ |S(r^2)| > x \right ] = \frac{1}{2} \mathrm{erfc} \left ( \frac{x}{\sqrt{2}} \right
   ) \approx \exp \left (-\frac{x^2}{2} \right )
-  \label{eq:12}
+  \label{eq:13}
 \end{equation}
 if we take the limit of many photons in the region of interest where
 the Bates distribution tends to the normal distribution.  
@@ -468,7 +485,7 @@ likelihood \citep[this is very similar to the expression used by][for neutrino t
 \begin{equation}
   \log L = \sum_\gamma \log \left [ A_\mathrm{PSF} \frac{\mathrm{PSF}_i \Omega_{\mathrm{max},i} }{0.95} + (1
     - A_\mathrm{PSF}) \right ]
-  \label{eq:13}
+  \label{eq:14}
 \end{equation}
 where we have dropped $N_\mathrm{pred}$ from the usual definition
 because we have defined the model in such a way that
@@ -486,7 +503,7 @@ $\log L$ larger than $x$ by chance is
 \begin{equation}
   P(\log L > x) = \sqrt{\pi} \mathrm{erfc} \left ( \sqrt{\frac{x}{2}}
   \right ) \approx \exp \left (-\frac{x}{2} \right ).
-  \label{eq:14}
+  \label{eq:15}
 \end{equation}
 From Tab.~\ref{tab:topten} we can see that the values of $A_f$ are
 similar to those of $A_\mathrm{PSF}$ at least for highly significant
@@ -494,7 +511,7 @@ sources.
 
 The first pass is to determine the value of $\log L$ on a HEALPix grid
 \citep{2005ApJ...622..759G} of potential sources.  The HEALPix grid is
-an array of equal area regions on a sphere in this case the sky.  The
+an array of equal area regions on a sphere, in this case the sky.  The
 sphere is first projected onto a rhombic dodecahedron.  Each of the
 faces is a rhombus congruent to the others, and a pair of opposite
 vertices is aligned with the poles.  Each of the rhombuses is
@@ -529,7 +546,7 @@ grid points or a separation of 26 arcminutes.  Of these 196,608
 points, 96,066 have $P(\log L >x) < e^{-12.5} \approx 4 \times
 10^{-6}$ and 967 unique peaks of which 310 have $A_\mathrm{PSF}>0$.
 
-Before discussing the results ({\em i.e.} the catalogue of sources and
+Before discussing the results ({\em i.e.} the catalogue of sources) and
 how they compare with the third Fermi catalogue, we will examine the
 performance of the technique and focus on the sources detected from
 photons with energies exceeding 1~GeV.  The left-panel of
@@ -558,7 +575,7 @@ interesting focus of further investigation.
 
 
 For the sources in the preliminary catalogue ({\em i.e.} those with
-$A_\mathrm{PSF}>0$ we further refine the position estimate of the
+$A_\mathrm{PSF}>0$) we further refine the position estimate of the
 source.  The left panel of Fig.~\ref{fig:position} depicts the change
 in $\log L$ during the optimization.  Sometimes the value of $\log L$
 actually decreases, but usually it increases modestly by say ten
@@ -593,11 +610,11 @@ is, photons detected between 2008 August 4 (15:45:36 UTC) and 2012
 July 26 (01:07:25 UTC), a span of nearly four years.  This is about
 five days shorter than the span of the 3FGL observations because we
 used the weekly files.  We used the good-time intervals (GTI) as
-defined by the Fermi team and the Pass 7 response function
+defined by the Fermi team, the Pass 7 response function
 (\texttt{P7REP\_SOURCE\_V15}) and the Pass 7 reprocessed data.  We use
 the Pass 7 data for comparison with the analysis of the 3FGL which
 also used Pass 7 data. From the form of the likelihood function,
-Eq.~\ref{eq:13}, it is apparent that we do not use a model for the
+Eq.~\ref{eq:14}, it is apparent that we do not use a model for the
 background, and the key ingredient of the instrument response is the
 estimate of the point-spread function \citep{2012ApJS..203....4A}.
 
@@ -690,7 +707,7 @@ in the FermiFAST catalogue.  We can examine the statistics of the
 correspondances more carefully by examining the distance across the
 sky between the nearest neighbours in each of the two catalogues:
 FermiFAST and 3FGL.  These are plotted as the red curves in
-Fig.~\ref{fig:corresponances} and the cyan curve is a multi-Rayleigh
+Fig.~\ref{fig:corresponances} and the dashed red curve is a multi-Rayleigh
 distribution fit to the red curves.  We assume a Rayleigh distribution
 to account for normally distributed errors in both directions along
 the sky.  We find that the nearest neighbour in the 3FGL of almost all sources
@@ -718,13 +735,13 @@ are by chance.
   the nearest Fermi 3FGL source.  This demonstrates that ninety
   percent of the Fermi FAST sources are associated with sources in the
   Fermi 3FGL (across the whole sky) and nearly all at Galactic
-  latitudes greater than ten degrees. The red curve give the
-  observed cumulative distribution of nearest distances.  The green
+  latitudes greater than ten degrees. The solid red curves give the
+  observed cumulative distribution of nearest distances.  The solid green
   curves give the cumulative distribution that one would expect if
   there were no associated between the Fermi FAST and Fermi 3FGL
   sources.  This is calculated by performing the same analysis as the
   red curves but with the Galactic coordinates inverted.  The blue
-  curve yields the false positive rate.  The cyan and magneta curves
+  curve yields the false positive rate.  The dashed red and dashed green curves
   are Rayleigh distributions that are fit to the observed
   distributions.  The typical positional error between associated 3FGL
   and FAST sources is 1-2~arcminutes.  }
@@ -904,11 +921,13 @@ weak.
 
 It is apparent from Fig.~\ref{fig:sources} that there are fewer
 100-MeV sources and that most of these sources coincide with 3FGL and
-1-GeV FermiFAST sources.  In Fig.~\ref{fig:cum0.1GeV} the localization is
-slightly poorer than Fig.~\ref{fig:ffl_comp} because we have used a
-coarser HEALPix grid to sample the likelihoods. For the 100-MeV
+1-GeV FermiFAST sources.  In Fig.~\ref{fig:cum0.1GeV} the localization
+is slightly poorer than Fig.~\ref{fig:ffl_comp} because we have used a
+coarser HEALPix grid to sample the likelihoods. Moreover, for the 100-MeV
 catalogue we have not optimized the likelihood to determine more
-accurate positions, so Fig.~\ref{fig:ffl_comp} is the best comparison
+accurate positions because the optimization often drifts onto other
+nearby detections for the more poorly localised low-energy photons.
+Consequently, Fig.~\ref{fig:ffl_comp} is the best comparison
 not Fig.~\ref{fig:corresponances}.  Again we have used a rank-sum test
 to determine the sources that are likely to be shared between the
 catalogues and also to determine those sources that appear in the
@@ -966,8 +985,11 @@ Otherwise, the values found in the 3FGL catalogue are used.  We
 perform a binned likelihood analysis for photons with energies between
 100~MeV and 300~GeV.  We used the Pass-8 data with the isotropic
 background model \texttt{iso\_P8R2\_SOURCE\_V6\_v06} and the Galactic
-background model \texttt{gll\_iem\_v06}.  We allow the normalization
-of the background models to vary but not the slope.
+background model \texttt{gll\_iem\_v06}.  We choose the Pass-8 data,
+so that we could use the latest background and extended emission
+models to get the most accurate characterization of the FermiFAST
+detections.  The results for Pass-7 data are similar. We allow the
+normalization of the background models to vary but not the slope.
 Tab.~\ref{tab:fermisig100MeV} presents the results for the binned
 likelihhod fit for all the unassociated FermiFAST detections outside
 of the Galactic plane.  The range of spectral indices is typical for
@@ -985,7 +1007,7 @@ between $2.0$ and $2.6$, near the mode of the distribution within the
 3FGL catalogue, so they do not appear unusual in that context.  Of the
 eight unassociated FermiFAST detections, six have significances
 greater than five when a detailed binned likelihood analysis is
-performed, yielding a final contamination rate of 0.3\%. 
+performed, yielding a final contamination rate of 0.3\%.
 
 %%
 %% src_5.o1678:TS value: -0.00199476
@@ -1063,6 +1085,37 @@ performed, yielding a final contamination rate of 0.3\%.
 43 & $ 64.51$ & $ 28.29$ &   2260 & $0.457$ & $0.805$ & $  -7.1$ & $  50.3$ & $0.12$  & $0.09$ & $     5.09$ & $11.7$  & $2.40\pm0.18$ & $7.2\pm1.7$\\ 
 \end{tabular}
 \end{table*}
+
+We looked for the nearest blazars to each of the unassociated
+FermiFAST detections (Tab.~\ref{tab:fermisig100MeV}) in the Roma-BZCAT
+catalogue of blazars \citep{2009A&A...495..691M}.  The results are
+listed in Tab.~\ref{tab:roma}.  The closest objects in the Roma-BZCAT
+to each of the unassociated FermiFAST detections are about one degree.
+Given the density of the blazars in this catalogue on the sky, this is
+the typical distance for the nearest source to be by chance;
+consequently, we find that it is unlikely that any of FermiFAST
+detections that did not have counterparts in the 3FGL have
+counterparts in the Roma-BZCAT.
+
+\begin{table}
+  \caption{The nearest blazars found in the Roma-BZCAT \citep{2009A&A...495..691M} to
+    the unassociated FermiFAST sources with the relative distance in degrees.}
+  \label{tab:roma}
+\centering
+\begin{tabular}{rrrrl}
+    \hline
+    \multicolumn{1}{c}{} &     \multicolumn{1}{c}{Distance} & \multicolumn{1}{c}{RA} & \multicolumn{1}{c}{Dec} & \multicolumn{1}{c}{Roma-BZCAT} \\
+        \hline
+ 5   & 0.70 & $77.1762$ & $+84.5346$    & BZBJ0508$+$8432 \\
+10   & 1.65 & $50.5329$ & $-52.0933$    & BZQJ0322$-$5205 \\
+18   & 1.15 & $77.1762$ & $+84.5346$    & BZBJ0508$+$8432 \\
+20   & 1.12 & $77.1762$ &  $+84.5346$   & BZBJ0508$+$8432 \\
+24   & 1.56 & $105.6367$ & $+85.8312$   & BZQJ0702$+$8549 \\
+29   & 5.58 & $43.4900$  & $+51.0490$   & BZQJ0253$+$5102 \\
+31   & 3.53 & $76.9842$  & $+67.6234$   & BZBJ0507$+$6737 \\
+43   & 3.57 & $72.3471$  & $+63.5359$   & BZQJ0449$+$6332 \\
+\end{tabular}
+\end{table}
 
 \section{Discussion}
 \label{sec:discussion}
@@ -1150,7 +1203,7 @@ used the data stream and the estimates of the point-spread
 function. There is additional data available that could help to
 improve the sensitivity of the technique, reduce the number of false
 positives and better characterize the sources detected.  First, the
-likelihood function, Eq.~\ref{eq:13}, assumes that the gamma-ray
+likelihood function, Eq.~\ref{eq:14}, assumes that the gamma-ray
 background is smooth everywhere.  However, we know from independent
 measurements, for example the Galactic synchrotron emission, that the
 gamma-ray background is likely to be clumpy and the Fermi team
@@ -1167,7 +1220,7 @@ already included this functionality in the software but it is not yet
 well characterized).
 
 One could also take an alternative route.  Looking again at
-Eq.~\ref{eq:13}, we can use the relative size of the two terms in the
+Eq.~\ref{eq:14}, we can use the relative size of the two terms in the
 brackets to assign a fraction of each photon to the source and to the
 background.  Again if we include information on the effective area and
 the exposure time, we obtain an estimate of the spectrum from each

@@ -110,6 +110,12 @@ pp 546--547
 \bibitem[\protect\citeauthoryear{Lang}{Lang}{2009}]{LangPhD}
 Lang D.,  2009, PhD thesis, University of Toronto
 
+\bibitem[\protect\citeauthoryear{{Massaro}, {Giommi}, {Leto}, {Marchegiani},
+  {Maselli}, {Perri}, {Piranomonte} \& {Sclavi}}{{Massaro}
+  et~al.}{2009}]{2009A&A...495..691M}
+{Massaro} E.,  {Giommi} P.,  {Leto} C.,  {Marchegiani} P.,  {Maselli} A.,
+  {Perri} M.,  {Piranomonte} S.,    {Sclavi} S.,  2009, \aap, 495, 691
+
 \bibitem[\protect\citeauthoryear{{Massaro}, {Tinebra}, {Campana} \&
   {Tosti}}{{Massaro} et~al.}{2009}]{2009arXiv0912.3843M}
 {Massaro} E.,  {Tinebra} F.,  {Campana} R.,    {Tosti} G.,  2009, ArXiv
@@ -128,6 +134,9 @@ Lang D.,  2009, PhD thesis, University of Toronto
 {Nolan} P.~L.,  {Abdo} A.~A.,  {Ackermann} M.,  {Ajello} M.,  {Allafort} A.,
   {Antolini} E.,  {Atwood} W.~B.,  {Axelsson} M.,  {Baldini} L.,  {Ballet} J.,
     et al. 2012, \apjs, 199, 31
+
+\bibitem[\protect\citeauthoryear{{Schmidt}}{{Schmidt}}{1968}]{1968ApJ...151..393S}
+{Schmidt} M.,  1968, \apj, 151, 393
 
 \bibitem[\protect\citeauthoryear{{Selig}, {Vacca}, {Oppermann} \&
   {En{\ss}lin}}{{Selig} et~al.}{2015}]{2015A&A...581A.126S}
